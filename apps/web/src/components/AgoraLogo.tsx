@@ -1,4 +1,4 @@
-interface AgoraLogoProps {
+export interface AgoraLogoProps {
   size?: "sm" | "md" | "lg";
   className?: string;
 }
@@ -24,6 +24,7 @@ export function AgoraLogo({ size = "md", className = "" }: AgoraLogoProps) {
         aria-hidden="true"
       >
         {/* Semicírculo izquierdo (C abriendo a la derecha) */}
+        {/* Colors are brand-fixed — use className="brightness-0 invert" for dark backgrounds */}
         <path
           d="M14 2 C6 2 6 18 14 18"
           stroke="#3730a3"
