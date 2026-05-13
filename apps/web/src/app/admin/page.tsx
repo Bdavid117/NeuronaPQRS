@@ -40,19 +40,25 @@ interface CasesResponse {
 export default function AdminDashboard() {
   const [data, setData] = useState<CasesResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState({ tipo: "", estado: "", urgencia: "" });
 
   useEffect(() => {
     setLoading(true);
+    setError(null);
     const params = new URLSearchParams({ page: String(page), per_page: "20" });
     if (filters.tipo) params.set("tipo", filters.tipo);
     if (filters.estado) params.set("estado", filters.estado);
     if (filters.urgencia) params.set("urgencia", filters.urgencia);
 
     fetch(`/api/admin/cases?${params}`)
-      .then((r) => r.json())
-      .then((d: CasesResponse) => setData(d))
+      .then((r) => {
+        if (!r.ok) throw new Error(`Error ${r.status}: no se pudieron cargar los casos`);
+        return r.json() as Promise<CasesResponse>;
+      })
+      .then((d) => setData(d))
+      .catch((err: Error) => setError(err.message))
       .finally(() => setLoading(false));
   }, [page, filters]);
 
@@ -132,6 +138,12 @@ export default function AdminDashboard() {
                 <tr>
                   <td colSpan={8} className="px-4 py-8 text-center text-slate-400 text-sm">
                     Cargando…
+                  </td>
+                </tr>
+              ) : error ? (
+                <tr>
+                  <td colSpan={8} className="px-4 py-8 text-center text-red-500 text-sm">
+                    {error}
                   </td>
                 </tr>
               ) : data?.cases.length === 0 ? (
