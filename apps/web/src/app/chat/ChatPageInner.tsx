@@ -1,32 +1,82 @@
 "use client";
 
 import { type CaseInfo, ChatStream } from "@/components/chat/ChatStream";
-import { ChatSidebar, type HistoryItem } from "@/components/chat/ChatSidebar";
-import { RightPanel } from "@/components/chat/RightPanel";
 import { cn } from "@/lib/utils";
-import { Keyboard, Mic } from "lucide-react";
+import { ChevronLeft, Keyboard, Mic, Plus } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
+import Link from "next/link";
+
+function CaseInfoPanel({ caseInfo }: { caseInfo: CaseInfo | null }) {
+  if (!caseInfo) return null;
+  return (
+    <div className="p-4 bg-white rounded-xl border border-slate-200 shadow-sm text-sm">
+      <h3 className="font-semibold text-xs uppercase tracking-widest text-slate-500 mb-3">Información del caso</h3>
+      <dl className="space-y-1.5">
+        {caseInfo.radicado && (
+          <div className="flex justify-between gap-2">
+            <dt className="text-slate-500">Radicado</dt>
+            <dd className="font-mono text-xs text-slate-900 font-semibold">{caseInfo.radicado}</dd>
+          </div>
+        )}
+        {caseInfo.tipo && (
+          <div className="flex justify-between gap-2">
+            <dt className="text-slate-500">Tipo</dt>
+            <dd className="text-slate-900 capitalize">{caseInfo.tipo}</dd>
+          </div>
+        )}
+        {caseInfo.categoria && (
+          <div className="flex justify-between gap-2">
+            <dt className="text-slate-500">Categoría</dt>
+            <dd className="text-slate-900 text-right">{caseInfo.categoria}</dd>
+          </div>
+        )}
+        {caseInfo.area && (
+          <div className="flex justify-between gap-2">
+            <dt className="text-slate-500">Área</dt>
+            <dd className="text-slate-900 text-right">{caseInfo.area}</dd>
+          </div>
+        )}
+        {caseInfo.urgencia && (
+          <div className="flex justify-between gap-2">
+            <dt className="text-slate-500">Urgencia</dt>
+            <dd className={cn("text-xs font-semibold capitalize", {
+              "text-red-600": caseInfo.urgencia === "alta",
+              "text-amber-600": caseInfo.urgencia === "media",
+              "text-green-600": caseInfo.urgencia === "baja",
+            })}>{caseInfo.urgencia}</dd>
+          </div>
+        )}
+        {caseInfo.plazo && (
+          <div className="flex justify-between gap-2">
+            <dt className="text-slate-500">Plazo</dt>
+            <dd className="text-slate-900">{caseInfo.plazo}</dd>
+          </div>
+        )}
+      </dl>
+      {caseInfo.radicado && (
+        <Link
+          href={`/r/${caseInfo.radicado}`}
+          className="mt-3 w-full flex items-center justify-center gap-1.5 text-xs text-primary-600 hover:text-primary-700 font-medium py-2 border border-primary-200 rounded-lg hover:bg-primary-50 transition-colors"
+        >
+          Ver página del caso →
+        </Link>
+      )}
+    </div>
+  );
+}
 
 export function ChatPageInner() {
   const searchParams = useSearchParams();
   const initialPrompt = searchParams.get("prompt") ?? undefined;
 
-  // Start with a stable placeholder — localStorage is read in useEffect to avoid hydration mismatch
   const [sessionId, setSessionId] = useState<string>(uuidv4);
   const sessionIdRef = useRef(sessionId);
-
   const [caseInfo, setCaseInfo] = useState<CaseInfo | null>(null);
-  const [activeAgent, setActiveAgent] = useState<string | null>(null);
-  const [completedAgents, setCompletedAgents] = useState<string[]>([]);
-  const [sessionTitle, setSessionTitle] = useState<string>("Nueva consulta");
   const [chatKey, setChatKey] = useState(0);
   const [voiceMode, setVoiceMode] = useState(false);
-  const [history, setHistory] = useState<HistoryItem[]>([]);
-  const [userName, setUserName] = useState("Anónimo");
 
-  // Read localStorage after mount — avoids SSR/client hydration mismatch
   useEffect(() => {
     const storedId = localStorage.getItem("pae_session_id");
     const id = storedId ?? sessionId;
@@ -35,58 +85,27 @@ export function ChatPageInner() {
       setSessionId(id);
       sessionIdRef.current = id;
     }
-
-    try {
-      const h = JSON.parse(localStorage.getItem("pae_history") ?? "[]");
-      setHistory(h);
-    } catch { /* noop */ }
-
-    try {
-      const u = JSON.parse(localStorage.getItem("pae_user") ?? "{}");
-      if (u.name) setUserName(u.name as string);
-    } catch { /* noop */ }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCaseUpdate = useCallback((info: CaseInfo) => {
     setCaseInfo(info);
-    if (info.tipo) {
-      setSessionTitle(
-        info.tipo.charAt(0).toUpperCase() + info.tipo.slice(1) + " — " + info.radicado
-      );
-    }
     if (info.radicado) {
-      setHistory((prev) => {
-        const sid = sessionIdRef.current;
-        const item: HistoryItem = {
-          sessionId: sid,
-          radicado: info.radicado,
-          title: info.tipo
-            ? `${info.tipo.charAt(0).toUpperCase()}${info.tipo.slice(1)}${info.categoria ? " · " + info.categoria : ""}`
-            : "Consulta PQRS",
-          date: new Date().toLocaleDateString("es-CO", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          }),
-          requiresHuman: info.requiresHuman,
-        };
-        const updated = [item, ...prev.filter((h) => h.sessionId !== sid)].slice(0, 20);
+      const item = {
+        sessionId: sessionIdRef.current,
+        radicado: info.radicado,
+        title: info.tipo
+          ? `${info.tipo.charAt(0).toUpperCase()}${info.tipo.slice(1)}${info.categoria ? " · " + info.categoria : ""}`
+          : "Consulta PQRS",
+        date: new Date().toLocaleDateString("es-CO", { day: "2-digit", month: "short", year: "numeric" }),
+        requiresHuman: info.requiresHuman,
+      };
+      try {
+        const prev = JSON.parse(localStorage.getItem("pae_history") ?? "[]");
+        const updated = [item, ...prev.filter((h: typeof item) => h.sessionId !== sessionIdRef.current)].slice(0, 20);
         localStorage.setItem("pae_history", JSON.stringify(updated));
-        return updated;
-      });
+      } catch { /* noop */ }
     }
-  }, []);
-
-  const handleAgentChange = useCallback((agentName: string) => {
-    setActiveAgent(agentName);
-    setCompletedAgents((prev) => {
-      const STEP_ORDER = ["classifier", "intake", "resolver", "vision", "escalator"];
-      const idx = STEP_ORDER.indexOf(agentName);
-      if (idx <= 0) return prev;
-      const newCompleted = STEP_ORDER.slice(0, idx).filter((s) => !prev.includes(s));
-      return [...prev, ...newCompleted];
-    });
   }, []);
 
   const handleNew = useCallback(() => {
@@ -95,83 +114,98 @@ export function ChatPageInner() {
     setSessionId(id);
     sessionIdRef.current = id;
     setCaseInfo(null);
-    setActiveAgent(null);
-    setCompletedAgents([]);
-    setSessionTitle("Nueva consulta");
     setChatKey((k) => k + 1);
   }, []);
 
   return (
-    <div className="flex h-screen bg-[#0A0A0A] overflow-hidden">
-      <ChatSidebar
-        onNew={handleNew}
-        activeSessionId={sessionId}
-        history={history}
-        userName={userName}
-      />
-
-      {/* Center */}
-      <div className="flex flex-col flex-1 min-w-0">
-        {/* Top bar */}
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#222233] bg-[#0D0D1C] flex-shrink-0">
-          <span className="text-white font-semibold text-sm truncate">{sessionTitle}</span>
-
-          <div className="flex items-center gap-3 flex-shrink-0">
-            {/* Voice / Text mode toggle */}
-            <div className="flex items-center gap-1 bg-white/[0.06] border border-white/10 rounded-lg p-0.5">
-              <button
-                onClick={() => setVoiceMode(false)}
-                title="Modo texto"
-                className={cn(
-                  "flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all duration-150",
-                  !voiceMode
-                    ? "bg-white/10 text-white shadow-sm"
-                    : "text-white/35 hover:text-white/60"
-                )}
-              >
-                <Keyboard size={13} />
-                <span className="hidden sm:inline">Texto</span>
-              </button>
-              <button
-                onClick={() => setVoiceMode(true)}
-                title="Modo voz"
-                className={cn(
-                  "flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all duration-150",
-                  voiceMode
-                    ? "bg-violet-500/20 text-violet-300 shadow-sm"
-                    : "text-white/35 hover:text-white/60"
-                )}
-              >
-                <Mic size={13} />
-                <span className="hidden sm:inline">Voz</span>
-              </button>
+    <div className="flex flex-col h-screen bg-surface-alt">
+      {/* Top bar */}
+      <header className="flex items-center justify-between px-4 py-3 bg-white border-b border-slate-200 flex-shrink-0 shadow-sm">
+        <div className="flex items-center gap-2">
+          <Link href="/" className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-colors">
+            <ChevronLeft size={18} />
+          </Link>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-md bg-primary-600 flex items-center justify-center flex-shrink-0">
+              <span className="text-white text-[10px] font-bold">N</span>
             </div>
-
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[11px] text-white/40">En línea</span>
-            </div>
+            <span className="font-semibold text-slate-900 text-sm">NeuronaPQRS</span>
           </div>
         </div>
 
-        {/* Chat area */}
-        <div className="flex-1 overflow-hidden">
+        <div className="flex items-center gap-2">
+          {/* Voice / Text toggle */}
+          <div className="flex items-center bg-slate-100 rounded-lg p-0.5">
+            <button
+              onClick={() => setVoiceMode(false)}
+              className={cn(
+                "flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all",
+                !voiceMode ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"
+              )}
+            >
+              <Keyboard size={12} />
+              <span className="hidden sm:inline">Texto</span>
+            </button>
+            <button
+              onClick={() => setVoiceMode(true)}
+              className={cn(
+                "flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all",
+                voiceMode ? "bg-primary-600 text-white shadow-sm" : "text-slate-500 hover:text-slate-700"
+              )}
+            >
+              <Mic size={12} />
+              <span className="hidden sm:inline">Voz</span>
+            </button>
+          </div>
+
+          <button
+            onClick={handleNew}
+            className="flex items-center gap-1 text-xs text-slate-500 hover:text-slate-700 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 transition-colors border border-slate-200"
+            title="Nueva consulta"
+          >
+            <Plus size={13} />
+            <span className="hidden sm:inline">Nueva</span>
+          </button>
+        </div>
+      </header>
+
+      {/* Main area — mobile: 1 col, desktop: 2 col */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Chat column */}
+        <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
           <ChatStream
             key={chatKey}
             sessionId={sessionId}
             onCaseUpdate={handleCaseUpdate}
-            onAgentChange={handleAgentChange}
+            onAgentChange={() => {}}
             initialPrompt={chatKey === 0 ? initialPrompt : undefined}
             voiceMode={voiceMode}
           />
         </div>
-      </div>
 
-      <RightPanel
-        caseInfo={caseInfo}
-        activeAgent={activeAgent}
-        completedAgents={completedAgents}
-      />
+        {/* Right panel — only on desktop (md+) */}
+        <aside className="hidden md:flex flex-col w-72 lg:w-80 border-l border-slate-200 bg-white p-4 gap-4 overflow-y-auto flex-shrink-0">
+          <div>
+            <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Estado del caso</h2>
+            {caseInfo ? (
+              <CaseInfoPanel caseInfo={caseInfo} />
+            ) : (
+              <div className="text-sm text-slate-400 bg-slate-50 rounded-xl p-4 text-center">
+                El caso aparecerá aquí cuando se radique.
+              </div>
+            )}
+          </div>
+
+          <div>
+            <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Ayuda rápida</h2>
+            <div className="space-y-2 text-xs text-slate-500">
+              <p>• Puedes adjuntar documentos con el ícono de clip</p>
+              <p>• El asistente te guiará para completar tu solicitud</p>
+              <p>• Guarda tu radicado para hacer seguimiento</p>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
   );
 }

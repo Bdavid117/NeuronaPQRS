@@ -14,11 +14,12 @@ export interface Message {
 }
 
 const AGENT_META: Record<string, { label: string; color: string; dot: string }> = {
-  intake:     { label: "Recepción",    color: "text-blue-400",   dot: "bg-blue-400" },
-  classifier: { label: "Clasificador", color: "text-violet-400", dot: "bg-violet-400" },
-  vision:     { label: "Verificación", color: "text-amber-400",  dot: "bg-amber-400" },
-  resolver:   { label: "Resolución",   color: "text-emerald-400",dot: "bg-emerald-400" },
-  escalator:  { label: "Escalamiento", color: "text-rose-400",   dot: "bg-rose-400" },
+  intake:       { label: "Recepción",    color: "text-blue-600",   dot: "bg-blue-500" },
+  classifier:   { label: "Clasificador", color: "text-violet-600", dot: "bg-violet-500" },
+  vision:       { label: "Verificación", color: "text-amber-600",  dot: "bg-amber-500" },
+  resolver:     { label: "Resolución",   color: "text-emerald-600",dot: "bg-emerald-500" },
+  resolver_auto:{ label: "Auto-Res.",    color: "text-teal-600",   dot: "bg-teal-500" },
+  escalator:    { label: "Escalamiento", color: "text-rose-600",   dot: "bg-rose-500" },
 };
 
 export function MessageBubble({ message }: { message: Message }) {
@@ -26,25 +27,25 @@ export function MessageBubble({ message }: { message: Message }) {
   const agent = message.agentName ? AGENT_META[message.agentName] : null;
 
   return (
-    <div className={cn("flex gap-3 items-start group", isUser ? "flex-row-reverse" : "flex-row")}>
+    <div className={cn("flex gap-3 items-start", isUser ? "flex-row-reverse" : "flex-row")}>
       {/* Avatar */}
       <div className={cn(
-        "flex-shrink-0 w-9 h-9 rounded-2xl flex items-center justify-center shadow-lg",
+        "flex-shrink-0 w-8 h-8 rounded-xl flex items-center justify-center shadow-sm",
         isUser
-          ? "bg-gradient-to-br from-indigo-500 to-violet-600"
-          : "bg-gradient-to-br from-slate-700 to-slate-800 border border-white/10"
+          ? "bg-primary-600"
+          : "bg-white border border-slate-200"
       )}>
         {isUser
-          ? <User size={16} className="text-white" />
-          : <Bot size={16} className="text-white/80" />}
+          ? <User size={14} className="text-white" />
+          : <Bot size={14} className="text-slate-500" />}
       </div>
 
       {/* Bubble + meta */}
-      <div className={cn("max-w-[78%] flex flex-col gap-1.5", isUser ? "items-end" : "items-start")}>
+      <div className={cn("max-w-[78%] flex flex-col gap-1", isUser ? "items-end" : "items-start")}>
         {/* Agent label */}
         {!isUser && agent && (
           <div className="flex items-center gap-1.5">
-            <span className={cn("w-1.5 h-1.5 rounded-full", agent.dot)} />
+            <span className={cn("w-1.5 h-1.5 rounded-full flex-shrink-0", agent.dot)} />
             <span className={cn("text-[11px] font-semibold uppercase tracking-widest", agent.color)}>
               {agent.label}
             </span>
@@ -53,30 +54,29 @@ export function MessageBubble({ message }: { message: Message }) {
 
         {/* Bubble */}
         <div className={cn(
-          "px-4 py-3 text-sm leading-relaxed break-words shadow-md",
+          "px-4 py-3 text-sm leading-relaxed break-words",
           isUser
-            ? "bg-gradient-to-br from-indigo-600 to-violet-700 text-white rounded-2xl rounded-tr-sm"
-            : "bg-white/[0.07] backdrop-blur-sm text-white/90 border border-white/10 rounded-2xl rounded-tl-sm"
+            ? "bg-primary-600 text-white rounded-2xl rounded-tr-sm shadow-sm"
+            : "bg-white text-slate-800 border border-slate-200 rounded-2xl rounded-tl-sm shadow-sm"
         )}>
           {isUser ? (
             <span className="whitespace-pre-wrap">{message.content}</span>
           ) : (
-            <div className="prose prose-invert prose-sm max-w-none
+            <div className="prose prose-slate prose-sm max-w-none
               prose-p:my-1 prose-p:leading-relaxed
-              prose-strong:text-white prose-strong:font-semibold
-              prose-em:text-white/80
+              prose-strong:text-slate-900 prose-strong:font-semibold
               prose-ul:my-1.5 prose-ul:pl-4
               prose-ol:my-1.5 prose-ol:pl-4
               prose-li:my-0.5
-              prose-code:bg-white/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs
-              prose-blockquote:border-l-2 prose-blockquote:border-indigo-400 prose-blockquote:pl-3 prose-blockquote:text-white/60
-              prose-h1:text-base prose-h2:text-sm prose-h3:text-sm
-              prose-hr:border-white/10">
+              prose-code:bg-slate-100 prose-code:text-slate-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs
+              prose-blockquote:border-l-2 prose-blockquote:border-primary-300 prose-blockquote:pl-3 prose-blockquote:text-slate-500
+              prose-h1:text-base prose-h2:text-sm prose-h3:text-sm prose-h1:text-slate-900 prose-h2:text-slate-900
+              prose-hr:border-slate-200">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {message.content}
               </ReactMarkdown>
               {message.isStreaming && (
-                <span className="inline-block w-1.5 h-4 ml-0.5 bg-white/60 animate-pulse rounded-sm align-middle" />
+                <span className="inline-block w-1.5 h-4 ml-0.5 bg-slate-400 animate-pulse rounded-sm align-middle" />
               )}
             </div>
           )}
