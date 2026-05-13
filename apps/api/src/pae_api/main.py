@@ -12,6 +12,7 @@ from .models.user import User as _User  # noqa: F401 — registers table with SQ
 from .rate_limit import RateLimitMiddleware
 from .routers import chat, files, pqrs, transcribe
 from .routers import auth
+from .routers import admin as admin_router
 
 setup_logging()
 log = get_logger("main")
@@ -63,6 +64,7 @@ def create_app() -> FastAPI:
     app.include_router(files.router)
     app.include_router(pqrs.router)
     app.include_router(transcribe.router)
+    app.include_router(admin_router.router)
 
     @app.get("/healthz", tags=["health"])
     async def health():

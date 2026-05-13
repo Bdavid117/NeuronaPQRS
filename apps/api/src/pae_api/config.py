@@ -38,6 +38,11 @@ class Settings(BaseSettings):
     max_upload_size_mb: int = 10
     app_url: str = "http://localhost:3000"
 
+    # Admin
+    admin_username: str = "admin"
+    admin_password: str = "change-me-in-production"
+    admin_token_secret: str = "admin-token-secret-change-in-production"
+
     @field_validator("upload_dir", mode="before")
     @classmethod
     def ensure_upload_dir(cls, v: str) -> str:
