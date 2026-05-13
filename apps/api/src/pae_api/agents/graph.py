@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import io
+import logging
 import re
 import secrets
 from datetime import date
@@ -228,7 +229,6 @@ async def finish_node(state: PQRSState) -> dict:
     except FileExistsError:
         vault_path = None
     except Exception as exc:
-        import logging
         logging.getLogger("pae_api.agents.graph").error(
             "finish_node: failed to write case %s to vault: %s", radicado, exc
         )

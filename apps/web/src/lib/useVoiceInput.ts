@@ -74,6 +74,7 @@ export function useVoiceInput({
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
+  const errorTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const onResultRef = useRef(onResult);
   onResultRef.current = onResult;
 
@@ -126,9 +127,11 @@ export function useVoiceInput({
     };
 
     recognition.onerror = () => {
-      setState("idle");
+      console.warn("NeuronaPQRS: SpeechRecognition error");
+      setState("error");
       setInterimTranscript("");
       recognitionRef.current = null;
+      errorTimerRef.current = setTimeout(() => setState("idle"), 2000);
     };
 
     recognitionRef.current = recognition;
@@ -157,7 +160,7 @@ export function useVoiceInput({
         } catch (err) {
           console.warn("NeuronaPQRS: Whisper transcription failed:", err);
           setState("error");
-          setTimeout(() => setState("idle"), 2000);
+          errorTimerRef.current = setTimeout(() => setState("idle"), 2000);
           mediaRecorderRef.current = null;
         }
       };
@@ -183,6 +186,9 @@ export function useVoiceInput({
       recognitionRef.current?.abort();
       if (mediaRecorderRef.current?.state === "recording") {
         mediaRecorderRef.current.stop();
+      }
+      if (errorTimerRef.current !== null) {
+        clearTimeout(errorTimerRef.current);
       }
     };
   }, []);
