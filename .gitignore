@@ -44,6 +44,10 @@ Thumbs.db
 .vscode/settings.json
 *.swp
 
+# Dev tooling artifacts
+.dev-logs/
+.playwright-mcp/
+
 # Obsidian sync conflict files
 Neurona/**/*.md.conflict
 

@@ -27,7 +27,7 @@ trap cleanup INT TERM
 
 echo ""
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${CYAN}   NeuronaPQRS — Entorno de Desarrollo          ${NC}"
+echo -e "${CYAN}   ÁGORA — Entorno de Desarrollo                ${NC}"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
 
@@ -66,8 +66,9 @@ fi
 
 # ── 3. Backend FastAPI ───────────────────────────────────────────────────────
 info "Iniciando Backend FastAPI (puerto 8000)..."
+cd "$ROOT/apps/api"
 PYTHONPATH="$ROOT/apps/api/src" \
-  "$ROOT/.venv/bin/uvicorn" pae_api.main:app --reload --port 8000 \
+  "$UV" run uvicorn pae_api.main:app --reload --port 8000 \
   > "$LOG_DIR/api.log" 2>&1 &
 API_PID=$!
 
