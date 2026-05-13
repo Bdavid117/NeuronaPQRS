@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, use } from "react";
+import { useState, use, useEffect } from "react";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 
@@ -12,6 +12,23 @@ export default function AdminCaseDetail({ params }: { params: Promise<{ radicado
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [caseData, setCaseData] = useState<{ tipo: string | null; categoria: string | null; area: string | null; urgencia: string } | null>(null);
+  const [loadingCase, setLoadingCase] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch(`/api/admin/cases/${radicado}`)
+      .then((r) => {
+        if (!r.ok) throw new Error(`Error ${r.status}`);
+        return r.json();
+      })
+      .then((d) => {
+        setCaseData(d);
+        setEstado(d.estado ?? "");
+      })
+      .catch((err: Error) => setLoadError(err.message))
+      .finally(() => setLoadingCase(false));
+  }, [radicado]);
 
   async function handleStatusChange(newEstado: string) {
     setSaving(true);
@@ -52,6 +69,23 @@ export default function AdminCaseDetail({ params }: { params: Promise<{ radicado
           <p className="text-sm text-slate-500">Detalle del caso</p>
         </div>
       </div>
+
+      {/* Case info */}
+      {loadingCase ? (
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-4 text-sm text-slate-400 text-center">Cargando información del caso…</div>
+      ) : loadError ? (
+        <div className="bg-red-50 rounded-xl border border-red-200 p-4 mb-4 text-sm text-red-600">{loadError}</div>
+      ) : caseData ? (
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-4">
+          <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Información</h2>
+          <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+            {caseData.tipo && <><dt className="text-slate-500">Tipo</dt><dd className="text-slate-900 capitalize">{caseData.tipo}</dd></>}
+            {caseData.categoria && <><dt className="text-slate-500">Categoría</dt><dd className="text-slate-900">{caseData.categoria}</dd></>}
+            {caseData.area && <><dt className="text-slate-500">Área</dt><dd className="text-slate-900">{caseData.area}</dd></>}
+            {caseData.urgencia && <><dt className="text-slate-500">Urgencia</dt><dd className="text-slate-900 capitalize">{caseData.urgencia}</dd></>}
+          </dl>
+        </div>
+      ) : null}
 
       {/* Status changer */}
       <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-5 mb-4">

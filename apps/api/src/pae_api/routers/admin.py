@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import hmac
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
@@ -93,6 +93,34 @@ async def list_cases(
     }
 
 
+@router.get("/cases/{radicado}")
+async def get_case(
+    radicado: str,
+    request: Request,
+    session: AsyncSession = Depends(get_session),
+):
+    _verify_admin(request)
+
+    result = await session.exec(select(PQRSCase).where(PQRSCase.radicado == radicado))
+    case = result.first()
+    if not case:
+        raise HTTPException(status_code=404, detail="Case not found")
+
+    return {
+        "id": case.id,
+        "radicado": case.radicado,
+        "tipo": case.tipo,
+        "categoria": case.categoria,
+        "area": case.area,
+        "urgencia": case.urgencia,
+        "estado": case.estado,
+        "requiere_revision_humana": case.requiere_revision_humana,
+        "plazo_respuesta": case.plazo_respuesta.isoformat() if case.plazo_respuesta else None,
+        "created_at": case.created_at.isoformat(),
+        "collected_fields": case.collected_fields,
+    }
+
+
 @router.patch("/cases/{radicado}/status")
 async def update_case_status(
     radicado: str,
@@ -108,7 +136,7 @@ async def update_case_status(
         raise HTTPException(status_code=404, detail="Case not found")
 
     case.estado = body.estado
-    case.updated_at = datetime.utcnow()
+    case.updated_at = datetime.now(timezone.utc)
     await session.commit()
     return {"status": "updated", "radicado": radicado, "estado": body.estado}
 

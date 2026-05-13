@@ -89,7 +89,7 @@ async def resolver_auto_agent(state: PQRSState) -> dict:
     template_text: str | None = None
     try:
         note = read_note(f"40-Plantillas/{categoria}.md")
-        template_text = note.get("content") or note.get("body") or None
+        template_text = note.get("body")
     except Exception:
         template_text = None
 
