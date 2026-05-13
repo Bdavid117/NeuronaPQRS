@@ -25,7 +25,7 @@ class OpenRouterClient:
                 "HTTP-Referer": "https://github.com/pae-agente/neurapqrs",
                 "X-Title": "NeuronaPQRS",
             },
-            timeout=httpx.Timeout(120.0, connect=10.0),
+            timeout=httpx.Timeout(10.0, connect=5.0),
         )
 
     async def aclose(self) -> None:

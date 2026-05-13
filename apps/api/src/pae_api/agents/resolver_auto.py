@@ -13,6 +13,7 @@ AUTO_RESOLVE_CATEGORIES: set[str] = {
     "Certificado-Academico",
     "Biblioteca",
     "Servicios-TI",
+    "Bienestar",
 }
 
 # Fallback templates used when the Obsidian note is not found.
@@ -35,6 +36,12 @@ _FALLBACK_TEMPLATES: dict[str, str] = {
         "Su solicitud de Servicios TI ha sido registrada con el radicado **{radicado}**. "
         "El equipo de soporte técnico dará respuesta dentro de 1 a 3 días hábiles.\n\n"
         "Atentamente,\nDirección de Tecnologías de la Información"
+    ),
+    "Bienestar": (
+        "Estimado/a {nombre_solicitante},\n\n"
+        "Su solicitud de servicios de Bienestar Universitario ha sido radicada bajo el número **{radicado}**. "
+        "Nuestro equipo la atenderá en un plazo máximo de 5 días hábiles.\n\n"
+        "Atentamente,\nBienestar Universitario"
     ),
 }
 
