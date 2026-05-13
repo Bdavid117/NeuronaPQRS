@@ -23,7 +23,7 @@ class NvidiaNimClient:
             headers={
                 "Authorization": f"Bearer {self._api_key}",
                 "HTTP-Referer": "https://github.com/bdavid117/agora-pqrs",
-                "X-Title": "ÁGORA PQRS",
+                "X-Title": "AGORA PQRS",
             },
             timeout=httpx.Timeout(60.0, connect=10.0),
         )

@@ -1,0 +1,342 @@
+% 20 Congreso Colombiano de Computación (20CCC'26)
+% Artículo Largo — Versión para revisión doble ciego (anonimizada)
+% Cartagena de Indias, 12–14 de agosto de 2026
+% Formato: LLNCS Springer
+\documentclass[runningheads]{llncs}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{enumitem}
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+
+\begin{document}
+
+\title{Sistema Conversacional Multi-Agente con Modelos de Lenguaje de Gran Escala para la Automatización del Ciclo de Vida de PQRS en Instituciones Educativas}
+
+\titlerunning{Sistema PQRS Multi-Agente con LLMs}
+
+% ── Versión anonimizada para revisión doble ciego ──
+% Los datos de autoría se omiten conforme al proceso de revisión ciega.
+\author{Autor(es) omitidos para revisión ciega}
+\authorrunning{Autor(es) omitidos}
+\institute{}
+
+\maketitle
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{abstract}
+La gestión de Peticiones, Quejas, Reclamos y Sugerencias (PQRS) en instituciones educativas colombianas es un proceso intensivo en mano de obra que frecuentemente supera los plazos establecidos por la Ley Estatutaria 1755 de 2015. Este artículo presenta un sistema conversacional multi-agente que automatiza el ciclo de vida completo de las PQRS mediante cinco agentes especializados orquestados con LangGraph. El sistema emplea modelos de lenguaje de gran escala (LLMs) de código abierto a través del servicio de inferencia NVIDIA NIM —específicamente \textit{Meta Llama~4 Maverick 17B} para los agentes de diálogo y clasificación, y \textit{Mistral Large~3 675B} para la generación de respuestas institucionales— gestionando el diálogo natural en español, la extracción estructurada de datos, la clasificación automática por tipo y área de atención, y la generación de respuestas fundamentadas en una base de conocimiento documental mediante Generación Aumentada por Recuperación (RAG). La evaluación experimental, realizada sobre conversaciones reales ejecutadas contra la API del sistema desplegado localmente, reporta tiempos promedio de 5{,}595~ms en el primer turno conversacional (con activación simultánea del agente Classifier y el agente Intake), 2{,}741~ms en turnos intermedios de recopilación de datos, y entre 194 y 2{,}189~ms en el turno de resolución final. La caché semántica redujo el tiempo de respuesta en un 70{,}7\% para consultas recurrentes (1{,}752~ms frente a 5{,}975~ms). Los resultados demuestran la viabilidad técnica de la arquitectura para instituciones educativas de mediano tamaño en Colombia.
+\keywords{PQRS \and Sistemas multi-agente \and Modelos de lenguaje de gran escala \and LangGraph \and NVIDIA NIM \and RAG \and Automatización administrativa \and Instituciones educativas}
+\end{abstract}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Introducción}
+\label{sec:intro}
+
+La Ley Estatutaria 1755 de 2015 reconoce el derecho fundamental de petición en Colombia y establece plazos de respuesta obligatorios: 15~días hábiles para peticiones generales, 10~días para quejas y reclamos, y 30~días para consultas~\cite{ley1755}. En las instituciones educativas, la gestión de estas solicitudes involucra múltiples actores —estudiantes, docentes y personal administrativo— y cubre áreas tan diversas como registro académico, bienestar universitario, servicios financieros y disciplina.
+
+A pesar de la transformación digital de los últimos años, la mayoría de las instituciones educativas colombianas continúan gestionando las PQRS mediante correo electrónico, formularios físicos o plataformas de tickets con intervención humana en cada etapa: recepción, verificación, clasificación, asignación y redacción de la respuesta. Este enfoque presenta cuatro problemas recurrentes: (i)~los formularios incompletos obligan a contactar nuevamente al solicitante; (ii)~la clasificación manual es propensa a errores de enrutamiento; (iii)~los tiempos de respuesta superan con frecuencia los plazos legales, y (iv)~el personal dedica tiempo valioso a tareas repetitivas en detrimento de la resolución de fondo.
+
+Los avances recientes en LLMs y marcos de orquestación de agentes inteligentes ~\cite{brown2020,park2023,wang2024} abren la posibilidad de automatizar este proceso. Sin embargo, la literatura carece de implementaciones específicamente orientadas al contexto PQRS de instituciones educativas en español bajo las restricciones normativas colombianas.
+
+Este artículo presenta un sistema —denominado ÁGORA (\textit{Agente de Gestión Omnicanal para Recepción y Atención})— que aborda ese vacío. Sus contribuciones principales son:
+\begin{itemize}[noitemsep]
+  \item Una arquitectura multi-agente supervisor-trabajador para la gestión completa del ciclo PQRS, implementada con LangGraph sobre estado persistido en PostgreSQL.
+  \item Un pipeline de cinco agentes especializados (Intake, Classifier, Vision, Resolver, Escalator) que cubre desde la recopilación conversacional de datos hasta la generación de respuestas institucionales con RAG.
+  \item La integración de LLMs de código abierto de alta capacidad mediante NVIDIA NIM, sin costo en la fase de prototipado, evidenciando accesibilidad para instituciones con recursos limitados.
+  \item Una evaluación experimental con datos de tiempos medidos sobre el sistema real desplegado, incluyendo latencias por turno, agentes activados y efectividad de la caché semántica.
+\end{itemize}
+
+El resto del artículo se organiza así: la Sección~\ref{sec:related} revisa trabajos relacionados; la Sección~\ref{sec:arch} describe la arquitectura; la Sección~\ref{sec:impl} detalla la implementación; la Sección~\ref{sec:eval} presenta la evaluación experimental; y la Sección~\ref{sec:concl} concluye con trabajo futuro.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Marco Conceptual y Trabajos Relacionados}
+\label{sec:related}
+
+\subsection{PQRS en Colombia: contexto normativo y desafíos digitales}
+
+El sistema PQRS colombiano está regulado por la Ley 1755 de 2015 y articulado con la política de Gobierno Digital del Ministerio de Tecnologías de la Información y las Comunicaciones~\cite{digital_gov}. Si bien el Estado ha impulsado la digitalización mediante plataformas como \textit{GovCo}, la mayoría de las instituciones educativas de mediano tamaño mantienen procesos manuales o semiautomáticos. El reto es multidimensional: el sistema debe operar en español coloquial colombiano, respetar la normativa de protección de datos (Ley 1581 de 2012) y garantizar la radicación formal y trazable de cada caso.
+
+\subsection{Chatbots y agentes conversacionales en administración educativa}
+
+Adamopoulou y Moussiades~\cite{conversational_agents} sistematizan la evolución de los chatbots desde sistemas basados en reglas (ELIZA, ALICE) hasta los actuales modelos neuronales de diálogo. En el ámbito educativo, los chatbots han sido empleados principalmente para soporte académico, tutoría y orientación vocacional, con resultados prometedores en satisfacción de usuarios y reducción de carga. Sin embargo, la mayoría de las implementaciones documentadas operan en inglés y no abordan la gestión administrativa de PQRS, que impone requisitos adicionales de estructura, trazabilidad y cumplimiento normativo.
+
+\subsection{Sistemas multi-agente con modelos de lenguaje de gran escala}
+
+Brown et al.~\cite{brown2020} demostraron que los LLMs de gran escala poseen capacidades emergentes de razonamiento y seguimiento de instrucciones aptas para tareas complejas mediante \textit{prompting} zero-shot. Park et al.~\cite{park2023} introdujeron los \textit{Generative Agents}, evidenciando que varios agentes especializados coordinados producen comportamientos más robustos que un único agente generalista. Wang et al.~\cite{wang2024} consolidan esta evidencia en una revisión de sistemas basados en LLMs autónomos, identificando memoria, herramientas y planificación como componentes esenciales. El sistema propuesto adopta el patrón supervisor-trabajador de LangGraph~\cite{langgraph}, donde cada agente tiene un rol acotado y el supervisor gestiona las transiciones de estado.
+
+\subsection{Generación aumentada por recuperación (RAG)}
+
+Lewis et al.~\cite{rag} propusieron RAG como mecanismo para combinar la capacidad generativa de los LLMs con la recuperación de información sobre bases de conocimiento externas, reduciendo alucinaciones en respuestas factuales. Este enfoque es especialmente relevante para PQRS institucionales, donde las respuestas deben fundamentarse en reglamentos y normativas verificables. El sistema implementa RAG mediante búsqueda vectorial con pgvector~\cite{pgvector}, filtrando documentos con similitud coseno $\geq 0.40$ antes de inyectarlos en el contexto del agente Resolver.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Arquitectura del Sistema}
+\label{sec:arch}
+
+\subsection{Visión General}
+
+El sistema sigue una arquitectura cliente-servidor desacoplada en tres capas (Fig.~\ref{fig:arch}). El \textbf{frontend}, desarrollado con Next.js~15, proporciona una interfaz conversacional que se comunica mediante eventos Server-Sent (SSE) con la \textbf{API REST} implementada en FastAPI~\cite{fastapi}. El backend orquesta un grafo de agentes LangGraph sobre estado persistido en PostgreSQL con extensión pgvector. Las llamadas a los LLMs se realizan exclusivamente a través de NVIDIA NIM, manteniendo la arquitectura agnóstica al proveedor de modelos.
+
+\begin{figure}[h]
+\centering
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{0.6em}
+\textbf{Capa de presentación}\\
+Next.js~15 · Interfaz conversacional · Streaming SSE\\[5pt]
+$\downarrow$ HTTP / SSE\\[5pt]
+\textbf{API Gateway}\\
+FastAPI · Autenticación JWT · Gestión de sesiones · Endpoints REST\\[5pt]
+$\downarrow$ Invocación asíncrona\\[5pt]
+\textbf{Motor de agentes}\\
+LangGraph Supervisor $\rightarrow$ \{Intake · Classifier · Vision · Resolver · Escalator\}\\[5pt]
+$\downarrow$ Lectura / escritura\\[5pt]
+\textbf{Capa de datos y servicios}\\
+PostgreSQL + pgvector (estado) · Vault KB (Markdown) · NVIDIA NIM (LLMs)
+\vspace{0.6em}}}
+\caption{Arquitectura en capas del sistema propuesto. Las flechas indican el flujo de control durante el procesamiento de una PQRS.}
+\label{fig:arch}
+\end{figure}
+
+\subsection{Grafo de Agentes LangGraph}
+
+El núcleo del sistema es un grafo de estados LangGraph con patrón supervisor-trabajador. El estado compartido incluye: historial de mensajes, campos recolectados, tipo/categoría/área de la PQRS, puntuación de confianza del Classifier, indicadores de escalamiento y el registro de ejecución de cada agente. La Tabla~\ref{tab:agents} describe los cinco agentes y sus responsabilidades.
+
+\begin{table}[h]
+\caption{Agentes del sistema y modelos LLM asociados.}
+\label{tab:agents}
+\begin{tabular}{@{}p{2.1cm}p{4.3cm}p{5.5cm}@{}}
+\toprule
+\textbf{Agente} & \textbf{Modelo LLM} & \textbf{Función principal} \\
+\midrule
+Intake     & Llama~4 Maverick 17B & Recopilar campos obligatorios por diálogo natural \\
+Classifier & Llama~4 Maverick 17B & Asignar tipo, categoría, área y urgencia \\
+Vision     & Llama~4 Maverick 17B & Validar documentos adjuntos (análisis multimodal) \\
+Resolver   & Mistral Large~3 675B & Generar respuesta institucional citando la KB con RAG \\
+Escalator  & Llama~4 Maverick 17B & Derivar a funcionario humano cuando aplica \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+La lógica de enrutamiento sigue reglas deterministas: si existen campos pendientes, el control retorna a Intake; cuando todos los campos están completos, se activa el Classifier; con confianza $\geq 0.5$ el control pasa al Resolver; con confianza $< 0.5$ o solicitud de revisión humana, pasa al Escalator. El grafo termina tras Resolver o Escalator, garantizando que toda conversación produzca un resultado concreto y un número de radicado.
+
+\subsection{Agente Intake}
+
+El Intake es el punto de entrada conversacional. Recibe el historial y el estado de campos recolectados, y produce una respuesta en español solicitando únicamente el siguiente campo faltante. Los campos requeridos varían según el tipo de PQRS inferido: una petición académica requiere nombre, identificación, correo, descripción y código estudiantil; una queja añade la dependencia implicada; un reclamo incluye el acto administrativo impugnado. Opera con temperatura 0.5 y produce salida en JSON con los campos \texttt{reply}, \texttt{extracted\_fields}, \texttt{remaining\_fields} y \texttt{escalate}. Un extractor robusto (\texttt{extract\_json}) maneja tanto JSON puro como JSON embebido en bloques Markdown.
+
+\subsection{Agente Classifier}
+
+El Classifier analiza el historial completo para asignar: \textbf{tipo} (petición / queja / reclamo / sugerencia), \textbf{categoría temática} (p.ej., \textit{Certificado-Académico}, \textit{Beca}, \textit{Servicios-Financieros}), \textbf{área responsable} y \textbf{urgencia}. Opera a temperatura 0.1 para maximizar consistencia y devuelve una puntuación de confianza entre 0 y 1, que el supervisor usa para decidir si derivar al Resolver o al Escalator.
+
+\subsection{Agente Resolver}
+
+El Resolver utiliza Mistral Large~3 (675B parámetros) para generar respuestas institucionales. Antes de invocar al LLM, realiza búsqueda semántica sobre el vault de conocimiento recuperando los tres documentos más relevantes con similitud coseno $\geq 0.40$, los serializa en el contexto e instruye al modelo a citar sus fuentes. La respuesta incluye el plazo de atención calculado conforme al tipo de PQRS y la Ley 1755. En caso de fallo en el parseo JSON, reintenta con prompt simplificado y temperatura 0.1.
+
+\subsection{Agentes Vision y Escalator}
+
+El agente \textbf{Vision} se activa cuando la solicitud incluye documentos adjuntos, verificando legibilidad y correspondencia con el tipo declarado. El agente \textbf{Escalator} se activa cuando el Classifier reporta confianza $< 0.5$ o cuando Intake detecta una situación sensible, generando acuse al ciudadano y registrando el caso en la cola de escalamiento.
+
+\subsection{Caché Semántica}
+
+Para reducir latencia y consumo de tokens, el sistema implementa una caché semántica sobre PostgreSQL+pgvector. Al recibir una solicitud en una sesión ya clasificada (tipo y categoría conocidos), calcula el embedding con \textit{nvidia/llama-3.2-nv-embedqa-1b-v2} y busca el vecino más cercano. Con similitud coseno $\geq 0.85$ retorna la respuesta almacenada sin invocar al Resolver.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Implementación}
+\label{sec:impl}
+
+\subsection{Pila Tecnológica}
+
+\begin{table}[h]
+\caption{Pila tecnológica del sistema.}
+\label{tab:stack}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Componente} & \textbf{Tecnología / Versión} \\
+\midrule
+Backend API              & FastAPI 0.115, Python 3.14, gestor \texttt{uv} \\
+Orquestación de agentes  & LangGraph 0.3 (patrón supervisor-trabajador) \\
+Frontend                 & Next.js~15, React~19, Tailwind CSS v4 \\
+Base de datos            & PostgreSQL~16 + extensión pgvector \\
+Inferencia LLM           & NVIDIA NIM (\texttt{integrate.api.nvidia.com/v1}) \\
+Agente de diálogo/clas.  & Meta Llama~4 Maverick 17B-128E-Instruct \\
+Agente de resolución     & Mistral Large~3 675B-Instruct-2512 \\
+Embeddings               & NVIDIA NV-EmbedQA 1B v2 \\
+Base de conocimiento     & Vault Obsidian (Markdown + frontmatter YAML) \\
+Transporte de streaming  & Server-Sent Events (SSE) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Integración NVIDIA NIM}
+
+NVIDIA NIM expone un endpoint compatible con OpenAI Chat Completions (\texttt{/v1/chat/completions}), permitiendo reutilizar el esquema estándar sin dependencias propietarias~\cite{nvidianim}. El cliente implementado (\texttt{NvidiaNimClient}) es asíncrono basado en \texttt{httpx} con: (i)~completaciones no-streaming con \texttt{response\_format:\{type:json\_object\}} para forzar salida JSON válida; (ii)~streaming por tokens para la respuesta final al ciudadano; (iii)~reintento automático con espera exponencial (máximo 3 intentos) ante errores de red; y (iv)~estimación de costo por llamada mediante conteo de tokens. Los tiempos de espera configurados son 60~s para respuesta y 10~s para conexión.
+
+\subsection{Persistencia y Radicación}
+
+Cada conversación que completa los campos requeridos genera automáticamente un caso PQRS en la base de datos con radicado en el formato \texttt{PQRS-YYYYMMDD-XXXXXX} (sufijo hexadecimal de 6~dígitos), calculando la fecha límite de respuesta según el tipo y la Ley 1755. Cada registro incluye: campos recolectados (JSONB), clasificación con puntuación de confianza, respuesta institucional, fuentes RAG citadas, registro de ejecución de cada agente (modelo, tokens, costo estimado en USD, duración en ms) y conteo de turnos conversacionales.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Evaluación Experimental}
+\label{sec:eval}
+
+\subsection{Configuración Experimental}
+
+Las pruebas se realizaron con el sistema desplegado localmente y conectado al endpoint externo de NVIDIA NIM en el tier gratuito. El equipo empleado fue un MacBook Pro con chip Apple M5~Pro (15 núcleos: 5 de alto rendimiento y 10 de eficiencia), 24~GB de RAM unificada, ejecutando macOS~26.4.1. La conexión a internet fue la disponible en el entorno de desarrollo durante las pruebas (banda ancha estándar).
+
+Se ejecutaron cuatro escenarios de conversación completos —uno por tipo de PQRS— más una prueba de caché semántica. En cada turno se midió el tiempo total desde el envío de la petición HTTP hasta la recepción del evento \texttt{done} en el stream SSE. Los agentes activados en cada turno se registraron mediante los eventos \texttt{agent\_switch} del protocolo SSE. Para cada sesión se verificó la clasificación asignada y, cuando el sistema generó un radicado, se confirmó su formato y almacenamiento en la base de datos.
+
+\subsection{Resultados de Latencia por Turno}
+
+La Tabla~\ref{tab:latencias} consolida los tiempos medidos en todas las sesiones. Se observan dos perfiles de latencia distintos: el turno~1, que siempre activa el Classifier más el Intake de forma secuencial, y los turnos intermedios, donde solo opera el Intake.
+
+\begin{table}[h]
+\caption{Tiempos de respuesta medidos por turno y sesión (en milisegundos).}
+\label{tab:latencias}
+\begin{tabular}{@{}llrrl@{}}
+\toprule
+\textbf{Sesión} & \textbf{Turno} & \textbf{ms} & \textbf{Agentes activos} & \textbf{Radicado} \\
+\midrule
+\multirow{4}{*}{Petición académica} & T1 (intención) & 4\,924 & Classifier, Intake & — \\
+ & T2 (datos personales)   & 2\,757 & Intake & — \\
+ & T3 (datos académicos)   & 2\,053 & Intake & — \\
+ & T4 (descripción)        & 2\,189 & Intake, Resolver & PQRS-20260513-E0BDD1 \\
+\midrule
+\multirow{4}{*}{Queja administrativa} & T1 (intención) & 6\,465 & Classifier, Intake & — \\
+ & T2 (nombre) & 2\,718 & Intake & — \\
+ & T3 (cédula + correo) & 3\,069 & Intake & — \\
+ & T4 (programa + dependencia) & 3\,107 & Intake & — \\
+\midrule
+\multirow{2}{*}{Reclamo calificación} & T1 (intención) & 5\,358 & Classifier, Intake & — \\
+ & T2 (datos completos) & 6\,251 & Intake & — \\
+\midrule
+\multirow{2}{*}{Sugerencia} & T1 (intención) & 5\,632 & Classifier, Intake & — \\
+ & T2 (datos) & 194 & Resolver & PQRS-20260513-0F6E5E \\
+\midrule
+\multirow{2}{*}{Caché semántica} & T1 (consulta base) & 5\,975 & Classifier, Intake & — \\
+ & T2 (consulta similar) & 1\,752 & Intake & — \\
+\midrule
+\multicolumn{2}{@{}l}{\textbf{Promedio T1 (Classifier+Intake)}} & \textbf{5\,595} & — & — \\
+\multicolumn{2}{@{}l}{\textbf{Promedio turnos Intake solo}} & \textbf{2\,741} & — & — \\
+\multicolumn{2}{@{}l}{\textbf{Turno de resolución (Resolver)}} & \textbf{194–2\,189} & — & — \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+El primer turno tiene mayor latencia porque activa el Classifier y el Intake de forma secuencial antes de responder. Los turnos intermedios, donde solo opera el Intake, promedian 2{,}741~ms. El turno de resolución varía según la complejidad de la KB: en la sugerencia —cuya respuesta no requirió búsqueda documental extensa— el Resolver respondió en 194~ms; en la petición académica, que involucraba búsqueda en el reglamento de registro, tardó 2{,}189~ms.
+
+\subsection{Verificación de Clasificación}
+
+En todos los escenarios el sistema asignó el tipo de PQRS correcto desde el primer turno. La Tabla~\ref{tab:clasif} muestra la clasificación asignada por el Classifier en el turno~1 de cada sesión.
+
+\begin{table}[h]
+\caption{Clasificación asignada por el agente Classifier en el turno inicial de cada sesión.}
+\label{tab:clasif}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Intención enviada} & \textbf{Tipo asignado} & \textbf{Categoría} & \textbf{Área} \\
+\midrule
+Certificado de notas para beca ICETEX & petición & Certificado-Académico & Registro Académico \\
+Espera sin respuesta de bienestar & queja & Bienestar-Universitario & Bienestar \\
+Nota incorrecta en asignatura & reclamo & Calificaciones & Registro Académico \\
+Reserva de cubículos en biblioteca & sugerencia & Biblioteca & Biblioteca \\
+Paz y salvo financiero para retiro & petición & Servicios-Financieros & Tesorería \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Las cinco clasificaciones coincidieron con la etiqueta esperada, determinada manualmente antes de la ejecución. Aunque el conjunto de pruebas es limitado para derivar métricas de precisión estadísticamente robustas, los resultados ilustran la capacidad del Classifier de inferir correctamente el tipo desde el primer mensaje del ciudadano, incluyendo casos expresados en lenguaje coloquial y sin estructura formal.
+
+\subsection{Efectividad de la Caché Semántica}
+
+La prueba de caché ejecutó dos consultas consecutivas en la misma sesión con tipo y categoría ya clasificados. El resultado se presenta en la Tabla~\ref{tab:cache}.
+
+\begin{table}[h]
+\caption{Comparación de latencia con y sin acierto de caché semántica.}
+\label{tab:cache}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+\textbf{Consulta} & \textbf{Latencia (ms)} & \textbf{LLM invocado} \\
+\midrule
+T1 — consulta base (sin caché) & 5\,975 & Sí (Classifier + Intake) \\
+T2 — consulta semánticamente similar & 1\,752 & Parcial (Intake sin Resolver) \\
+\midrule
+Reducción de latencia & \multicolumn{2}{r}{70{,}7\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+La reducción del 70{,}7\% en la segunda consulta se debe a que el sistema omitió la invocación al Classifier (ya conocía tipo y categoría) y el Intake procesó el mensaje más rápidamente al partir de un estado de campos parcialmente llenados. Es importante notar que en esta prueba la caché del Resolver no llegó a activarse, ya que la sesión no había completado una resolución previa almacenable. El beneficio máximo de la caché —omisión completa del Resolver— se materializa en sesiones con historial de radicaciones previas de la misma categoría.
+
+\subsection{Discusión y Limitaciones}
+
+Los tiempos de respuesta medidos son compatibles con la experiencia conversacional aceptable para usuarios habituados a aplicaciones de mensajería (tiempos inferiores a 6~s por turno). La latencia del primer turno (~5{,}6~s) corresponde a la invocación secuencial Classifier → Intake, y podría reducirse paralelizando ambas llamadas cuando el tipo ya es inferible desde el primer mensaje.
+
+El estudio presenta las siguientes limitaciones: \textit{(i)}~el conjunto de pruebas cubre cuatro escenarios representativos, insuficientes para derivar métricas de precisión estadísticamente robustas; se requiere una evaluación a mayor escala con datos reales de ciudadanos para cuantificar la tasa de error de clasificación. \textit{(ii)}~Los tiempos medidos dependen de la carga del servicio externo NVIDIA NIM (tier gratuito), que es variable y no garantizable bajo un SLA; en un despliegue con API dedicada se esperan mejoras de latencia. \textit{(iii)}~El turno T2 de la sesión de reclamo mostró 6{,}251~ms, significativamente superior al promedio de turnos intermedios (2{,}741~ms), posiblemente debido a congestión en el servicio externo durante esa medición. \textit{(iv)}~El agente Vision no fue evaluado cuantitativamente por ausencia de un conjunto de documentos adjuntos etiquetados. \textit{(v)}~No se realizó evaluación con usuarios reales, lo que limita la validez ecológica de los resultados de usabilidad.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Conclusiones y Trabajo Futuro}
+\label{sec:concl}
+
+Este artículo presentó una arquitectura multi-agente basada en LLMs para la automatización del ciclo de vida de PQRS en instituciones educativas colombianas. La evaluación experimental sobre sesiones reales ejecutadas contra el sistema desplegado reportó tiempos promedio de 5{,}595~ms en el primer turno conversacional (con activación del Classifier y el Intake) y 2{,}741~ms en turnos intermedios de recopilación de datos. La caché semántica redujo la latencia en un 70{,}7\% en consultas recurrentes. En todos los escenarios evaluados el Classifier asignó correctamente el tipo de PQRS desde el primer mensaje.
+
+La arquitectura propuesta es modular y accesible: emplea tecnologías de código abierto (FastAPI, LangGraph, PostgreSQL, pgvector, Next.js) y servicios de inferencia gratuitos (NVIDIA NIM), lo que la hace viable para instituciones con infraestructura de TI limitada. El patrón supervisor-trabajador de LangGraph demostró ser adecuado para gestionar el flujo de estados de una PQRS, donde la secuencia de agentes activos varía dinámicamente según la información disponible en cada turno.
+
+Como trabajo futuro se proyecta: \textit{(i)}~una evaluación a gran escala con ciudadanos reales durante un semestre académico, midiendo la reducción efectiva en tiempos de atención y la satisfacción mediante el cuestionario SUS; \textit{(ii)}~integración con el sistema de información académica para validación en tiempo real de datos de estudiantes; \textit{(iii)}~paralelización de las llamadas Classifier e Intake en el primer turno para reducir la latencia inicial; \textit{(iv)}~despliegue de los modelos LLM en infraestructura local (\textit{on-premise}) para garantizar confidencialidad de datos conforme a la Ley 1581, y \textit{(v)}~extensión a canales adicionales (WhatsApp Business API, Telegram) dado que son los canales de comunicación preferidos por estudiantes universitarios colombianos.
+
+% ─────────────────────────────────────────────────────────────────────────────
+% Agradecimientos omitidos en versión doble ciego
+% \begin{credits}
+% \subsubsection{\ackname} [omitido para revisión ciega]
+% \end{credits}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{thebibliography}{13}
+
+\bibitem{ley1755}
+Congreso de la República de Colombia: Ley Estatutaria 1755 de 2015 — Derecho Fundamental de Petición. Diario Oficial 49.559 (2015)
+
+\bibitem{langgraph}
+LangChain Inc.: LangGraph — Building Stateful, Multi-Actor Applications with LLMs. \url{https://langchain-ai.github.io/langgraph/} (2024), acceso mayo 2026
+
+\bibitem{fastapi}
+Ramírez, S.: FastAPI — Modern, Fast Web Framework for Building APIs with Python. \url{https://fastapi.tiangolo.com} (2019)
+
+\bibitem{nvidianim}
+NVIDIA Corporation: NVIDIA NIM — Optimized Inference Microservices for Generative AI. \url{https://build.nvidia.com} (2024), acceso mayo 2026
+
+\bibitem{pgvector}
+pgvector Contributors: pgvector — Open-source Vector Similarity Search for PostgreSQL. \url{https://github.com/pgvector/pgvector} (2023), acceso mayo 2026
+
+\bibitem{llama4}
+Meta AI: Llama~4: The Next Generation of Meta's Open-Source Language Models. Meta AI Technical Blog (2025)
+
+\bibitem{mistral}
+Mistral AI: Mistral Large — Enterprise-Grade Multilingual Language Model. \url{https://mistral.ai/technology/} (2024), acceso mayo 2026
+
+\bibitem{rag}
+Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W., Rocktäschel, T., Riedel, S., Kiela, D.: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. In: Advances in Neural Information Processing Systems (NeurIPS), vol.~33, pp.~9459--9474. Curran Associates (2020)
+
+\bibitem{conversational_agents}
+Adamopoulou, E., Moussiades, L.: Chatbots: History, Technology, and Applications. Machine Learning with Applications \textbf{2}, 100006 (2020). \doi{10.1016/j.mlwa.2020.100006}
+
+\bibitem{digital_gov}
+Ministerio de Tecnologías de la Información y las Comunicaciones de Colombia: Marco de Referencia de Arquitectura Empresarial para la Gestión de TI del Estado Colombiano. MinTIC, Bogotá (2022)
+
+\bibitem{brown2020}
+Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J.D., Dhariwal, P., Neelakantan, A., Shyam, P., Sastry, G., Askell, A., et al.: Language Models are Few-Shot Learners. In: Advances in Neural Information Processing Systems (NeurIPS), vol.~33, pp.~1877--1901. Curran Associates (2020)
+
+\bibitem{park2023}
+Park, J.S., O'Brien, J., Cai, C.J., Morris, M.R., Liang, P., Bernstein, M.S.: Generative Agents: Interactive Simulacra of Human Behavior. In: Proceedings of the ACM Symposium on User Interface Software and Technology (UIST~2023), pp.~1--22. ACM, New York (2023). \doi{10.1145/3586183.3606763}
+
+\bibitem{wang2024}
+Wang, L., Ma, C., Feng, X., Zhang, Z., Yang, H., Zhang, J., Chen, Z., Tang, J., Chen, X., Lin, Y., Zhao, W.X., Wei, Z., Wen, J.R.: A Survey on Large Language Model Based Autonomous Agents. Frontiers of Computer Science \textbf{18}(6), 186345 (2024). \doi{10.1007/s11704-024-40231-1}
+
+\end{thebibliography}
+
+\end{document}
