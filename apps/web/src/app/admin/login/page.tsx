@@ -1,5 +1,6 @@
 "use client";
 
+import { AgoraLogo } from "@/components/AgoraLogo";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -36,14 +37,9 @@ export default function AdminLogin() {
     <div className="min-h-screen bg-surface-alt flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
-          <div className="flex items-center gap-2.5 mb-6">
-            <div className="w-8 h-8 rounded-lg bg-primary-600 flex items-center justify-center">
-              <span className="text-white text-xs font-bold">N</span>
-            </div>
-            <div>
-              <h1 className="font-semibold text-slate-900 text-sm">NeuronaPQRS</h1>
-              <p className="text-xs text-slate-500">Panel de Administración</p>
-            </div>
+          <div className="mb-6">
+            <AgoraLogo size="md" className="mb-1" />
+            <p className="text-xs text-slate-500 mt-1">Panel de Administración</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">

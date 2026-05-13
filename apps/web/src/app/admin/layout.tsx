@@ -1,3 +1,4 @@
+import { AgoraLogo } from "@/components/AgoraLogo";
 import Link from "next/link";
 import { LayoutDashboard, ListChecks, LogOut } from "lucide-react";
 
@@ -7,14 +8,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Sidebar */}
       <aside className="w-56 flex-shrink-0 bg-white border-r border-slate-200 flex flex-col">
         <div className="px-4 py-4 border-b border-slate-100">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-primary-600 flex items-center justify-center">
-              <span className="text-white text-[11px] font-bold">N</span>
-            </div>
-            <div>
-              <p className="text-xs font-semibold text-slate-900">NeuronaPQRS</p>
-              <p className="text-[10px] text-slate-500">Administración</p>
-            </div>
+          <div className="flex flex-col gap-0.5">
+            <AgoraLogo size="sm" />
+            <p className="text-[10px] text-slate-500 pl-0.5">Administración</p>
           </div>
         </div>
 

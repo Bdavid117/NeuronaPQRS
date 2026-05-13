@@ -1,5 +1,6 @@
 "use client";
 
+import { AgoraLogo } from "@/components/AgoraLogo";
 import { cn } from "@/lib/utils";
 import { Eye, EyeOff, LogIn, UserX } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -67,12 +68,8 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-[#0A0A0A] flex flex-col items-center justify-center px-4">
       {/* Logo */}
-      <div className="flex items-center gap-3 mb-10">
-        <div
-          className="w-10 h-10 rounded-full flex-shrink-0"
-          style={{ background: "linear-gradient(135deg, #7c3aed, #3b82f6)" }}
-        />
-        <span className="text-white font-bold text-lg tracking-tight">NeuronaPQRS</span>
+      <div className="flex items-center justify-center mb-10">
+        <AgoraLogo size="md" />
       </div>
 
       <div className="w-full max-w-sm">
