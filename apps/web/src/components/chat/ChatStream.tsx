@@ -66,7 +66,7 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
       id: "welcome",
       role: "assistant",
       content:
-        "¡Hola! Soy el asistente virtual de PQRS de la institución.\n\n¿En qué puedo ayudarte hoy? Puedes presentar una **Petición**, **Queja**, **Reclamo** o **Sugerencia**.\n\nSelecciona una opción o escríbeme directamente.",
+        "¡Hola! Soy ÁGORA, el asistente virtual de PQRS de la institución.\n\n¿En qué puedo ayudarte hoy? Puedes presentar una **Petición**, **Queja**, **Reclamo** o **Sugerencia**.\n\nSelecciona una opción o escríbeme directamente.",
     },
   ]);
   const [input, setInput] = useState("");
