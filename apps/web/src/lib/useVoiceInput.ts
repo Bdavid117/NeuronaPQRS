@@ -127,7 +127,7 @@ export function useVoiceInput({
     };
 
     recognition.onerror = () => {
-      console.warn("NeuronaPQRS: SpeechRecognition error");
+      console.warn("ÁGORA: SpeechRecognition error");
       setState("error");
       setInterimTranscript("");
       recognitionRef.current = null;
@@ -158,7 +158,7 @@ export function useVoiceInput({
           setState("idle");
           mediaRecorderRef.current = null;
         } catch (err) {
-          console.warn("NeuronaPQRS: Whisper transcription failed:", err);
+          console.warn("ÁGORA: Whisper transcription failed:", err);
           setState("error");
           errorTimerRef.current = setTimeout(() => setState("idle"), 2000);
           mediaRecorderRef.current = null;

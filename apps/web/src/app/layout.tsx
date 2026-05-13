@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NeuronaPQRS — Sistema PQRS Institucional",
+  title: "ÁGORA — Sistema PQRS Institucional",
   description: "Radica peticiones, quejas, reclamos y sugerencias de forma rápida y segura.",
 };
 

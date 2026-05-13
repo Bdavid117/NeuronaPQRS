@@ -9,7 +9,8 @@ import { useVoiceInput } from "@/lib/useVoiceInput";
 import { useVoiceSynthesis } from "@/lib/useVoiceSynthesis";
 import { streamChat, type AgentSwitchData, type DeltaData, type StateData } from "@/lib/sse";
 import { cn } from "@/lib/utils";
-import { AlertTriangle, CheckCircle2, Clock, Paperclip, Send, Volume2, VolumeX, X } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Clock, Paperclip, QrCode, Send, Thermometer, VolumeX, X } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -37,6 +38,20 @@ const TIPO_ICONS: Record<string, string> = {
   sugerencia: "💡",
 };
 
+const FRUSTRATION_KEYWORDS = [
+  "mal", "terrible", "horrible", "pésimo", "fatal", "inaceptable",
+  "urgente", "urgentemente", "desesperado", "desesperante",
+  "injusto", "injusticia", "abuso", "descaro", "vergüenza",
+  "incompetente", "incompetencia", "molesto", "fastidio", "enojado",
+  "furioso", "indignado", "harto", "cansado", "insoportable",
+];
+
+function detectFrustration(text: string): boolean {
+  const lower = text.toLowerCase();
+  const matches = FRUSTRATION_KEYWORDS.filter((kw) => lower.includes(kw));
+  return matches.length >= 2;
+}
+
 interface ChatStreamProps {
   sessionId: string;
   onCaseUpdate?: (caseInfo: CaseInfo) => void;
@@ -60,6 +75,8 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
   const [showUpload, setShowUpload] = useState(false);
   const [pendingAttachments, setPendingAttachments] = useState<number[]>([]);
   const [caseInfo, setCaseInfo] = useState<CaseInfo | null>(null);
+  const [showQR, setShowQR] = useState(false);
+  const [isFrustrated, setIsFrustrated] = useState(false);
   // Keep a ref to the current AbortController so we can abort on unmount without
   // stale-closure issues. This prevents a running SSE stream from emitting events
   // (and calling onCaseUpdate/onAgentChange) after "Nueva consulta" replaces us.
@@ -118,7 +135,7 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
       try {
         voiceStart();
       } catch (err) {
-        console.warn("NeuronaPQRS: Failed to restart mic after TTS:", err);
+        console.warn("ÁGORA: Failed to restart mic after TTS:", err);
       }
     }
   }, [tts.isSpeaking, voiceMode, isLoading, voiceStart]);
@@ -129,6 +146,21 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
       voiceStop();
     }
   }, [voiceMode, voiceState, voiceStop]);
+
+  // Voice summary when case is filed (radicado appears for the first time)
+  const prevRadicadoRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (!voiceMode) return;
+    if (caseInfo?.radicado && !prevRadicadoRef.current) {
+      const summary = `Tu caso ha sido radicado exitosamente con el número ${caseInfo.radicado}. ${
+        caseInfo.tipo ? `Tipo: ${caseInfo.tipo}. ` : ""
+      }${caseInfo.urgencia ? `Urgencia: ${caseInfo.urgencia}. ` : ""}${
+        caseInfo.plazo ? `Plazo de respuesta: ${caseInfo.plazo}. ` : ""
+      }Guarda tu número de radicado para dar seguimiento.`;
+      speakRef.current(summary);
+    }
+    prevRadicadoRef.current = caseInfo?.radicado ?? null;
+  }, [caseInfo, voiceMode]);
 
   const showCards = messages.length === 1 && !isLoading;
 
@@ -291,11 +323,29 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
                     {caseInfo.urgencia}
                   </span>
                 )}
+                <button
+                  onClick={() => setShowQR((v) => !v)}
+                  className="flex items-center gap-1 text-[10px] text-slate-500 hover:text-slate-700 border border-slate-200 rounded-md px-1.5 py-0.5 bg-white hover:bg-slate-50 transition-colors"
+                  title="Ver código QR"
+                >
+                  <QrCode size={10} />
+                  QR
+                </button>
               </div>
               {caseInfo.plazo && (
                 <div className="flex items-center gap-1.5 text-xs text-slate-500 mt-1.5">
                   <Clock size={11} />
                   <span>Plazo: {caseInfo.plazo}</span>
+                </div>
+              )}
+              {showQR && (
+                <div className="mt-3 p-2 bg-white rounded-lg border border-slate-200 inline-block">
+                  <QRCodeSVG
+                    value={`${typeof window !== "undefined" ? window.location.origin : ""}/r/${caseInfo.radicado}`}
+                    size={96}
+                    level="M"
+                  />
+                  <p className="text-[9px] text-slate-400 text-center mt-1">Escanea para ver tu caso</p>
                 </div>
               )}
             </div>
@@ -377,9 +427,17 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
       ) : (
         /* ── Text mode ── */
         <div className="px-4 pb-4 pt-1">
+          {isFrustrated && (
+            <div className="mb-2 flex items-center gap-2 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2">
+              <Thermometer size={14} className="flex-shrink-0" />
+              <span>Detectamos que tu situación puede ser urgente. Tu caso será marcado para atención prioritaria.</span>
+            </div>
+          )}
           <div className={cn(
-            "flex items-end gap-2 bg-white border border-slate-200 rounded-2xl px-3 py-2.5 transition-all duration-200 shadow-sm",
-            "focus-within:border-primary-400 focus-within:shadow-md"
+            "flex items-end gap-2 bg-white border rounded-2xl px-3 py-2.5 transition-all duration-200 shadow-sm",
+            isFrustrated
+              ? "border-amber-400 focus-within:border-amber-500 focus-within:shadow-md"
+              : "border-slate-200 focus-within:border-primary-400 focus-within:shadow-md"
           )}>
             <button
               onClick={() => setShowUpload((v) => !v)}
@@ -397,7 +455,10 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
             <textarea
               ref={inputRef}
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => {
+                setInput(e.target.value);
+                setIsFrustrated(detectFrustration(e.target.value));
+              }}
               onKeyDown={handleKeyDown}
               placeholder="Escribe tu mensaje aquí…"
               rows={1}
