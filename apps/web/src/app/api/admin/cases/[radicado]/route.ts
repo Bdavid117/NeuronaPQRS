@@ -13,15 +13,21 @@ export async function PATCH(
   const token = cookieStore.get("pae_admin_token")?.value ?? "";
   const body = await request.json();
 
-  const res = await fetch(`${API_URL}/admin/cases/${radicado}/status`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(body),
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${API_URL}/admin/cases/${radicado}/status`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(5000),
+    });
+  } catch {
+    return NextResponse.json({ error: "No se pudo conectar con el servidor" }, { status: 503 });
+  }
 
-  const data = await res.json();
+  const data = await res.json().catch(() => ({ error: "Respuesta inválida del servidor" }));
   return NextResponse.json(data, { status: res.status });
 }
