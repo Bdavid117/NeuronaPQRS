@@ -1,12 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* Paleta primaria — azul institucional */
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-600: #2563eb;
-  --color-primary-700: #1d4ed8;
+  /* Paleta primaria — índigo institucional ÁGORA */
+  --color-primary-50:  #eef2ff;
+  --color-primary-100: #e0e7ff;
+  --color-primary-200: #c7d2fe;
+  --color-primary-300: #a5b4fc;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #3730a3;
+  --color-primary-800: #312e81;
+  --color-primary-900: #1e1b4b;
 
   /* Superficies */
   --color-surface: #f1f5f9;
