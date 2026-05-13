@@ -14,42 +14,24 @@ export function AgoraLogo({ size = "md", className = "" }: AgoraLogoProps) {
 
   return (
     <div className={`flex items-center ${gap} ${className}`}>
-      {/* Símbolo de diálogo: dos semicírculos enfrentados conectados por línea */}
+      {/* Pórtico clásico: dos pilares + arco — evoca la ágora griega */}
       <svg
         width={icon}
-        height={Math.round(icon * 0.625)}
-        viewBox="0 0 32 20"
+        height={Math.round(icon * 0.75)}
+        viewBox="0 0 32 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        {/* Semicírculo izquierdo (C abriendo a la derecha) */}
         {/* Colors are brand-fixed — use className="brightness-0 invert" for dark backgrounds */}
-        <path
-          d="M14 2 C6 2 6 18 14 18"
-          stroke="#3730a3"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          fill="none"
-        />
-        {/* Semicírculo derecho (C invertida, abriendo a la izquierda) */}
-        <path
-          d="M18 2 C26 2 26 18 18 18"
-          stroke="#3730a3"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          fill="none"
-        />
-        {/* Línea fina de conexión */}
-        <line
-          x1="14"
-          y1="10"
-          x2="18"
-          y2="10"
-          stroke="#3730a3"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
+        {/* Pilar izquierdo */}
+        <line x1="8" y1="21" x2="8" y2="12" stroke="#4f46e5" strokeWidth="2.5" strokeLinecap="round" />
+        {/* Pilar derecho */}
+        <line x1="24" y1="21" x2="24" y2="12" stroke="#4f46e5" strokeWidth="2.5" strokeLinecap="round" />
+        {/* Arco superior */}
+        <path d="M8,12 Q16,3 24,12" stroke="#4f46e5" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+        {/* Base */}
+        <line x1="4" y1="21" x2="28" y2="21" stroke="#4f46e5" strokeWidth="2" strokeLinecap="round" />
       </svg>
 
       {/* Texto ÁGORA */}

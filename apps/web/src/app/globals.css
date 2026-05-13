@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Class-based dark mode: applies dark: variants when <html class="dark"> */
+@custom-variant dark (&:is(.dark *));
+
 @theme {
   /* Paleta primaria — índigo institucional ÁGORA */
   --color-primary-50:  #eef2ff;
@@ -25,9 +28,16 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #1e1b4b;   /* primary-900 — cálido en lugar de slate frío */
-  --border: #dde1f0;       /* borde con leve tinte índigo */
-  --muted: #475569;        /* slate-600 — más legible que slate-500 */
+  --foreground: #1e1b4b;
+  --border: #dde1f0;
+  --muted: #475569;
+}
+
+.dark {
+  --background: #0A0A0A;
+  --foreground: #f8fafc;
+  --border: rgba(255,255,255,0.07);
+  --muted: rgba(255,255,255,0.45);
 }
 
 html, body, #__next {

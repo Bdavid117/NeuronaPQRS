@@ -29,13 +29,13 @@ export function AgentStatus({ agent, isThinking }: { agent: string | null; isThi
       {/* Active step pill */}
       {current && (
         <div className={cn(
-          "flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs text-white/80 shadow-lg",
+          "flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-white/10 backdrop-blur-sm border border-slate-200 dark:border-white/15 text-xs text-slate-700 dark:text-white/80 shadow-lg",
           current.glow
         )}>
           <span className={cn("w-2 h-2 rounded-full animate-pulse shadow-sm", current.color, current.glow)} />
           <span className="font-semibold">{current.label}</span>
-          <span className="text-white/40">·</span>
-          <span className="text-white/60">{DESCRIPTIONS[agent ?? ""] ?? "Procesando…"}</span>
+          <span className="text-slate-400 dark:text-white/40">·</span>
+          <span className="text-slate-500 dark:text-white/60">{DESCRIPTIONS[agent ?? ""] ?? "Procesando…"}</span>
         </div>
       )}
 
@@ -48,10 +48,10 @@ export function AgentStatus({ agent, isThinking }: { agent: string | null; isThi
                 "rounded-full transition-all duration-300",
                 i === currentIdx
                   ? cn("w-2 h-2 animate-pulse shadow-sm", step.color, step.glow)
-                  : "w-1.5 h-1.5 bg-white/30"
+                  : "w-1.5 h-1.5 bg-slate-300 dark:bg-white/30"
               )} />
               {i < currentIdx && (
-                <div className="w-3 h-px bg-white/20 rounded" />
+                <div className="w-3 h-px bg-slate-200 dark:bg-white/20 rounded" />
               )}
             </div>
           ))}
@@ -59,7 +59,7 @@ export function AgentStatus({ agent, isThinking }: { agent: string | null; isThi
       )}
 
       {!current && (
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs text-white/60">
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-white/10 backdrop-blur-sm border border-slate-200 dark:border-white/15 text-xs text-slate-500 dark:text-white/60">
           <span className="w-2 h-2 rounded-full bg-slate-400 animate-pulse" />
           <span>Procesando…</span>
         </div>

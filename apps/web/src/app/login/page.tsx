@@ -66,7 +66,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] flex flex-col items-center justify-center px-4">
+    <div className="min-h-screen bg-white dark:bg-[#0A0A0A] flex flex-col items-center justify-center px-4">
       {/* Logo */}
       <div className="flex items-center justify-center mb-10">
         <AgoraLogo size="md" />
@@ -74,9 +74,9 @@ export default function LoginPage() {
 
       <div className="w-full max-w-sm">
         {/* Card */}
-        <div className="bg-[#0D0D1C] border border-[#222233] rounded-2xl p-7 shadow-2xl shadow-black/50">
+        <div className="bg-white dark:bg-[#0D0D1C] border border-slate-200 dark:border-[#222233] rounded-2xl p-7 shadow-2xl shadow-black/10 dark:shadow-black/50">
           {/* Tabs */}
-          <div className="flex gap-1 bg-white/[0.04] rounded-lg p-0.5 mb-6">
+          <div className="flex gap-1 bg-slate-100 dark:bg-white/[0.04] rounded-lg p-0.5 mb-6">
             {(["login", "register"] as const).map((t) => (
               <button
                 key={t}
@@ -84,8 +84,8 @@ export default function LoginPage() {
                 className={cn(
                   "flex-1 py-1.5 rounded-md text-sm font-medium transition-all duration-150",
                   tab === t
-                    ? "bg-white/10 text-white shadow-sm"
-                    : "text-white/40 hover:text-white/60"
+                    ? "bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-sm"
+                    : "text-slate-500 dark:text-white/40 hover:text-slate-700 dark:hover:text-white/60"
                 )}
               >
                 {t === "login" ? "Iniciar sesión" : "Registrarse"}
@@ -96,19 +96,19 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             {tab === "register" && (
               <div>
-                <label className="block text-xs text-white/50 mb-1.5 font-medium">Nombre</label>
+                <label className="block text-xs text-slate-600 dark:text-white/50 mb-1.5 font-medium">Nombre</label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Tu nombre"
-                  className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/25 outline-none focus:border-indigo-400/50 focus:bg-white/10 transition-all"
+                  className="w-full bg-slate-50 dark:bg-white/[0.06] border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/25 outline-none focus:border-indigo-400 dark:focus:border-indigo-400/50 focus:bg-white dark:focus:bg-white/10 transition-all"
                 />
               </div>
             )}
 
             <div>
-              <label className="block text-xs text-white/50 mb-1.5 font-medium">
+              <label className="block text-xs text-slate-600 dark:text-white/50 mb-1.5 font-medium">
                 Correo institucional
               </label>
               <input
@@ -117,12 +117,12 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="usuario@universidad.edu.co"
-                className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/25 outline-none focus:border-indigo-400/50 focus:bg-white/10 transition-all"
+                className="w-full bg-slate-50 dark:bg-white/[0.06] border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/25 outline-none focus:border-indigo-400 dark:focus:border-indigo-400/50 focus:bg-white dark:focus:bg-white/10 transition-all"
               />
             </div>
 
             <div>
-              <label className="block text-xs text-white/50 mb-1.5 font-medium">Contraseña</label>
+              <label className="block text-xs text-slate-600 dark:text-white/50 mb-1.5 font-medium">Contraseña</label>
               <div className="relative">
                 <input
                   type={showPass ? "text" : "password"}
@@ -130,12 +130,12 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="••••••••"
-                  className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-3.5 py-2.5 pr-10 text-sm text-white placeholder-white/25 outline-none focus:border-indigo-400/50 focus:bg-white/10 transition-all"
+                  className="w-full bg-slate-50 dark:bg-white/[0.06] border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 pr-10 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/25 outline-none focus:border-indigo-400 dark:focus:border-indigo-400/50 focus:bg-white dark:focus:bg-white/10 transition-all"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/30 hover:text-slate-600 dark:hover:text-white/60 transition-colors"
                 >
                   {showPass ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
@@ -161,22 +161,25 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="flex items-center gap-3 my-5">
-            <div className="flex-1 h-px bg-white/[0.07]" />
-            <span className="text-[11px] text-white/30">o continúa sin cuenta</span>
-            <div className="flex-1 h-px bg-white/[0.07]" />
+            <div className="flex-1 h-px bg-slate-200 dark:bg-white/[0.07]" />
+            <span className="text-[11px] text-slate-400 dark:text-white/30">o continúa sin cuenta</span>
+            <div className="flex-1 h-px bg-slate-200 dark:bg-white/[0.07]" />
           </div>
 
           {/* Anonymous */}
           <button
             onClick={handleAnonymous}
-            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-medium text-white/60 bg-white/[0.04] border border-white/10 hover:bg-white/[0.08] hover:text-white/80 transition-all duration-200"
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-medium text-slate-600 dark:text-white/60 bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/[0.08] hover:text-slate-800 dark:hover:text-white/80 transition-all duration-200"
           >
             <UserX size={15} />
             Entrar de forma anónima
           </button>
+          <p className="text-center text-[11px] text-slate-400 dark:text-white/25 mt-2.5 leading-relaxed">
+            Sin cuenta, el historial de tus solicitudes no quedará guardado.
+          </p>
         </div>
 
-        <p className="text-center text-[11px] text-white/20 mt-5 tracking-wide">
+        <p className="text-center text-[11px] text-slate-400 dark:text-white/20 mt-5 tracking-wide">
           Sistema PQRS Institucional · Ley 1755 de 2015
         </p>
       </div>

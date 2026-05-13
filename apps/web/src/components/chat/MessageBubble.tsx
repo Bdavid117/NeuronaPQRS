@@ -33,11 +33,11 @@ export function MessageBubble({ message }: { message: Message }) {
         "flex-shrink-0 w-8 h-8 rounded-xl flex items-center justify-center shadow-sm",
         isUser
           ? "bg-primary-600"
-          : "bg-white border border-slate-200"
+          : "bg-slate-100 dark:bg-white/[0.08] border border-slate-200 dark:border-white/10"
       )}>
         {isUser
           ? <User size={14} className="text-white" />
-          : <Bot size={14} className="text-slate-500" />}
+          : <Bot size={14} className="text-slate-400 dark:text-white/50" />}
       </div>
 
       {/* Bubble + meta */}
@@ -57,26 +57,26 @@ export function MessageBubble({ message }: { message: Message }) {
           "px-4 py-3 text-sm leading-relaxed break-words",
           isUser
             ? "bg-primary-600 text-white rounded-2xl rounded-tr-sm shadow-sm"
-            : "bg-white text-slate-800 border border-slate-200 rounded-2xl rounded-tl-sm shadow-sm"
+            : "bg-white dark:bg-white/[0.07] text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-white/[0.08] rounded-2xl rounded-tl-sm"
         )}>
           {isUser ? (
             <span className="whitespace-pre-wrap">{message.content}</span>
           ) : (
-            <div className="prose prose-slate prose-sm max-w-none
+            <div className="prose prose-slate dark:prose-invert prose-sm max-w-none
               prose-p:my-1 prose-p:leading-relaxed
-              prose-strong:text-slate-900 prose-strong:font-semibold
+              prose-strong:text-slate-900 dark:prose-strong:text-white prose-strong:font-semibold
               prose-ul:my-1.5 prose-ul:pl-4
               prose-ol:my-1.5 prose-ol:pl-4
               prose-li:my-0.5
-              prose-code:bg-slate-100 prose-code:text-slate-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs
-              prose-blockquote:border-l-2 prose-blockquote:border-primary-300 prose-blockquote:pl-3 prose-blockquote:text-slate-500
-              prose-h1:text-base prose-h2:text-sm prose-h3:text-sm prose-h1:text-slate-900 prose-h2:text-slate-900
-              prose-hr:border-slate-200">
+              prose-code:bg-slate-100 dark:prose-code:bg-white/10 prose-code:text-slate-700 dark:prose-code:text-slate-200 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs
+              prose-blockquote:border-l-2 prose-blockquote:border-primary-400/60 prose-blockquote:pl-3 prose-blockquote:text-slate-500 dark:prose-blockquote:text-white/50
+              prose-h1:text-base prose-h2:text-sm prose-h3:text-sm
+              prose-hr:border-slate-200 dark:prose-hr:border-white/10">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {message.content}
               </ReactMarkdown>
               {message.isStreaming && (
-                <span className="inline-block w-1.5 h-4 ml-0.5 bg-slate-400 animate-pulse rounded-sm align-middle" />
+                <span className="inline-block w-1.5 h-4 ml-0.5 bg-slate-400 dark:bg-white/50 animate-pulse rounded-sm align-middle" />
               )}
             </div>
           )}

@@ -4,6 +4,7 @@ import { AgoraLogo } from "@/components/AgoraLogo";
 import { type CaseInfo, ChatStream } from "@/components/chat/ChatStream";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, Keyboard, Mic, Plus } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
@@ -12,54 +13,54 @@ import Link from "next/link";
 function CaseInfoPanel({ caseInfo }: { caseInfo: CaseInfo | null }) {
   if (!caseInfo) return null;
   return (
-    <div className="p-4 bg-white rounded-xl border border-slate-200 shadow-sm text-sm">
-      <h3 className="font-semibold text-xs uppercase tracking-widest text-slate-500 mb-3">Información del caso</h3>
+    <div className="p-4 bg-slate-50 dark:bg-white/[0.05] rounded-xl border border-slate-200 dark:border-white/[0.08] text-sm">
+      <h3 className="font-semibold text-xs uppercase tracking-widest text-slate-500 dark:text-white/40 mb-3">Información del caso</h3>
       <dl className="space-y-1.5">
         {caseInfo.radicado && (
           <div className="flex justify-between gap-2">
-            <dt className="text-slate-500">Radicado</dt>
-            <dd className="font-mono text-xs text-slate-900 font-semibold">{caseInfo.radicado}</dd>
+            <dt className="text-slate-500 dark:text-white/40">Radicado</dt>
+            <dd className="font-mono text-xs text-slate-800 dark:text-white/90 font-semibold">{caseInfo.radicado}</dd>
           </div>
         )}
         {caseInfo.tipo && (
           <div className="flex justify-between gap-2">
-            <dt className="text-slate-500">Tipo</dt>
-            <dd className="text-slate-900 capitalize">{caseInfo.tipo}</dd>
+            <dt className="text-slate-500 dark:text-white/40">Tipo</dt>
+            <dd className="text-slate-700 dark:text-white/80 capitalize">{caseInfo.tipo}</dd>
           </div>
         )}
         {caseInfo.categoria && (
           <div className="flex justify-between gap-2">
-            <dt className="text-slate-500">Categoría</dt>
-            <dd className="text-slate-900 text-right">{caseInfo.categoria}</dd>
+            <dt className="text-slate-500 dark:text-white/40">Categoría</dt>
+            <dd className="text-slate-700 dark:text-white/80 text-right">{caseInfo.categoria}</dd>
           </div>
         )}
         {caseInfo.area && (
           <div className="flex justify-between gap-2">
-            <dt className="text-slate-500">Área</dt>
-            <dd className="text-slate-900 text-right">{caseInfo.area}</dd>
+            <dt className="text-slate-500 dark:text-white/40">Área</dt>
+            <dd className="text-slate-700 dark:text-white/80 text-right">{caseInfo.area}</dd>
           </div>
         )}
         {caseInfo.urgencia && (
           <div className="flex justify-between gap-2">
-            <dt className="text-slate-500">Urgencia</dt>
+            <dt className="text-slate-500 dark:text-white/40">Urgencia</dt>
             <dd className={cn("text-xs font-semibold capitalize", {
-              "text-red-600": caseInfo.urgencia === "alta",
-              "text-amber-600": caseInfo.urgencia === "media",
-              "text-green-600": caseInfo.urgencia === "baja",
+              "text-red-600 dark:text-red-400": caseInfo.urgencia === "alta",
+              "text-amber-600 dark:text-amber-400": caseInfo.urgencia === "media",
+              "text-green-600 dark:text-green-400": caseInfo.urgencia === "baja",
             })}>{caseInfo.urgencia}</dd>
           </div>
         )}
         {caseInfo.plazo && (
           <div className="flex justify-between gap-2">
-            <dt className="text-slate-500">Plazo</dt>
-            <dd className="text-slate-900">{caseInfo.plazo}</dd>
+            <dt className="text-slate-500 dark:text-white/40">Plazo</dt>
+            <dd className="text-slate-700 dark:text-white/80">{caseInfo.plazo}</dd>
           </div>
         )}
       </dl>
       {caseInfo.radicado && (
         <Link
           href={`/r/${caseInfo.radicado}`}
-          className="mt-3 w-full flex items-center justify-center gap-1.5 text-xs text-primary-600 hover:text-primary-700 font-medium py-2 border border-primary-200 rounded-lg hover:bg-primary-50 transition-colors"
+          className="mt-3 w-full flex items-center justify-center gap-1.5 text-xs text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium py-2 border border-primary-300 dark:border-primary-500/30 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-500/10 transition-colors"
         >
           Ver página del caso →
         </Link>
@@ -126,11 +127,11 @@ export function ChatPageInner() {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen bg-surface-alt">
+    <div className="flex flex-col h-screen bg-white dark:bg-[#0A0A0A]">
       {/* Top bar */}
-      <header className="flex items-center justify-between px-4 py-3 bg-white border-b border-slate-200 flex-shrink-0 shadow-sm">
+      <header className="flex items-center justify-between px-4 py-3 bg-slate-50 dark:bg-[#0d0d1c] border-b border-slate-200 dark:border-white/[0.07] flex-shrink-0">
         <div className="flex items-center gap-2">
-          <Link href="/" className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-colors" aria-label="Volver al inicio">
+          <Link href="/" className="p-1.5 rounded-lg text-slate-400 dark:text-white/40 hover:text-slate-700 dark:hover:text-white/70 hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors" aria-label="Volver al inicio">
             <ChevronLeft size={18} />
           </Link>
           <div className="flex items-center gap-2">
@@ -139,13 +140,17 @@ export function ChatPageInner() {
         </div>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
+
           {/* Voice / Text toggle */}
-          <div className="flex items-center bg-slate-100 rounded-lg p-0.5">
+          <div className="flex items-center bg-slate-100 dark:bg-white/[0.06] rounded-lg p-0.5">
             <button
               onClick={() => setVoiceMode(false)}
               className={cn(
                 "flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all",
-                !voiceMode ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"
+                !voiceMode
+                  ? "bg-white dark:bg-white/10 text-slate-900 dark:text-white shadow-sm"
+                  : "text-slate-500 dark:text-white/40 hover:text-slate-700 dark:hover:text-white/60"
               )}
             >
               <Keyboard size={12} />
@@ -155,7 +160,7 @@ export function ChatPageInner() {
               onClick={() => setVoiceMode(true)}
               className={cn(
                 "flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all",
-                voiceMode ? "bg-primary-600 text-white shadow-sm" : "text-slate-500 hover:text-slate-700"
+                voiceMode ? "bg-primary-600 text-white shadow-sm" : "text-slate-500 dark:text-white/40 hover:text-slate-700 dark:hover:text-white/60"
               )}
             >
               <Mic size={12} />
@@ -165,7 +170,7 @@ export function ChatPageInner() {
 
           <button
             onClick={handleNew}
-            className="flex items-center gap-1 text-xs text-slate-500 hover:text-slate-700 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 transition-colors border border-slate-200"
+            className="flex items-center gap-1 text-xs text-slate-500 dark:text-white/50 hover:text-slate-800 dark:hover:text-white/80 px-2.5 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/[0.08] transition-colors border border-slate-200 dark:border-white/10"
             title="Nueva consulta"
           >
             <Plus size={13} />
@@ -189,21 +194,21 @@ export function ChatPageInner() {
         </div>
 
         {/* Right panel — only on desktop (md+) */}
-        <aside className="hidden md:flex flex-col w-72 lg:w-80 border-l border-slate-200 bg-white p-4 gap-4 overflow-y-auto flex-shrink-0">
+        <aside className="hidden md:flex flex-col w-72 lg:w-80 border-l border-slate-200 dark:border-white/[0.07] bg-slate-50 dark:bg-[#0d0d1c] p-4 gap-4 overflow-y-auto flex-shrink-0">
           <div>
-            <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Estado del caso</h2>
+            <h2 className="text-xs font-semibold text-slate-500 dark:text-white/40 uppercase tracking-widest mb-3">Estado del caso</h2>
             {caseInfo ? (
               <CaseInfoPanel caseInfo={caseInfo} />
             ) : (
-              <div className="text-sm text-slate-400 bg-slate-50 rounded-xl p-4 text-center">
+              <div className="text-sm text-slate-400 dark:text-white/30 bg-slate-100 dark:bg-white/[0.04] rounded-xl p-4 text-center">
                 El caso aparecerá aquí cuando se radique.
               </div>
             )}
           </div>
 
           <div>
-            <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Ayuda rápida</h2>
-            <div className="space-y-2 text-xs text-slate-500">
+            <h2 className="text-xs font-semibold text-slate-500 dark:text-white/40 uppercase tracking-widest mb-3">Ayuda rápida</h2>
+            <div className="space-y-2 text-xs text-slate-500 dark:text-white/40">
               <p>• Puedes adjuntar documentos con el ícono de clip</p>
               <p>• El asistente te guiará para completar tu solicitud</p>
               <p>• Guarda tu radicado para hacer seguimiento</p>
