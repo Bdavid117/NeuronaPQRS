@@ -89,6 +89,7 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
   speakRef.current = tts.speak;
 
   // Auto-speak the last assistant message when it finishes streaming (voice mode only)
+  const ttsPlayedIds = useRef<Set<string>>(new Set());
   const prevMessagesRef = useRef<Message[]>([]);
   useEffect(() => {
     if (!voiceMode) return;
@@ -101,12 +102,10 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
       !lastCurr?.isStreaming &&
       lastCurr?.role === "assistant" &&
       lastCurr?.content &&
-      !lastCurr?.ttsPlayed
+      !ttsPlayedIds.current.has(lastCurr.id)
     ) {
+      ttsPlayedIds.current.add(lastCurr.id);
       speakRef.current(lastCurr.content);
-      setMessages((prev) =>
-        prev.map((m) => (m.id === lastCurr.id ? { ...m, ttsPlayed: true } : m))
-      );
     }
     prevMessagesRef.current = curr;
   }, [messages, voiceMode]);

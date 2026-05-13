@@ -11,7 +11,6 @@ export interface Message {
   content: string;
   agentName?: string;
   isStreaming?: boolean;
-  ttsPlayed?: boolean;
 }
 
 const AGENT_META: Record<string, { label: string; color: string; dot: string }> = {
