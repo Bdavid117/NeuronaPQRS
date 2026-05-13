@@ -3,7 +3,7 @@ from __future__ import annotations
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import field_validator
+from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -48,6 +48,18 @@ class Settings(BaseSettings):
     def ensure_upload_dir(cls, v: str) -> str:
         Path(v).mkdir(parents=True, exist_ok=True)
         return v
+
+    @model_validator(mode="after")
+    def check_production_secrets(self) -> "Settings":
+        if self.app_env != "development":
+            insecure_markers = ("change", "change-me", "secret-change", "placeholder")
+            for field_name in ("admin_password", "admin_token_secret"):
+                val = getattr(self, field_name, "")
+                if any(marker in val for marker in insecure_markers):
+                    raise ValueError(
+                        f"{field_name} must be changed from its default before running in a non-development environment"
+                    )
+        return self
 
     @property
     def cors_origins(self) -> list[str]:

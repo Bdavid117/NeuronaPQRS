@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import hmac
+from datetime import datetime
 from typing import Optional
+
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from pydantic import BaseModel
 from sqlmodel import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -12,19 +16,26 @@ from ..models.pqrs import PQRSCase, PQRSEstado
 router = APIRouter(prefix="/admin", tags=["admin"])
 
 
+class UpdateStatusBody(BaseModel):
+    estado: PQRSEstado
+
+
+class LoginBody(BaseModel):
+    username: str
+    password: str
+
+
 def _verify_admin(request: Request) -> None:
     """Simple token-based admin auth — checks Authorization header or cookie."""
     settings = get_settings()
     secret = settings.admin_token_secret
 
-    # Check Authorization: Bearer <secret>
     auth = request.headers.get("Authorization", "")
-    if auth.startswith("Bearer ") and auth[7:] == secret:
+    if auth.startswith("Bearer ") and hmac.compare_digest(auth[7:], secret):
         return
 
-    # Check cookie
     cookie = request.cookies.get("pae_admin_token", "")
-    if cookie == secret:
+    if hmac.compare_digest(cookie, secret):
         return
 
     raise HTTPException(status_code=401, detail="Unauthorized")
@@ -85,7 +96,7 @@ async def list_cases(
 @router.patch("/cases/{radicado}/status")
 async def update_case_status(
     radicado: str,
-    body: dict,
+    body: UpdateStatusBody,
     request: Request,
     session: AsyncSession = Depends(get_session),
 ):
@@ -96,20 +107,17 @@ async def update_case_status(
     if not case:
         raise HTTPException(status_code=404, detail="Case not found")
 
-    new_estado = body.get("estado")
-    if new_estado and new_estado in [e.value for e in PQRSEstado]:
-        case.estado = new_estado  # type: ignore[assignment]
-        await session.commit()
-        return {"status": "updated", "radicado": radicado, "estado": new_estado}
-
-    raise HTTPException(status_code=400, detail=f"Invalid estado: {new_estado}")
+    case.estado = body.estado
+    case.updated_at = datetime.utcnow()
+    await session.commit()
+    return {"status": "updated", "radicado": radicado, "estado": body.estado}
 
 
 @router.post("/login")
-async def admin_login(body: dict, request: Request):
+async def admin_login(body: LoginBody, request: Request):
     settings = get_settings()
-    username = body.get("username", "")
-    password = body.get("password", "")
-    if username == settings.admin_username and password == settings.admin_password:
+    user_ok = hmac.compare_digest(body.username, settings.admin_username)
+    pass_ok = hmac.compare_digest(body.password, settings.admin_password)
+    if user_ok and pass_ok:
         return {"token": settings.admin_token_secret}
     raise HTTPException(status_code=401, detail="Credenciales incorrectas")
