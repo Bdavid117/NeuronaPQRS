@@ -186,6 +186,8 @@ async def _persist_state(db: AsyncSession, session_id: str, state: dict) -> None
     if state.get("requires_human"):
         case.requiere_revision_humana = True
 
+    case.turn_count = (case.turn_count or 0) + 1
+
     await db.commit()
 
 

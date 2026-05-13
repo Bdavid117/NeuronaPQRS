@@ -8,7 +8,7 @@ from pathlib import Path
 from langchain_core.messages import AIMessage
 
 from ..config import get_settings
-from ..services.openrouter import get_openrouter
+from ..services.nvidia_nim import get_nvidia_nim
 from .state import PQRSState
 
 _PROMPT = (Path(__file__).parent / "prompts" / "vision.md").read_text()
@@ -29,7 +29,7 @@ async def vision_agent(state: PQRSState, db_session=None) -> dict:
     from sqlmodel import select
 
     settings = get_settings()
-    client = get_openrouter()
+    client = get_nvidia_nim()
     start = time.monotonic()
 
     attachment_ids = state.get("attachment_ids", [])

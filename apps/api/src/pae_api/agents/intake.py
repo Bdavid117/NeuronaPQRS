@@ -9,8 +9,9 @@ from langchain_core.messages import AIMessage
 from ..config import get_settings
 from ..logging_config import get_logger
 from ..services.obsidian import search as kb_search
-from ..services.openrouter import get_openrouter
+from ..services.nvidia_nim import get_nvidia_nim
 from .state import PQRSState
+from .utils import extract_json
 
 _PROMPT = (Path(__file__).parent / "prompts" / "intake.md").read_text()
 log = get_logger("intake")
@@ -26,7 +27,7 @@ _BASE_REQUIRED: dict[str, list[str]] = {
 
 async def intake_agent(state: PQRSState) -> dict:
     settings = get_settings()
-    client = get_openrouter()
+    client = get_nvidia_nim()
     start = time.monotonic()
 
     # Determine pending fields
@@ -53,6 +54,7 @@ async def intake_agent(state: PQRSState) -> dict:
         model=settings.model_intake,
         messages=messages,
         temperature=0.5,
+        response_format={"type": "json_object"},
     )
 
     cost = client.estimate_cost(resp)
@@ -60,7 +62,7 @@ async def intake_agent(state: PQRSState) -> dict:
     raw = resp["choices"][0]["message"]["content"] or ""
 
     try:
-        parsed = json.loads(raw)
+        parsed = extract_json(raw)
         log.info(f"  extracted={list(parsed.get('extracted_fields', {}).keys())}  pending={parsed.get('remaining_fields', [])}")
     except (json.JSONDecodeError, ValueError) as e:
         log.warning(f"  ⚠ JSON parse failed: {e}  raw={raw[:80]!r}")

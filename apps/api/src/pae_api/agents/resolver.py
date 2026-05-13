@@ -10,9 +10,10 @@ from langchain_core.messages import AIMessage
 from ..config import get_settings
 from ..logging_config import get_logger
 from ..services.obsidian import search as kb_search
-from ..services.openrouter import get_openrouter
+from ..services.nvidia_nim import get_nvidia_nim
 from ..services.tracking import plazo_label
 from .state import PQRSState
+from .utils import extract_json
 
 log = get_logger("resolver")
 
@@ -32,7 +33,7 @@ def _is_garbled(text: str) -> bool:
 
 async def resolver_agent(state: PQRSState) -> dict:
     settings = get_settings()
-    client = get_openrouter()
+    client = get_nvidia_nim()
     start = time.monotonic()
 
     tipo = state.get("pqrs_tipo", "peticion")
@@ -93,6 +94,7 @@ async def resolver_agent(state: PQRSState) -> dict:
         model=settings.model_resolver,
         messages=messages,
         temperature=0.3,
+        response_format={"type": "json_object"},
     )
 
     cost = client.estimate_cost(resp)
@@ -108,7 +110,7 @@ async def resolver_agent(state: PQRSState) -> dict:
 
     def _try_parse(text: str) -> dict | None:
         try:
-            return json.loads(text)
+            return extract_json(text)
         except (json.JSONDecodeError, ValueError):
             return None
 
@@ -136,6 +138,7 @@ async def resolver_agent(state: PQRSState) -> dict:
                 model=settings.model_resolver,
                 messages=retry_messages,
                 temperature=0.1,
+                response_format={"type": "json_object"},
             )
             raw2 = resp2["choices"][0]["message"]["content"] or ""
             parsed = _try_parse(raw2) or {}

@@ -52,6 +52,7 @@ class PQRSCase(SQLModel, table=True):
     collected_fields: dict[str, Any] = Field(default_factory=dict, sa_column=Column(JSONB))
     validation_errors: list[str] = Field(default_factory=list, sa_column=Column(JSONB))
     vault_note_path: str | None = None
+    turn_count: int = Field(default=0)
 
 
 class Message(SQLModel, table=True):

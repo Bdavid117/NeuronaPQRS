@@ -8,8 +8,9 @@ from langchain_core.messages import AIMessage
 
 from ..config import get_settings
 from ..logging_config import get_logger
-from ..services.openrouter import get_openrouter
+from ..services.nvidia_nim import get_nvidia_nim
 from .state import PQRSState
+from .utils import extract_json
 
 _PROMPT = (Path(__file__).parent / "prompts" / "classifier.md").read_text()
 log = get_logger("classifier")
@@ -17,7 +18,7 @@ log = get_logger("classifier")
 
 async def classifier_agent(state: PQRSState) -> dict:
     settings = get_settings()
-    client = get_openrouter()
+    client = get_nvidia_nim()
     start = time.monotonic()
 
     context = {
@@ -39,6 +40,7 @@ async def classifier_agent(state: PQRSState) -> dict:
         model=settings.model_classifier,
         messages=messages,
         temperature=0.1,
+        response_format={"type": "json_object"},
     )
 
     cost = client.estimate_cost(resp)
@@ -46,11 +48,11 @@ async def classifier_agent(state: PQRSState) -> dict:
     raw = resp["choices"][0]["message"]["content"] or ""
 
     try:
-        parsed = json.loads(raw)
+        parsed = extract_json(raw)
         log.info(f"  ✅ tipo={parsed.get('tipo')}  cat={parsed.get('categoria')}  area={parsed.get('area')}  conf={parsed.get('confidence')}")
     except (json.JSONDecodeError, ValueError) as e:
         log.warning(f"  ⚠ JSON parse failed: {e}  raw={raw[:80]!r}")
-        parsed = {"tipo": state.get("pqrs_tipo", "peticion"), "categoria": "General", "area": "Secretaría General", "urgencia": "baja", "confidence": 0.5, "reasoning": ""}
+        parsed = {"tipo": state.get("pqrs_tipo") or "peticion", "categoria": "General", "area": "Secretaría General", "urgencia": "baja", "confidence": 0.5, "reasoning": ""}
 
     run_record = {
         "agent_name": "classifier",
@@ -62,10 +64,10 @@ async def classifier_agent(state: PQRSState) -> dict:
     }
 
     return {
-        "pqrs_tipo": parsed.get("tipo", state.get("pqrs_tipo")),
-        "categoria": parsed.get("categoria"),
-        "area": parsed.get("area"),
-        "urgencia": parsed.get("urgencia", "baja"),
-        "confidence": float(parsed.get("confidence", 0.7)),
+        "pqrs_tipo": parsed.get("tipo") or state.get("pqrs_tipo") or "peticion",
+        "categoria": parsed.get("categoria") or state.get("categoria") or "General",
+        "area": parsed.get("area") or state.get("area") or "Secretaría General",
+        "urgencia": parsed.get("urgencia") or "baja",
+        "confidence": float(parsed.get("confidence") or 0.7),
         "agent_runs": state.get("agent_runs", []) + [run_record],
     }

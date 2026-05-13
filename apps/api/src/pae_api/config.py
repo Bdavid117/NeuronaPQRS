@@ -14,14 +14,15 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # LLM
-    openrouter_api_key: str = "sk-or-placeholder"
-    openrouter_base_url: str = "https://openrouter.ai/api/v1"
-    model_intake: str = "google/gemma-3-27b-it:free"
-    model_classifier: str = "google/gemma-3-12b-it:free"
-    model_vision: str = "google/gemma-3-27b-it:free"
-    model_resolver: str = "google/gemma-3-27b-it:free"
-    model_escalator: str = "google/gemma-3-12b-it:free"
+    # LLM — NVIDIA NIM
+    nvidia_api_key: str = "nvapi-placeholder"
+    nvidia_base_url: str = "https://integrate.api.nvidia.com/v1"
+    model_intake: str = "meta/llama-4-maverick-17b-128e-instruct"
+    model_classifier: str = "meta/llama-4-maverick-17b-128e-instruct"
+    model_vision: str = "meta/llama-4-maverick-17b-128e-instruct"
+    model_resolver: str = "mistralai/mistral-large-3-675b-instruct-2512"
+    model_escalator: str = "meta/llama-4-maverick-17b-128e-instruct"
+    model_embeddings: str = "nvidia/llama-3.2-nv-embedqa-1b-v2"
 
     # DB
     database_url: str = "postgresql+asyncpg://pae:pae123@localhost:5432/pae_pqrs"

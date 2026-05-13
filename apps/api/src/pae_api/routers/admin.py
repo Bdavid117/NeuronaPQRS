@@ -87,6 +87,7 @@ async def list_cases(
                 "requiere_revision_humana": c.requiere_revision_humana,
                 "plazo_respuesta": c.plazo_respuesta.isoformat() if c.plazo_respuesta else None,
                 "created_at": c.created_at.isoformat(),
+                "turn_count": c.turn_count,
             }
             for c in cases
         ],
@@ -117,6 +118,7 @@ async def get_case(
         "requiere_revision_humana": case.requiere_revision_humana,
         "plazo_respuesta": case.plazo_respuesta.isoformat() if case.plazo_respuesta else None,
         "created_at": case.created_at.isoformat(),
+        "turn_count": case.turn_count,
         "collected_fields": case.collected_fields,
     }
 

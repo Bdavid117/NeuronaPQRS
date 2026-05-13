@@ -9,15 +9,16 @@ from langchain_core.messages import AIMessage
 
 from ..config import get_settings
 from ..services.obsidian import write_note
-from ..services.openrouter import get_openrouter
+from ..services.nvidia_nim import get_nvidia_nim
 from .state import PQRSState
+from .utils import extract_json
 
 _PROMPT = (Path(__file__).parent / "prompts" / "escalator.md").read_text()
 
 
 async def escalator_agent(state: PQRSState) -> dict:
     settings = get_settings()
-    client = get_openrouter()
+    client = get_nvidia_nim()
     start = time.monotonic()
 
     radicado = state.get("radicado", "PQRS-PENDIENTE")
@@ -51,7 +52,7 @@ async def escalator_agent(state: PQRSState) -> dict:
     raw = resp["choices"][0]["message"]["content"] or ""
 
     try:
-        parsed = json.loads(raw)
+        parsed = extract_json(raw)
     except (json.JSONDecodeError, ValueError):
         parsed = {
             "reply": "Tu caso ha sido derivado a un funcionario que te contactará pronto.",

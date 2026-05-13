@@ -4,7 +4,7 @@ from fastapi import APIRouter, File, HTTPException, UploadFile
 from pydantic import BaseModel
 
 from ..config import get_settings
-from ..services.openrouter import get_openrouter
+from ..services.nvidia_nim import get_nvidia_nim
 
 router = APIRouter(prefix="/transcribe", tags=["voice"])
 
@@ -26,7 +26,7 @@ async def transcribe_audio(audio: UploadFile = File(...)) -> TranscribeResponse:
     is unavailable (e.g. Firefox, Safari).
     """
     settings = get_settings()
-    client = get_openrouter()
+    client = get_nvidia_nim()
 
     content = await audio.read()
     max_bytes = 25 * 1024 * 1024  # Whisper hard limit
