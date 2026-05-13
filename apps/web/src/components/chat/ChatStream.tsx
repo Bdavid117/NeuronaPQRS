@@ -116,9 +116,20 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
     const wasSpeaking = prevIsSpeakingRef.current;
     prevIsSpeakingRef.current = tts.isSpeaking;
     if (wasSpeaking && !tts.isSpeaking && voiceMode && !isLoading) {
-      voice.start();
+      try {
+        voice.start();
+      } catch (err) {
+        console.warn("NeuronaPQRS: Failed to restart mic after TTS:", err);
+      }
     }
   }, [tts.isSpeaking, voiceMode, isLoading, voice.start]);
+
+  // Stop microphone when switching from voice to text mode
+  useEffect(() => {
+    if (!voiceMode && voice.state !== "idle") {
+      voice.stop();
+    }
+  }, [voiceMode, voice.state, voice.stop]);
 
   const showCards = messages.length === 1 && !isLoading;
 
@@ -364,7 +375,9 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
             )}
           </div>
           <p className="text-center text-xs text-white/35 max-w-xs px-2 leading-relaxed">
-            {voice.state === "listening" && voice.interimTranscript
+            {voice.state === "error"
+              ? <span className="text-rose-400">Error de transcripción. Intenta de nuevo.</span>
+              : voice.state === "listening" && voice.interimTranscript
               ? <span className="text-white/60 italic">&ldquo;{voice.interimTranscript}&rdquo;</span>
               : voice.state === "listening"
               ? "Escuchando… toca para detener"

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-export type VoiceInputState = "idle" | "listening" | "processing";
+export type VoiceInputState = "idle" | "listening" | "processing" | "error";
 
 interface UseVoiceInputOptions {
   onResult: (transcript: string) => void;
@@ -152,10 +152,12 @@ export function useVoiceInput({
           const blob = new Blob(chunksRef.current, { type: "audio/webm" });
           const transcript = await transcribeWithWhisper(blob);
           if (transcript) onResultRef.current(transcript);
-        } catch {
-          // silent fail
-        } finally {
           setState("idle");
+          mediaRecorderRef.current = null;
+        } catch (err) {
+          console.warn("NeuronaPQRS: Whisper transcription failed:", err);
+          setState("error");
+          setTimeout(() => setState("idle"), 2000);
           mediaRecorderRef.current = null;
         }
       };

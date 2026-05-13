@@ -225,7 +225,13 @@ async def finish_node(state: PQRSState) -> dict:
         except Exception:
             pass  # non-critical
 
-    except (FileExistsError, Exception):
+    except FileExistsError:
+        vault_path = None
+    except Exception as exc:
+        import logging
+        logging.getLogger("pae_api.agents.graph").error(
+            "finish_node: failed to write case %s to vault: %s", radicado, exc
+        )
         vault_path = None
 
     # Improvement 3: generate QR code for case status URL
