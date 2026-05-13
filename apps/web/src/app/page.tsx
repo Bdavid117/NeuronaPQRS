@@ -1,183 +1,141 @@
-import {
-  AlertTriangle,
-  FileText,
-  Lightbulb,
-  XCircle,
-} from "lucide-react";
+import { Clock, FileText, Shield } from "lucide-react";
 import Link from "next/link";
 
 const PQRS_TYPES = [
   {
     key: "peticion",
     label: "Petición",
-    description: "Solicita información, documentos, certificados o acciones administrativas.",
-    icon: FileText,
-    iconColor: "text-blue-500",
-    borderColor: "border-blue-500/30",
+    description: "Solicita información, certificados o documentos oficiales.",
+    emoji: "📄",
     prompt: "Quiero radicar una petición",
+    accent: "border-blue-200 hover:border-blue-400 hover:bg-blue-50",
+    badge: "bg-blue-100 text-blue-700",
   },
   {
     key: "queja",
     label: "Queja",
-    description: "Reporta inconformidad con la atención o el comportamiento de un funcionario.",
-    icon: AlertTriangle,
-    iconColor: "text-orange-500",
-    borderColor: "border-orange-500/30",
+    description: "Reporta inconformidad con la atención o un funcionario.",
+    emoji: "💬",
     prompt: "Quiero radicar una queja",
+    accent: "border-orange-200 hover:border-orange-400 hover:bg-orange-50",
+    badge: "bg-orange-100 text-orange-700",
   },
   {
     key: "reclamo",
     label: "Reclamo",
-    description: "Exige la corrección de una nota, proceso académico o trámite institucional.",
-    icon: XCircle,
-    iconColor: "text-rose-500",
-    borderColor: "border-rose-500/30",
+    description: "Exige la revisión de una nota o trámite institucional.",
+    emoji: "⚖️",
     prompt: "Quiero radicar un reclamo",
+    accent: "border-red-200 hover:border-red-400 hover:bg-red-50",
+    badge: "bg-red-100 text-red-700",
   },
   {
     key: "sugerencia",
     label: "Sugerencia",
-    description: "Propón mejoras a los servicios, procesos o recursos de la institución.",
-    icon: Lightbulb,
-    iconColor: "text-emerald-500",
-    borderColor: "border-emerald-500/30",
+    description: "Propón mejoras a los servicios o procesos institucionales.",
+    emoji: "💡",
     prompt: "Quiero radicar una sugerencia",
+    accent: "border-green-200 hover:border-green-400 hover:bg-green-50",
+    badge: "bg-green-100 text-green-700",
   },
 ] as const;
 
-const STATS = [
-  { value: "3.200+", label: "Casos radicados", valueColor: "text-violet-400" },
-  { value: "98%", label: "Resueltos a tiempo", valueColor: "text-emerald-400" },
-  { value: "< 2 min", label: "Tiempo de respuesta IA", valueColor: "text-blue-400" },
-  { value: "24/7", label: "Disponibilidad", valueColor: "text-orange-400" },
-];
-
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#0A0A0A] flex flex-col">
-      {/* Navbar */}
-      <header className="sticky top-0 z-50 bg-[#0D0D1C] border-b border-white/[0.08]">
-        <div className="max-w-[1440px] mx-auto px-8 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div
-              className="w-8 h-8 rounded-full flex-shrink-0"
-              style={{ background: "linear-gradient(135deg, #7c3aed, #3b82f6)" }}
-            />
-            <span className="text-white font-bold text-sm tracking-tight">NeuronaPQRS</span>
+    <div className="min-h-screen flex flex-col">
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-8 h-14 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-primary-600 flex items-center justify-center flex-shrink-0">
+              <span className="text-white text-xs font-bold">N</span>
+            </div>
+            <span className="font-semibold text-slate-900 text-sm">NeuronaPQRS</span>
           </div>
-
-          {/* Nav links */}
-          <nav className="hidden md:flex items-center gap-7">
-            <span className="text-violet-400 text-sm font-medium">Inicio</span>
-            <Link href="/dashboard" className="text-white/45 text-sm hover:text-white/70 transition-colors">
-              Mis solicitudes
-            </Link>
-            <Link href="/login" className="text-white/45 text-sm hover:text-white/70 transition-colors">
-              Acceder
-            </Link>
-          </nav>
-
-          {/* CTA */}
-          <Link
-            href="/chat"
-            className="px-4 py-2 rounded-lg text-sm font-semibold text-white transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
-            style={{ background: "linear-gradient(135deg, #7c3aed, #4338ca)" }}
-          >
-            Nueva solicitud
+          <Link href="/admin/login" className="text-xs text-slate-400 hover:text-slate-700 transition-colors">
+            Administración
           </Link>
         </div>
       </header>
 
       {/* Hero */}
-      <section className="flex-1 flex flex-col items-center justify-center text-center px-6 py-24">
-        {/* Badge */}
-        <div className="mb-6 inline-flex items-center px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20">
-          <span className="text-violet-400 text-sm font-medium">Sistema de PQRS Universitario</span>
+      <section className="flex-1 flex flex-col items-center justify-center text-center px-4 py-16 bg-surface-alt">
+        <div className="inline-flex items-center gap-2 bg-primary-50 text-primary-600 text-xs font-medium px-3 py-1.5 rounded-full mb-6 border border-primary-100">
+          <span className="w-1.5 h-1.5 bg-primary-600 rounded-full" />
+          Sistema PQRS — Institución Educativa
         </div>
 
-        {/* H1 */}
-        <h1 className="max-w-3xl">
-          <span className="block text-white font-bold" style={{ fontSize: "52px", lineHeight: 1.1 }}>
-            Tu voz es importante.
-          </span>
-          <span
-            className="block font-bold"
-            style={{
-              fontSize: "52px",
-              lineHeight: 1.1,
-              background: "linear-gradient(90deg, #7c3aed, #3b82f6)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            Radica y rastrea tu PQRS en segundos.
-          </span>
+        <h1 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-4 leading-tight max-w-2xl">
+          Radica tu solicitud<br className="hidden sm:block" /> en minutos
         </h1>
 
-        {/* Subtitle */}
-        <p className="mt-6 text-white/55 max-w-xl" style={{ fontSize: "18px" }}>
-          Peticiones, quejas, reclamos y sugerencias atendidos por IA las 24 horas del día.
+        <p className="text-slate-500 text-base sm:text-lg mb-8 max-w-md">
+          Nuestro asistente inteligente te guía paso a paso para registrar peticiones, quejas, reclamos y sugerencias.
         </p>
 
-        {/* Buttons */}
-        <div className="mt-10 flex items-center gap-4 flex-wrap justify-center">
+        <div className="flex gap-3 flex-wrap justify-center">
           <Link
             href="/chat"
-            className="px-7 py-3 rounded-xl text-sm font-semibold text-white transition-all duration-200 hover:opacity-90 active:scale-[0.98] shadow-lg shadow-violet-500/20"
-            style={{ background: "linear-gradient(135deg, #7c3aed, #3b82f6)" }}
+            className="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-2.5 rounded-xl font-medium text-sm hover:bg-primary-700 transition-colors shadow-sm"
           >
             Iniciar solicitud
           </Link>
           <Link
-            href="/dashboard"
-            className="px-7 py-3 rounded-xl text-sm font-semibold text-white/70 bg-white/5 border border-white/15 hover:bg-white/10 hover:text-white transition-all duration-200"
+            href="/historial"
+            className="inline-flex items-center gap-2 bg-white text-slate-700 px-6 py-2.5 rounded-xl font-medium text-sm hover:bg-slate-50 transition-colors border border-slate-200"
           >
             Ver mis casos
           </Link>
         </div>
       </section>
 
-      {/* PQRS Type Cards */}
-      <section className="px-10 pb-20 bg-[#0A0A0A]">
-        <p className="text-center text-[11px] font-semibold uppercase tracking-widest text-white/30 mb-6">
+      {/* PQRS type cards */}
+      <section className="max-w-5xl mx-auto w-full px-4 sm:px-8 py-12">
+        <p className="text-center text-xs font-semibold uppercase tracking-widest text-slate-400 mb-6">
           ¿Qué necesitas radicar?
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1440px] mx-auto">
-          {PQRS_TYPES.map((type) => {
-            const Icon = type.icon;
-            return (
-              <Link
-                key={type.key}
-                href={`/chat?prompt=${encodeURIComponent(type.prompt)}`}
-                className={`group flex flex-col gap-4 p-5 rounded-xl bg-[#0D0D1C] border ${type.borderColor} hover:border-opacity-70 transition-all duration-200 hover:scale-[1.02] hover:shadow-lg hover:shadow-black/30`}
-              >
-                <Icon size={28} className={type.iconColor} />
-                <div>
-                  <p className="text-white font-semibold text-base mb-1">{type.label}</p>
-                  <p className="text-white/45 text-sm leading-relaxed">{type.description}</p>
-                </div>
-              </Link>
-            );
-          })}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {PQRS_TYPES.map((type) => (
+            <Link
+              key={type.key}
+              href={`/chat?prompt=${encodeURIComponent(type.prompt)}`}
+              className={`flex flex-col gap-3 p-5 rounded-2xl bg-white border transition-all duration-200 ${type.accent}`}
+            >
+              <span className="text-2xl">{type.emoji}</span>
+              <div>
+                <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${type.badge} mb-2 inline-block`}>
+                  {type.label}
+                </span>
+                <p className="text-slate-500 text-sm leading-relaxed">{type.description}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
-      {/* Stats bar */}
-      <section className="bg-[#0D0D1C] border-t border-white/[0.07] py-10">
-        <div className="max-w-[1440px] mx-auto px-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {STATS.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center gap-1 text-center">
-              <span className={`text-3xl font-bold ${stat.valueColor}`}>{stat.value}</span>
-              <span className="text-white/40 text-sm">{stat.label}</span>
+      {/* Features */}
+      <section className="bg-surface border-t border-slate-100 px-4 sm:px-8 py-12">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            { icon: Clock, title: "Respuesta en 15 días hábiles", desc: "Cumplimos con la Ley 1755/2015 de derecho de petición." },
+            { icon: Shield, title: "Tus datos están protegidos", desc: "Información cifrada y acceso restringido por área responsable." },
+            { icon: FileText, title: "Radicado instantáneo", desc: "Recibes tu número de caso y código QR al finalizar." },
+          ].map(({ icon: Icon, title, desc }) => (
+            <div key={title} className="flex gap-4">
+              <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-primary-50 flex items-center justify-center">
+                <Icon size={18} className="text-primary-600" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-slate-900 text-sm mb-1">{title}</h4>
+                <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-4 text-center text-[11px] text-white/20 border-t border-white/[0.05] tracking-wide bg-[#0A0A0A]">
+      <footer className="py-4 text-center text-xs text-slate-400 border-t border-slate-100">
         NeuronaPQRS · Sistema PQRS Institucional · Ley 1755 de 2015
       </footer>
     </div>
