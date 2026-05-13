@@ -1,3 +1,4 @@
+import { AgoraLogo } from "@/components/AgoraLogo";
 import { AlertTriangle, ChevronLeft, FileText } from "lucide-react";
 import Link from "next/link";
 
@@ -73,11 +74,7 @@ export default async function RadicadoPage({ params }: PageProps) {
       <header className="sticky top-0 z-50 bg-[#0D0D1C] border-b border-white/[0.08]">
         <div className="max-w-[1440px] mx-auto px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div
-              className="w-8 h-8 rounded-full flex-shrink-0"
-              style={{ background: "linear-gradient(135deg, #7c3aed, #3b82f6)" }}
-            />
-            <span className="text-white font-bold text-sm tracking-tight">NeuronaPQRS</span>
+            <AgoraLogo size="sm" className="brightness-0 invert" />
           </div>
           <nav className="hidden md:flex items-center gap-7">
             <Link href="/" className="text-white/45 text-sm hover:text-white/70 transition-colors">

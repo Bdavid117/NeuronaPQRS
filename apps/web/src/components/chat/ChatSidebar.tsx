@@ -1,5 +1,6 @@
 "use client";
 
+import { AgoraLogo } from "@/components/AgoraLogo";
 import { cn } from "@/lib/utils";
 import { Clock, History, LogOut, MessageSquare, Plus, User } from "lucide-react";
 import Link from "next/link";
@@ -29,11 +30,7 @@ export function ChatSidebar({ onNew, activeSessionId, history = [], userName = "
     <aside className="flex flex-col h-full bg-[#0D0D1C] border-r border-[#222233] w-[260px] flex-shrink-0">
       {/* Logo row */}
       <div className="flex items-center gap-3 px-5 py-5 border-b border-[#222233]">
-        <div
-          className="w-8 h-8 rounded-full flex-shrink-0"
-          style={{ background: "linear-gradient(135deg, #7c3aed, #3b82f6)" }}
-        />
-        <span className="text-white font-bold text-sm tracking-tight">NeuronaPQRS</span>
+        <AgoraLogo size="sm" className="brightness-0 invert" />
       </div>
 
       {/* New consultation button */}

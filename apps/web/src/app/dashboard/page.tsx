@@ -1,5 +1,6 @@
 "use client";
 
+import { AgoraLogo } from "@/components/AgoraLogo";
 import { cn } from "@/lib/utils";
 import { Clock, ExternalLink, FileText, MessageSquare, Plus, Search } from "lucide-react";
 import Link from "next/link";
@@ -111,11 +112,7 @@ export default function DashboardPage() {
       <header className="sticky top-0 z-50 bg-[#0D0D1C] border-b border-white/[0.08]">
         <div className="max-w-[1100px] mx-auto px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div
-              className="w-8 h-8 rounded-full flex-shrink-0"
-              style={{ background: "linear-gradient(135deg, #7c3aed, #3b82f6)" }}
-            />
-            <span className="text-white font-bold text-sm tracking-tight">NeuronaPQRS</span>
+            <AgoraLogo size="sm" className="brightness-0 invert" />
           </Link>
           <nav className="hidden md:flex items-center gap-7">
             <Link href="/" className="text-white/45 text-sm hover:text-white/70 transition-colors">
@@ -254,7 +251,7 @@ export default function DashboardPage() {
       </main>
 
       <footer className="py-4 text-center text-[11px] text-white/20 border-t border-white/[0.05] bg-[#0A0A0A]">
-        NeuronaPQRS · Sistema PQRS Institucional · Ley 1755 de 2015
+        ÁGORA · Sistema PQRS Institucional · Ley 1755 de 2015
       </footer>
     </div>
   );

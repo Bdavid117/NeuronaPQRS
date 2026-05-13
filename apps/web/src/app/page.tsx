@@ -1,5 +1,6 @@
 import { Clock, FileText, Shield } from "lucide-react";
 import Link from "next/link";
+import { AgoraLogo } from "@/components/AgoraLogo";
 
 const PQRS_TYPES = [
   {
@@ -47,10 +48,7 @@ export default function HomePage() {
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-primary-600 flex items-center justify-center flex-shrink-0">
-              <span className="text-white text-xs font-bold">N</span>
-            </div>
-            <span className="font-semibold text-slate-900 text-sm">NeuronaPQRS</span>
+            <AgoraLogo size="sm" />
           </div>
           <Link href="/admin/login" className="text-xs text-slate-400 hover:text-slate-700 transition-colors">
             Administración
@@ -136,7 +134,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="py-4 text-center text-xs text-slate-400 border-t border-slate-100">
-        NeuronaPQRS · Sistema PQRS Institucional · Ley 1755 de 2015
+        ÁGORA · Sistema PQRS Institucional · Ley 1755 de 2015
       </footer>
     </div>
   );

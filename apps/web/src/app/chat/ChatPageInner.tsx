@@ -1,5 +1,6 @@
 "use client";
 
+import { AgoraLogo } from "@/components/AgoraLogo";
 import { type CaseInfo, ChatStream } from "@/components/chat/ChatStream";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, Keyboard, Mic, Plus } from "lucide-react";
@@ -133,10 +134,7 @@ export function ChatPageInner() {
             <ChevronLeft size={18} />
           </Link>
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md bg-primary-600 flex items-center justify-center flex-shrink-0">
-              <span className="text-white text-[10px] font-bold">N</span>
-            </div>
-            <span className="font-semibold text-slate-900 text-sm">NeuronaPQRS</span>
+            <AgoraLogo size="sm" />
           </div>
         </div>
 
