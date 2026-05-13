@@ -1,8 +1,28 @@
 @import "tailwindcss";
 
+@theme {
+  /* Paleta primaria — azul institucional */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+
+  /* Superficies */
+  --color-surface: #f1f5f9;
+  --color-surface-alt: #f8fafc;
+
+  /* Urgencia */
+  --color-urgencia-alta: #dc2626;
+  --color-urgencia-media: #d97706;
+  --color-urgencia-baja: #16a34a;
+}
+
 :root {
-  --background: #0f1117;
-  --foreground: #e2e8f0;
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --border: #e2e8f0;
+  --muted: #64748b;
 }
 
 html, body, #__next {
@@ -16,8 +36,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar { width: 6px; }
+/* Scrollbar suave */
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }

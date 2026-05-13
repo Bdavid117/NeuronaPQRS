@@ -13,21 +13,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NeuronaPQRS — Sistema de Peticiones, Quejas, Reclamos y Sugerencias",
-  description: "Presenta tu PQRS de forma conversacional, inteligente y segura.",
+  title: "NeuronaPQRS — Sistema PQRS Institucional",
+  description: "Radica peticiones, quejas, reclamos y sugerencias de forma rápida y segura.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="es" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-white text-slate-900">{children}</body>
     </html>
   );
 }
