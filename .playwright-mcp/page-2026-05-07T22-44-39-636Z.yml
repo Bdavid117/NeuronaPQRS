@@ -1,0 +1,43 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - link "NeuronaPQRS" [ref=e5] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e7]: NeuronaPQRS
+        - navigation [ref=e8]:
+          - link "Inicio" [ref=e9] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e10]: Mis solicitudes
+        - link "Nueva solicitud" [ref=e11] [cursor=pointer]:
+          - /url: /chat
+          - img [ref=e12]
+          - text: Nueva solicitud
+    - main [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]:
+          - heading "Mis solicitudes" [level=1] [ref=e16]
+          - paragraph [ref=e17]: 1 solicitud registrada
+        - generic [ref=e18]:
+          - img [ref=e19]
+          - textbox "Buscar por radicado o tipo…" [ref=e22]
+      - generic [ref=e24]:
+        - img [ref=e26]
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - paragraph [ref=e30]: Peticion · Certificado-Academico
+            - 'generic "Urgencia: media" [ref=e31]'
+          - generic [ref=e32]:
+            - code [ref=e33]: PQRS-20260507-80D4E8
+            - generic [ref=e34]: Registro Académico
+            - generic [ref=e35]:
+              - img [ref=e36]
+              - text: 07 de may de 2026
+        - generic [ref=e39]: Abierto
+        - link "Ver detalle" [ref=e40] [cursor=pointer]:
+          - /url: /r/PQRS-20260507-80D4E8
+          - img [ref=e41]
+    - contentinfo [ref=e45]: NeuronaPQRS · Sistema PQRS Institucional · Ley 1755 de 2015
+  - button "Open Next.js Dev Tools" [ref=e51] [cursor=pointer]:
+    - img [ref=e52]
+  - alert [ref=e55]

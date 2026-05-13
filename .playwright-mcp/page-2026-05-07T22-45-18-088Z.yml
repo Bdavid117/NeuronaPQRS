@@ -1,0 +1,67 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e51] [cursor=pointer]:
+    - img [ref=e52]
+  - alert [ref=e55]
+  - generic [ref=e78]:
+    - banner [ref=e79]:
+      - generic [ref=e80]:
+        - generic [ref=e83]: NeuronaPQRS
+        - navigation [ref=e84]:
+          - link "Inicio" [ref=e85] [cursor=pointer]:
+            - /url: /
+          - link "Mis solicitudes" [ref=e86] [cursor=pointer]:
+            - /url: /dashboard
+          - generic [ref=e87]: Estado
+          - link "Contacto" [ref=e88] [cursor=pointer]:
+            - /url: "#"
+        - link "Nueva solicitud" [ref=e89] [cursor=pointer]:
+          - /url: /chat
+    - generic [ref=e91]:
+      - generic [ref=e92]:
+        - link "Mis solicitudes" [ref=e93] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e94]
+          - text: Mis solicitudes
+        - heading "PQRS-20260507-80D4E8" [level=1] [ref=e96]
+        - paragraph [ref=e97]: peticion — Certificado-Academico — Registro Académico
+      - generic [ref=e99]: Abierto
+    - generic [ref=e101]:
+      - generic [ref=e102]:
+        - heading "Línea de tiempo" [level=2] [ref=e103]
+        - generic [ref=e104]:
+          - generic [ref=e109]:
+            - generic [ref=e110]:
+              - paragraph [ref=e111]: Caso radicado
+              - paragraph [ref=e112]: 07 de may de 2026, 10:41 p. m.
+            - paragraph [ref=e113]: Tu PQRS fue recibida y registrada en el sistema.
+          - generic [ref=e118]:
+            - generic [ref=e119]:
+              - paragraph [ref=e120]: Clasificado por IA
+              - paragraph [ref=e121]: 07 de may de 2026, 10:42 p. m.
+            - paragraph [ref=e122]: El agente identificó tu caso como peticion.
+          - generic [ref=e126]:
+            - generic [ref=e127]:
+              - paragraph [ref=e128]: Respuesta emitida
+              - paragraph [ref=e129]: Pendiente
+            - paragraph [ref=e130]: Se emitirá una respuesta formal a tu solicitud.
+      - complementary [ref=e131]:
+        - paragraph [ref=e132]: Detalles del caso
+        - generic [ref=e133]:
+          - generic [ref=e134]:
+            - generic [ref=e135]: Tipo
+            - generic [ref=e136]: peticion
+          - generic [ref=e138]:
+            - generic [ref=e139]: Área
+            - generic [ref=e140]: Registro Académico
+          - generic [ref=e142]:
+            - generic [ref=e143]: Radicado
+            - generic [ref=e144]: PQRS-20260507-80D4E8
+          - generic [ref=e146]:
+            - generic [ref=e147]: Vence
+            - generic [ref=e148]: —
+          - generic [ref=e150]:
+            - generic [ref=e151]: Urgencia
+            - generic [ref=e152]: media
+        - paragraph [ref=e153]: Documentos adjuntos
+        - paragraph [ref=e154]: Sin adjuntos
+        - button "Descargar expediente" [ref=e155]

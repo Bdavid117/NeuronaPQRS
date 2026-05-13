@@ -1,0 +1,67 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e43] [cursor=pointer]:
+    - img [ref=e44]
+  - alert [ref=e47]
+  - generic [ref=e325]:
+    - banner [ref=e326]:
+      - generic [ref=e327]:
+        - generic [ref=e330]: NeuronaPQRS
+        - navigation [ref=e331]:
+          - link "Inicio" [ref=e332] [cursor=pointer]:
+            - /url: /
+          - link "Mis solicitudes" [ref=e333] [cursor=pointer]:
+            - /url: /dashboard
+          - generic [ref=e334]: Estado
+          - link "Contacto" [ref=e335] [cursor=pointer]:
+            - /url: "#"
+        - link "Nueva solicitud" [ref=e336] [cursor=pointer]:
+          - /url: /chat
+    - generic [ref=e338]:
+      - generic [ref=e339]:
+        - link "Mis solicitudes" [ref=e340] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e341]
+          - text: Mis solicitudes
+        - heading "PQRS-20260507-80D4E8" [level=1] [ref=e343]
+        - paragraph [ref=e344]: peticion — Certificado-Academico — Registro Académico
+      - generic [ref=e346]: Abierto
+    - generic [ref=e348]:
+      - generic [ref=e349]:
+        - heading "Línea de tiempo" [level=2] [ref=e350]
+        - generic [ref=e351]:
+          - generic [ref=e356]:
+            - generic [ref=e357]:
+              - paragraph [ref=e358]: Caso radicado
+              - paragraph [ref=e359]: 07 de may de 2026, 10:41 p. m.
+            - paragraph [ref=e360]: Tu PQRS fue recibida y registrada en el sistema.
+          - generic [ref=e365]:
+            - generic [ref=e366]:
+              - paragraph [ref=e367]: Clasificado por IA
+              - paragraph [ref=e368]: 07 de may de 2026, 10:42 p. m.
+            - paragraph [ref=e369]: El agente identificó tu caso como peticion.
+          - generic [ref=e373]:
+            - generic [ref=e374]:
+              - paragraph [ref=e375]: Respuesta emitida
+              - paragraph [ref=e376]: Pendiente
+            - paragraph [ref=e377]: Se emitirá una respuesta formal a tu solicitud.
+      - complementary [ref=e378]:
+        - paragraph [ref=e379]: Detalles del caso
+        - generic [ref=e380]:
+          - generic [ref=e381]:
+            - generic [ref=e382]: Tipo
+            - generic [ref=e383]: peticion
+          - generic [ref=e385]:
+            - generic [ref=e386]: Área
+            - generic [ref=e387]: Registro Académico
+          - generic [ref=e389]:
+            - generic [ref=e390]: Radicado
+            - generic [ref=e391]: PQRS-20260507-80D4E8
+          - generic [ref=e393]:
+            - generic [ref=e394]: Vence
+            - generic [ref=e395]: —
+          - generic [ref=e397]:
+            - generic [ref=e398]: Urgencia
+            - generic [ref=e399]: media
+        - paragraph [ref=e400]: Documentos adjuntos
+        - paragraph [ref=e401]: Sin adjuntos
+        - button "Descargar expediente" [ref=e402]

@@ -1,0 +1,153 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - generic [ref=e6]:
+            - img [ref=e8]
+            - img [ref=e12]
+          - generic [ref=e15]:
+            - heading "NeuronaPQRS" [level=1] [ref=e16]
+            - paragraph [ref=e17]: Peticiones · Quejas · Reclamos · Sugerencias
+        - generic [ref=e18]:
+          - generic [ref=e21]: En línea
+          - generic [ref=e22]:
+            - img [ref=e23]
+            - generic [ref=e25]: Datos protegidos · Ley 1581
+    - main [ref=e26]:
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - img [ref=e31]
+            - generic [ref=e36]:
+              - paragraph [ref=e37]: ¡Hola! Soy el asistente virtual de PQRS de la institución.
+              - paragraph [ref=e38]:
+                - text: ¿En qué puedo ayudarte hoy? Puedes presentar una
+                - strong [ref=e39]: Petición
+                - text: ","
+                - strong [ref=e40]: Queja
+                - text: ","
+                - strong [ref=e41]: Reclamo
+                - text: o
+                - strong [ref=e42]: Sugerencia
+                - text: .
+              - paragraph [ref=e43]: Selecciona una opción o escríbeme directamente.
+          - generic [ref=e99]:
+            - img [ref=e101]
+            - generic [ref=e105]: Quiero presentar un reclamo
+          - generic [ref=e106]:
+            - img [ref=e108]
+            - generic [ref=e113]:
+              - paragraph [ref=e114]: Quiero presentar un reclamoQuiero presentar un reclamoQuiero presentar un reclamoEstimado/a estudiante,
+              - paragraph [ref=e126]:
+                - text: Hemos recibido su solicitud para presentar un reclamo. Según el
+                - strong [ref=e127]: Catálogo de PQRS
+                - text: de nuestra institución, los reclamos de tipo
+                - emphasis [ref=e128]: Nota
+                - text: deben ser canalizados a la dependencia de
+                - strong [ref=e129]: Registro Académico
+                - text: ", donde se realizará la revisión correspondiente de la calificación solicitada."
+              - paragraph [ref=e130]: "El proceso estándar es el siguiente:"
+              - list [ref=e131]:
+                - listitem [ref=e132]:
+                  - strong [ref=e133]: Registro del reclamo
+                  - text: en el sistema interno (ver fila 2026-00012345 en la cola de atención).
+                - listitem [ref=e134]:
+                  - strong [ref=e135]: Revisión documental
+                  - text: por parte del personal de Registro Académico, quien verificará la normativa vigente y la evidencia aportada.
+                - listitem [ref=e136]:
+                  - strong [ref=e137]: Respuesta al solicitante
+                  - text: con la decisión final o, en caso de requerir información adicional, se le notificará el requerimiento.
+              - paragraph [ref=e138]:
+                - text: Le informamos que el plazo máximo para dar respuesta a su reclamo es de
+                - strong [ref=e139]: 15 días hábiles
+                - text: ", contados a partir de la fecha de registro (hasta el 28/05/2026). Durante este tiempo, nuestro equipo le mantendrá informado/a mediante el correo electrónico registrado en su hoja de vida."
+              - paragraph [ref=e140]:
+                - strong [ref=e141]: Próximos pasos
+                - text: ":"
+              - list [ref=e142]:
+                - listitem [ref=e143]:
+                  - text: Si aún no ha adjuntado la documentación que respalde su reclamo (por ejemplo, copia del acta de calificaciones, evidencias de evaluaciones, etc.), le solicitamos enviarla a la brevedad al correo
+                  - strong [ref=e144]:
+                    - link "registroacademico@institucion.edu" [ref=e145] [cursor=pointer]:
+                      - /url: mailto:registroacademico@institucion.edu
+                  - text: .
+                - listitem [ref=e146]: Una vez recibida la información completa, el equipo de Registro Académico iniciará la revisión y le enviará la respuesta dentro del plazo establecido.
+              - paragraph [ref=e147]: Agradecemos su paciencia y quedamos atentos a cualquier duda adicional.
+              - paragraph [ref=e148]: Cordialmente,
+              - paragraph [ref=e149]: Equipo de Atención PQRS Institución EducativaQuiero presentar un reclamoEstimado/a estudiante,
+              - paragraph [ref=e150]:
+                - text: Hemos recibido su solicitud para presentar un reclamo. Según el
+                - strong [ref=e151]: Catálogo de PQRS
+                - text: de nuestra institución, los reclamos de tipo
+                - emphasis [ref=e152]: Nota
+                - text: deben ser canalizados a la dependencia de
+                - strong [ref=e153]: Registro Académico
+                - text: ", donde se realizará la revisión correspondiente de la calificación solicitada."
+              - paragraph [ref=e154]: "El proceso estándar es el siguiente:"
+              - list [ref=e155]:
+                - listitem [ref=e156]:
+                  - strong [ref=e157]: Registro del reclamo
+                  - text: en el sistema interno (ver fila 2026-00012345 en la cola de atención).
+                - listitem [ref=e158]:
+                  - strong [ref=e159]: Revisión documental
+                  - text: por parte del personal de Registro Académico, quien verificará la normativa vigente y la evidencia aportada.
+                - listitem [ref=e160]:
+                  - strong [ref=e161]: Respuesta al solicitante
+                  - text: con la decisión final o, en caso de requerir información adicional, se le notificará el requerimiento.
+              - paragraph [ref=e162]:
+                - text: Le informamos que el plazo máximo para dar respuesta a su reclamo es de
+                - strong [ref=e163]: 15 días hábiles
+                - text: ", contados a partir de la fecha de registro (hasta el 28/05/2026). Durante este tiempo, nuestro equipo le mantendrá informado/a mediante el correo electrónico registrado en su hoja de vida."
+              - paragraph [ref=e164]:
+                - strong [ref=e165]: Próximos pasos
+                - text: ":"
+              - list [ref=e166]:
+                - listitem [ref=e167]:
+                  - text: Si aún no ha adjuntado la documentación que respalde su reclamo (por ejemplo, copia del acta de calificaciones, evidencias de evaluaciones, etc.), le solicitamos enviarla a la brevedad al correo
+                  - strong [ref=e168]:
+                    - link "registroacademico@institucion.edu" [ref=e169] [cursor=pointer]:
+                      - /url: mailto:registroacademico@institucion.edu
+                  - text: .
+                - listitem [ref=e170]: Una vez recibida la información completa, el equipo de Registro Académico iniciará la revisión y le enviará la respuesta dentro del plazo establecido.
+              - paragraph [ref=e171]: Agradecemos su paciencia y quedamos atentos a cualquier duda adicional.
+              - paragraph [ref=e172]: Cordialmente,
+              - paragraph [ref=e173]:
+                - text: Equipo de Atención PQRS Institución Educativa✅
+                - strong [ref=e174]: Su caso ha sido radicado exitosamente.
+              - paragraph [ref=e175]:
+                - strong [ref=e176]: "Radicado:"
+                - code [ref=e177]: PQRS-20260507-867A85
+                - strong [ref=e178]: "Tipo:"
+                - text: Reclamo
+                - strong [ref=e179]: "Categoría:"
+                - text: Reclamo-Nota
+                - strong [ref=e180]: "Área responsable:"
+                - text: Registro Académico
+                - strong [ref=e181]: "Plazo de respuesta:"
+                - text: 15 días hábiles (hasta el 28/05/2026)
+              - paragraph [ref=e182]: Recibirá respuesta en el correo registrado antes de la fecha límite.
+        - generic [ref=e184]:
+          - img [ref=e185]
+          - generic [ref=e188]:
+            - generic [ref=e189]:
+              - generic [ref=e190]: Caso radicado exitosamente
+              - generic [ref=e191]: baja
+            - generic [ref=e192]:
+              - code [ref=e193]: PQRS-20260507-867A85
+              - generic [ref=e194]: ⚖️ reclamo
+            - generic [ref=e195]:
+              - img [ref=e196]
+              - generic [ref=e199]: 15 días hábiles (hasta el 28/05/2026)
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - button "Adjuntar documento" [ref=e80]:
+              - img [ref=e81]
+            - textbox "Escribe tu mensaje aquí…" [ref=e83]
+            - button "Enviar (Enter)" [disabled] [ref=e200]:
+              - img [ref=e201]
+          - paragraph [ref=e88]: Presiona Enter para enviar · Shift+Enter para nueva línea
+    - contentinfo [ref=e89]: NeuronaPQRS · Sistema PQRS Institucional · Ley 1755 de 2015
+  - button "Open Next.js Dev Tools" [ref=e95] [cursor=pointer]:
+    - img [ref=e96]
+  - alert [ref=e125]

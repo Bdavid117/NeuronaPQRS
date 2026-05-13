@@ -1,0 +1,218 @@
+{
+  "main": {
+    "id": "70cf3268ea5db5fe",
+    "type": "split",
+    "children": [
+      {
+        "id": "7f96fbd16c75e65d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e4cf5a0661cd53d1",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Vista gráfica"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "9cebf10868341bca",
+    "type": "split",
+    "children": [
+      {
+        "id": "c2ce19bc4c7a2d80",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3f66829db564d18f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "ed820f487b0ee04b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "e75a65cd453f823f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "9ba72a2f849254ee",
+    "type": "split",
+    "children": [
+      {
+        "id": "2783817f7aa2aeee",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ec5cbbe71a6e8c89",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes"
+            }
+          },
+          {
+            "id": "a39c97d9223ca3d8",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes"
+            }
+          },
+          {
+            "id": "9d91ba2a72c7fc3b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "9f791620979b0ef5",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas las propiedades"
+            }
+          },
+          {
+            "id": "205f1fca2c80f99a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Esquema"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Crear nueva base": false
+    }
+  },
+  "active": "e4cf5a0661cd53d1",
+  "lastOpenFiles": [
+    "30-Conocimiento/Plazos-Institucionales.md",
+    "30-Conocimiento/Registro Académico.md",
+    "20-Casos/PQRS-20260507-E36588.md",
+    "20-Casos/PQRS-20260507-E36588.md.bak",
+    "50-Usuarios/María-García-20230055.md",
+    "50-Usuarios",
+    "40-Plantillas/Certificado-Academico.md",
+    "10-Catalogo-PQRS/Tipos.md",
+    "20-Casos/PQRS-20260507-80D4E8.md",
+    "20-Casos/PQRS-20260507-BF928A.md",
+    "20-Casos/PQRS-20260507-BF928A.md.bak",
+    "20-Casos/PQRS-20260507-422905.md",
+    "20-Casos/PQRS-20260507-422905.md.bak",
+    "20-Casos/PQRS-20260507-C2FDB1.md",
+    "20-Casos/PQRS-20260507-C2FDB1.md.bak",
+    "20-Casos/PQRS-20260507-976B06.md",
+    "20-Casos/PQRS-20260507-976B06.md.bak",
+    "Bienvenido.md",
+    "cree un enlace.md",
+    "20-Casos/PQRS-20260507-D1E2B3.md",
+    "20-Casos/PQRS-20260507-D1E2B3.md.bak",
+    "20-Casos/PQRS-20260507-CAE7CA.md",
+    "20-Casos/PQRS-20260507-CAE7CA.md.bak",
+    "20-Casos/PQRS-20260507-5EBC31.md",
+    "20-Casos/PQRS-20260507-0B28FD.md",
+    "40-Plantillas/Servicios-TI.md",
+    "40-Plantillas/Biblioteca.md",
+    "20-Casos/PQRS-20260507-867A85.md",
+    "90-Sistema/cola.md",
+    "10-Catalogo-PQRS/Certificado-Academico.md",
+    "30-Conocimiento/Coordinación de Prácticas.md",
+    "30-Conocimiento/Planta Física.md",
+    "30-Conocimiento/Secretaría General.md",
+    "30-Conocimiento/Biblioteca.md",
+    "90-Sistema",
+    "40-Plantillas"
+  ]
+}

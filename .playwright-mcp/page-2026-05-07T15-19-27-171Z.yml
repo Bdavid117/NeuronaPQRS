@@ -1,0 +1,25 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - img [ref=e7]
+        - generic [ref=e10]:
+          - heading "NeuronaPQRS" [level=1] [ref=e11]
+          - paragraph [ref=e12]: Peticiones · Quejas · Reclamos · Sugerencias
+      - generic [ref=e13]:
+        - img [ref=e14]
+        - generic [ref=e16]: Datos protegidos · Ley 1581
+  - main [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e20]:
+        - img [ref=e22]
+        - generic [ref=e26]: ¡Hola! Soy el asistente virtual de PQRS de la institución. ¿En qué puedo ayudarte hoy? Puedes presentar una **Petición**, **Queja**, **Reclamo** o **Sugerencia**.
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - button "Adjuntar documento" [ref=e29]:
+            - img [ref=e30]
+          - textbox "Escribe tu mensaje aquí…" [ref=e32]
+          - button "Enviar (Enter)" [disabled] [ref=e33]:
+            - img [ref=e34]
+        - paragraph [ref=e37]: Presiona Enter para enviar · Shift+Enter para nueva línea
+  - contentinfo [ref=e38]: Sistema PQRS · Institución Educativa · Ley 1755 de 2015

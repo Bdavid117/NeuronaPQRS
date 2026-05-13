@@ -1,0 +1,68 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e7]: NeuronaPQRS
+        - navigation [ref=e8]:
+          - generic [ref=e9]: Inicio
+          - link "Mis solicitudes" [ref=e10] [cursor=pointer]:
+            - /url: /dashboard
+          - link "Acceder" [ref=e11] [cursor=pointer]:
+            - /url: /login
+        - link "Nueva solicitud" [ref=e12] [cursor=pointer]:
+          - /url: /chat
+    - generic [ref=e13]:
+      - generic [ref=e15]: Sistema de PQRS Universitario
+      - heading "Tu voz es importante. Radica y rastrea tu PQRS en segundos." [level=1] [ref=e16]:
+        - generic [ref=e17]: Tu voz es importante.
+        - generic [ref=e18]: Radica y rastrea tu PQRS en segundos.
+      - paragraph [ref=e19]: Peticiones, quejas, reclamos y sugerencias atendidos por IA las 24 horas del día.
+      - generic [ref=e20]:
+        - link "Iniciar solicitud" [ref=e21] [cursor=pointer]:
+          - /url: /chat
+        - link "Ver mis casos" [ref=e22] [cursor=pointer]:
+          - /url: /dashboard
+    - generic [ref=e23]:
+      - paragraph [ref=e24]: ¿Qué necesitas radicar?
+      - generic [ref=e25]:
+        - link "Petición Solicita información, documentos, certificados o acciones administrativas." [ref=e26] [cursor=pointer]:
+          - /url: /chat?prompt=Quiero%20radicar%20una%20petici%C3%B3n
+          - img [ref=e27]
+          - generic [ref=e30]:
+            - paragraph [ref=e31]: Petición
+            - paragraph [ref=e32]: Solicita información, documentos, certificados o acciones administrativas.
+        - link "Queja Reporta inconformidad con la atención o el comportamiento de un funcionario." [ref=e33] [cursor=pointer]:
+          - /url: /chat?prompt=Quiero%20radicar%20una%20queja
+          - img [ref=e34]
+          - generic [ref=e36]:
+            - paragraph [ref=e37]: Queja
+            - paragraph [ref=e38]: Reporta inconformidad con la atención o el comportamiento de un funcionario.
+        - link "Reclamo Exige la corrección de una nota, proceso académico o trámite institucional." [ref=e39] [cursor=pointer]:
+          - /url: /chat?prompt=Quiero%20radicar%20un%20reclamo
+          - img [ref=e40]
+          - generic [ref=e44]:
+            - paragraph [ref=e45]: Reclamo
+            - paragraph [ref=e46]: Exige la corrección de una nota, proceso académico o trámite institucional.
+        - link "Sugerencia Propón mejoras a los servicios, procesos o recursos de la institución." [ref=e47] [cursor=pointer]:
+          - /url: /chat?prompt=Quiero%20radicar%20una%20sugerencia
+          - img [ref=e48]
+          - generic [ref=e50]:
+            - paragraph [ref=e51]: Sugerencia
+            - paragraph [ref=e52]: Propón mejoras a los servicios, procesos o recursos de la institución.
+    - generic [ref=e54]:
+      - generic [ref=e55]:
+        - generic [ref=e56]: 3.200+
+        - generic [ref=e57]: Casos radicados
+      - generic [ref=e58]:
+        - generic [ref=e59]: 98%
+        - generic [ref=e60]: Resueltos a tiempo
+      - generic [ref=e61]:
+        - generic [ref=e62]: < 2 min
+        - generic [ref=e63]: Tiempo de respuesta IA
+      - generic [ref=e64]:
+        - generic [ref=e65]: 24/7
+        - generic [ref=e66]: Disponibilidad
+    - contentinfo [ref=e67]: NeuronaPQRS · Sistema PQRS Institucional · Ley 1755 de 2015
+  - button "Open Next.js Dev Tools" [ref=e73] [cursor=pointer]:
+    - img [ref=e74]
+  - alert [ref=e77]

@@ -1,0 +1,29 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e5]: NeuronaPQRS
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]:
+          - button "Iniciar sesión" [ref=e9]
+          - button "Registrarse" [ref=e10]
+        - generic [ref=e11]:
+          - generic [ref=e12]:
+            - generic [ref=e13]: Correo institucional
+            - textbox "usuario@universidad.edu.co" [ref=e14]
+          - generic [ref=e15]:
+            - generic [ref=e16]: Contraseña
+            - generic [ref=e17]:
+              - textbox "••••••••" [ref=e18]
+              - button [ref=e19]:
+                - img [ref=e20]
+          - button "Iniciar sesión" [ref=e23]:
+            - img [ref=e24]
+            - text: Iniciar sesión
+        - generic [ref=e29]: o continúa sin cuenta
+        - button "Entrar de forma anónima" [ref=e31]:
+          - img [ref=e32]
+          - text: Entrar de forma anónima
+      - paragraph [ref=e37]: Sistema PQRS Institucional · Ley 1755 de 2015
+  - button "Open Next.js Dev Tools" [ref=e43] [cursor=pointer]:
+    - img [ref=e44]
+  - alert [ref=e47]

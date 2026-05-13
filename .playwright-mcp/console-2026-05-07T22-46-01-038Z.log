@@ -1,0 +1,69 @@
+[     109ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0j7k_next_dist_0xtji~n._.js:2477
+[     118ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/0j7k_next_dist_0xtji~n._.js:2477
+[     429ms] Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <LoadingBoundary name="chat/" loading={null}>
+      <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+        <RedirectBoundary>
+          <RedirectErrorBoundary router={{...}}>
+            <InnerLayoutRouter url="/chat" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+              <SegmentViewNode type="page" pagePath="chat/page.tsx">
+                <SegmentTrieNode>
+                <ChatPage>
+                  <Suspense fallback={<div>}>
+                    <ChatPageInner>
+                      <div className="flex h-scr...">
+                        <ChatSidebar onNew={function ChatPageInner.useCallback[handleNew]} ...>
+                          <aside className="flex flex-...">
+                            <div>
+                            <div>
+                            <div className="px-4 pb-2 ...">
+                              <p>
+                              <div
++                               className="flex flex-col gap-0.5"
+-                               className="flex flex-col items-center gap-2 py-8 px-2"
+                              >
++                               <button
++                                 onClick={function ChatPageInner.useCallback[handleNew]}
++                                 className="w-full flex items-start gap-2.5 px-3 py-2.5 rounded-lg text-left transiti..."
++                               >
+-                               <svg
+-                                 xmlns="http://www.w3.org/2000/svg"
+-                                 width="22"
+-                                 height="22"
+-                                 viewBox="0 0 24 24"
+-                                 fill="none"
+-                                 stroke="currentColor"
+-                                 stroke-width="2"
+-                                 stroke-linecap="round"
+-                                 stroke-linejoin="round"
+-                                 className="lucide lucide-clock text-white/15"
+-                                 aria-hidden="true"
+-                               >
+                            ...
+                        ...
+              ...
+            ...
+
+    at throwOnHydrationMismatch (http://localhost:3000/_next/static/chunks/0j7k_next_dist_compiled_react-dom_0xxygip._.js:3318:56)
+    at beginWork (http://localhost:3000/_next/static/chunks/0j7k_next_dist_compiled_react-dom_0xxygip._.js:6758:918)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/0j7k_next_dist_compiled_react-dom_0xxygip._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/0j7k_next_dist_compiled_react-dom_0xxygip._.js:9555:97)
+    at workLoopConcurrentByScheduler (http://localhost:3000/_next/static/chunks/0j7k_next_dist_compiled_react-dom_0xxygip._.js:9551:58)
+    at renderRootConcurrent (http://localhost:3000/_next/static/chunks/0j7k_next_dist_compiled_react-dom_0xxygip._.js:9534:71)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/0j7k_next_dist_compiled_react-dom_0xxygip._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/0j7k_next_dist_compiled_react-dom_0xxygip._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/0j7k_next_dist_compiled_0y1la.i._.js:2647:64)
+[   75929ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/0j7k_next_dist_0xtji~n._.js:2477
+[   75957ms] [LOG] [Fast Refresh] done in 21ms @ http://localhost:3000/_next/static/chunks/0j7k_next_dist_0xtji~n._.js:2477

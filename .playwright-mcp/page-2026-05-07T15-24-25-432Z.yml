@@ -1,0 +1,53 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - generic [ref=e6]:
+            - img [ref=e8]
+            - img [ref=e12]
+          - generic [ref=e15]:
+            - heading "NeuronaPQRS" [level=1] [ref=e16]
+            - paragraph [ref=e17]: Peticiones · Quejas · Reclamos · Sugerencias
+        - generic [ref=e18]:
+          - generic [ref=e21]: En línea
+          - generic [ref=e22]:
+            - img [ref=e23]
+            - generic [ref=e25]: Datos protegidos · Ley 1581
+    - main [ref=e26]:
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - img [ref=e31]
+            - generic [ref=e36]:
+              - paragraph [ref=e37]: ¡Hola! Soy el asistente virtual de PQRS de la institución.
+              - paragraph [ref=e38]:
+                - text: ¿En qué puedo ayudarte hoy? Puedes presentar una
+                - strong [ref=e39]: Petición
+                - text: ","
+                - strong [ref=e40]: Queja
+                - text: ","
+                - strong [ref=e41]: Reclamo
+                - text: o
+                - strong [ref=e42]: Sugerencia
+                - text: .
+              - paragraph [ref=e43]: Selecciona una opción o escríbeme directamente.
+          - generic [ref=e100]:
+            - img [ref=e102]
+            - generic [ref=e106]: Quiero presentar un reclamo
+          - generic [ref=e107]:
+            - img [ref=e109]
+            - paragraph [ref=e115]: Quiero presentar un reclamo
+          - generic [ref=e121]: Procesando…
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - button "Adjuntar documento" [ref=e80]:
+              - img [ref=e81]
+            - textbox "Escribe tu mensaje aquí…" [disabled] [ref=e83]
+            - button "Detener" [ref=e122]:
+              - img [ref=e123]
+          - paragraph [ref=e88]: Presiona Enter para enviar · Shift+Enter para nueva línea
+    - contentinfo [ref=e89]: NeuronaPQRS · Sistema PQRS Institucional · Ley 1755 de 2015
+  - button "Open Next.js Dev Tools" [ref=e95] [cursor=pointer]:
+    - img [ref=e96]
+  - alert [ref=e99]

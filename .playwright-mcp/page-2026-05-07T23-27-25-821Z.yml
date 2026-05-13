@@ -1,0 +1,315 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e6]: NeuronaPQRS
+      - button "Nueva consulta" [ref=e8]:
+        - img [ref=e9]
+        - text: Nueva consulta
+      - generic [ref=e10]:
+        - paragraph [ref=e11]: Recientes
+        - generic [ref=e12]:
+          - button "Peticion · Certificado-Academico 07 de may de 2026 PQRS-20260507-80D4E8" [ref=e169]:
+            - img [ref=e170]
+            - generic [ref=e172]:
+              - paragraph [ref=e173]: Peticion · Certificado-Academico
+              - paragraph [ref=e174]: 07 de may de 2026
+              - paragraph [ref=e175]: PQRS-20260507-80D4E8
+          - button "Peticion · Certificado-Academico 07 de may de 2026 PQRS-20260507-80D4E8" [ref=e176]:
+            - img [ref=e177]
+            - generic [ref=e179]:
+              - paragraph [ref=e180]: Peticion · Certificado-Academico
+              - paragraph [ref=e181]: 07 de may de 2026
+              - paragraph [ref=e182]: PQRS-20260507-80D4E8
+      - generic [ref=e17]:
+        - generic [ref=e18]:
+          - img [ref=e20]
+          - generic [ref=e23]: Anónimo
+        - link "Salir" [ref=e24] [cursor=pointer]:
+          - /url: /login
+          - img [ref=e25]
+          - text: Salir
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - generic [ref=e30]: Nueva consulta
+        - generic [ref=e31]:
+          - generic [ref=e32]:
+            - button "Texto" [ref=e33]:
+              - img [ref=e34]
+              - generic [ref=e36]: Texto
+            - button "Voz" [ref=e37]:
+              - img [ref=e38]
+              - generic [ref=e41]: Voz
+          - generic [ref=e44]: En línea
+      - generic [ref=e183]:
+        - generic [ref=e184]:
+          - generic [ref=e185]:
+            - img [ref=e187]
+            - generic [ref=e192]:
+              - paragraph [ref=e193]: ¡Hola! Soy el asistente virtual de PQRS de la institución.
+              - paragraph [ref=e194]:
+                - text: ¿En qué puedo ayudarte hoy? Puedes presentar una
+                - strong [ref=e195]: Petición
+                - text: ","
+                - strong [ref=e196]: Queja
+                - text: ","
+                - strong [ref=e197]: Reclamo
+                - text: o
+                - strong [ref=e198]: Sugerencia
+                - text: .
+              - paragraph [ref=e199]: Selecciona una opción o escríbeme directamente.
+          - generic [ref=e245]:
+            - img [ref=e247]
+            - generic [ref=e251]: Hola, quiero presentar un reclamo porque me calificaron mal en la materia de Cálculo I
+          - generic [ref=e252]:
+            - img [ref=e254]
+            - generic [ref=e257]:
+              - generic [ref=e273]: Escalamiento
+              - generic [ref=e259]:
+                - paragraph [ref=e260]: Hola, quiero presentar un reclamo porque me calificaron mal en la materia de Cálculo IHola, quiero presentar un reclamo porque me calificaron mal en la materia de Cálculo IHola, quiero presentar un reclamo porque me calificaron mal en la materia de Cálculo IRespuesta no disponible.Hola, quiero presentar un reclamo porque me calificaron mal en la materia de Cálculo IRespuesta no disponible.Estimado/a usuario/a,
+                - paragraph [ref=e274]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e275]:
+                  - strong [ref=e276]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e277]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e278]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e279]: Agradecemos su paciencia y quedamos a su disposición.Hola, quiero presentar un reclamo porque me calificaron mal en la materia de Cálculo IRespuesta no disponible.Estimado/a usuario/a,
+                - paragraph [ref=e280]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e281]:
+                  - strong [ref=e282]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e283]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e284]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e285]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a,
+                - paragraph [ref=e286]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e287]:
+                  - strong [ref=e288]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e289]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e290]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e291]: Agradecemos su paciencia y quedamos a su disposición.Hola, quiero presentar un reclamo porque me calificaron mal en la materia de Cálculo IRespuesta no disponible.Estimado/a usuario/a,
+                - paragraph [ref=e326]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e327]:
+                  - strong [ref=e328]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e329]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e330]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e331]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a,
+                - paragraph [ref=e332]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e333]:
+                  - strong [ref=e334]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e335]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e336]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e337]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e338]:
+                  - strong [ref=e339]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e340]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e341]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e342]: Agradecemos su paciencia y quedamos a su disposición.Hola, quiero presentar un reclamo porque me calificaron mal en la materia de Cálculo IRespuesta no disponible.Estimado/a usuario/a,
+                - paragraph [ref=e343]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e344]:
+                  - strong [ref=e345]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e346]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e347]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e348]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a,
+                - paragraph [ref=e349]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e350]:
+                  - strong [ref=e351]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e352]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e353]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e354]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e355]:
+                  - strong [ref=e356]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e357]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e358]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e359]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e360]:
+                  - strong [ref=e361]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e362]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e363]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e364]: Agradecemos su paciencia y quedamos a su disposición.Hola, quiero presentar un reclamo porque me calificaron mal en la materia de Cálculo IRespuesta no disponible.Estimado/a usuario/a,
+                - paragraph [ref=e365]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e366]:
+                  - strong [ref=e367]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e368]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e369]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e370]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a,
+                - paragraph [ref=e371]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e372]:
+                  - strong [ref=e373]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e374]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e375]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e376]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e377]:
+                  - strong [ref=e378]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e379]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e380]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e381]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e382]:
+                  - strong [ref=e383]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e384]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e385]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e386]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e387]:
+                  - strong [ref=e388]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e389]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e390]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e391]: Agradecemos su paciencia y quedamos a su disposición.Hola, quiero presentar un reclamo porque me calificaron mal en la materia de Cálculo IRespuesta no disponible.Estimado/a usuario/a,
+                - paragraph [ref=e392]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e393]:
+                  - strong [ref=e394]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e395]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e396]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e397]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a,
+                - paragraph [ref=e398]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e399]:
+                  - strong [ref=e400]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e401]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e402]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e403]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e404]:
+                  - strong [ref=e405]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e406]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e407]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e408]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e409]:
+                  - strong [ref=e410]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e411]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e412]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e413]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e414]:
+                  - strong [ref=e415]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e416]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e417]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e418]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e419]:
+                  - strong [ref=e420]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e421]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e422]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e423]: Agradecemos su paciencia y quedamos a su disposición.Hola, quiero presentar un reclamo porque me calificaron mal en la materia de Cálculo IRespuesta no disponible.Estimado/a usuario/a,
+                - paragraph [ref=e424]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e425]:
+                  - strong [ref=e426]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e427]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e428]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e429]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a,
+                - paragraph [ref=e430]: Gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e431]:
+                  - strong [ref=e432]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e433]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e434]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e435]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e436]:
+                  - strong [ref=e437]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e438]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e439]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e440]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e441]:
+                  - strong [ref=e442]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e443]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e444]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e445]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e446]:
+                  - strong [ref=e447]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e448]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e449]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e450]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e451]:
+                  - strong [ref=e452]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e453]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e454]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e455]: Agradecemos su paciencia y quedamos a su disposición.Estimado/a usuario/a, gracias por contactarnos. Hemos recibido su reclamo sobre la calificación en la materia de Cálculo I. Para garantizar una revisión adecuada y personalizada, su caso será atendido por un funcionario del área de Registro Académico.
+                - paragraph [ref=e456]:
+                  - strong [ref=e457]: "Radicado:"
+                  - text: RA-2026-0001
+                  - strong [ref=e458]: "Plazo estimado de respuesta:"
+                  - text: 3 días hábiles
+                - paragraph [ref=e459]: Nuestro equipo se comunicará con usted dentro de ese plazo. Si necesita asistencia adicional, puede responder a este mensaje o contactar directamente a la oficina de Registro Académico.
+                - paragraph [ref=e460]: Agradecemos su paciencia y quedamos a su disposición.
+          - generic [ref=e292]:
+            - generic [ref=e294]: Escalamiento
+            - generic [ref=e295]: ·
+            - generic [ref=e296]: Derivando a un funcionario…
+        - generic [ref=e234]:
+          - generic [ref=e235]:
+            - button "Adjuntar documento" [ref=e236]:
+              - img [ref=e237]
+            - textbox "Escribe tu mensaje aquí…" [disabled] [ref=e239]
+            - button "Detener" [ref=e267]:
+              - img [ref=e268]
+          - paragraph [ref=e244]: Presiona Enter para enviar · Shift+Enter para nueva línea
+    - complementary [ref=e108]:
+      - generic [ref=e109]:
+        - paragraph [ref=e110]: Caso activo
+        - paragraph [ref=e111]: Sin caso activo
+      - generic [ref=e129]:
+        - paragraph [ref=e130]: Progreso del agente
+        - generic [ref=e131]:
+          - generic [ref=e132]:
+            - img [ref=e312]
+            - generic [ref=e135]: Clasificación
+          - generic [ref=e136]:
+            - img [ref=e315]
+            - generic [ref=e139]: Recolección de datos
+          - generic [ref=e140]:
+            - img [ref=e318]
+            - generic [ref=e143]: Resolución
+          - generic [ref=e144]:
+            - img [ref=e321]
+            - generic [ref=e147]: Verificación
+          - generic [ref=e151]: Cierre
+      - button "Ver resumen completo" [disabled] [ref=e154]:
+        - img [ref=e155]
+        - text: Ver resumen completo
+  - button "Open Next.js Dev Tools" [ref=e164] [cursor=pointer]:
+    - img [ref=e165]
+  - alert [ref=e168]

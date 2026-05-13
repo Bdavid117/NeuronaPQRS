@@ -1,0 +1,620 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - generic [ref=e6]:
+            - img [ref=e8]
+            - img [ref=e12]
+          - generic [ref=e15]:
+            - heading "NeuronaPQRS" [level=1] [ref=e16]
+            - paragraph [ref=e17]: Peticiones · Quejas · Reclamos · Sugerencias
+        - generic [ref=e18]:
+          - generic [ref=e21]: En línea
+          - generic [ref=e22]:
+            - img [ref=e23]
+            - generic [ref=e25]: Datos protegidos · Ley 1581
+    - main [ref=e26]:
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - img [ref=e31]
+            - generic [ref=e36]:
+              - paragraph [ref=e37]: ¡Hola! Soy el asistente virtual de PQRS de la institución.
+              - paragraph [ref=e38]:
+                - text: ¿En qué puedo ayudarte hoy? Puedes presentar una
+                - strong [ref=e39]: Petición
+                - text: ","
+                - strong [ref=e40]: Queja
+                - text: ","
+                - strong [ref=e41]: Reclamo
+                - text: o
+                - strong [ref=e42]: Sugerencia
+                - text: .
+              - paragraph [ref=e43]: Selecciona una opción o escríbeme directamente.
+          - generic [ref=e99]:
+            - img [ref=e101]
+            - generic [ref=e105]: Quiero presentar un reclamo
+          - generic [ref=e106]:
+            - img [ref=e108]
+            - generic [ref=e111]:
+              - generic [ref=e128]: Escalamiento
+              - generic [ref=e113]:
+                - paragraph [ref=e114]:
+                  - text: Quiero presentar un reclamoQuiero presentar un reclamoQuiero presentar un reclamo
+                  - code [ref=e129]: "json , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , { \"draft\": \"Estimado/a estudiante:\\n\\nHemos recibido su solicitud de presentar un reclamo. De acuerdo con el Catálogo de PQRS de nuestra institución, los reclamos de tipo **Nota** deben ser dirigidos al Área de Registro Académico, la cual es responsable de revisar y, en caso procedente, corregir la calificación solicitada.\\n\\nLe informamos que el proceso de revisión tiene un plazo máximo de **15 días hábiles** contados a partir de la fecha de recepción del reclamo (hasta el 28/05/2026). Durante este tiempo, el equipo de Registro Académico verificará la documentación que usted adjunte y le comunicará el resultado por el correo electrónico registrado en su expediente.\\n\\n**Próximos pasos**:\\n1. Envíe a la dirección de correo registroacademico@institucion.edu.co los documentos que respalden su reclamo (actas, evaluaciones, comunicaciones previas, etc.).\\n2. Mantenga su bandeja de entrada disponible para recibir la respuesta dentro del plazo indicado.\\n3. Si transcurrido el plazo no ha recibido respuesta, podrá solicitar una segunda revisión o escalar el caso a la Oficina de Atención al Usuario.\\n\\nQuedamos atentos a su información y a cualquier duda adicional.\\n\\nCordialmente,\\n\\nEquipo de PQRS – Área de Registro Académico\", \"citations\": [ { \"path\": \"10-Catalogo-PQRS/Reclamo-Nota.md\", \"excerpt\": \"tags: - catalogo - categoria\" }, { \"path\": \"30-Conocimiento/Registro Académico.md\", \"excerpt\": \"tags: - area - responsable\" } ], \"confidence\": 0.86, \"plazo_aplicable\": \"15 días hábiles (hasta el 28/05/2026)\", \"proximos_pasos\": \"Envíe la documentación de respaldo a registroacademico@institucion.edu.co y espere la respuesta dentro del plazo indicado.\" }Quiero presentar un reclamo"
+                  - text: "json , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , { \"draft\": \"Estimado/a estudiante:\\n\\nHemos recibido su solicitud de presentar un reclamo. De acuerdo con el Catálogo de PQRS de nuestra institución, los reclamos de tipo"
+                  - strong [ref=e130]: Nota
+                  - text: deben ser dirigidos al Área de Registro Académico, la cual es responsable de revisar y, en caso procedente, corregir la calificación solicitada.\n\nLe informamos que el proceso de revisión tiene un plazo máximo de
+                  - strong [ref=e131]: 15 días hábiles
+                  - text: contados a partir de la fecha de recepción del reclamo (hasta el 28/05/2026). Durante este tiempo, el equipo de Registro Académico verificará la documentación que usted adjunte y le comunicará el resultado por el correo electrónico registrado en su expediente.\n\n
+                  - strong [ref=e132]: Próximos pasos
+                  - text: :\n1. Envíe a la dirección de correo
+                  - link "registroacademico@institucion.edu.co" [ref=e133] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "los documentos que respalden su reclamo (actas, evaluaciones, comunicaciones previas, etc.).\\n2. Mantenga su bandeja de entrada disponible para recibir la respuesta dentro del plazo indicado.\\n3. Si transcurrido el plazo no ha recibido respuesta, podrá solicitar una segunda revisión o escalar el caso a la Oficina de Atención al Usuario.\\n\\nQuedamos atentos a su información y a cualquier duda adicional.\\n\\nCordialmente,\\n\\nEquipo de PQRS – Área de Registro Académico\", \"citations\": [ { \"path\": \"10-Catalogo-PQRS/Reclamo-Nota.md\", \"excerpt\": \"tags: - catalogo - categoria\" }, { \"path\": \"30-Conocimiento/Registro Académico.md\", \"excerpt\": \"tags: - area - responsable\" } ], \"confidence\": 0.86, \"plazo_aplicable\": \"15 días hábiles (hasta el 28/05/2026)\", \"proximos_pasos\": \"Envíe la documentación de respaldo a"
+                  - link "registroacademico@institucion.edu.co" [ref=e134] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "y espere la respuesta dentro del plazo indicado.\" }Estimado/a solicitante,"
+                - paragraph [ref=e135]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e136]:
+                  - strong [ref=e137]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e138]:
+                  - strong [ref=e139]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e140]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e141] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e142]:
+                  - text: "Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Quiero presentar un reclamo```json , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , { \"draft\": \"Estimado/a estudiante:\\n\\nHemos recibido su solicitud de presentar un reclamo. De acuerdo con el Catálogo de PQRS de nuestra institución, los reclamos de tipo"
+                  - strong [ref=e143]: Nota
+                  - text: deben ser dirigidos al Área de Registro Académico, la cual es responsable de revisar y, en caso procedente, corregir la calificación solicitada.\n\nLe informamos que el proceso de revisión tiene un plazo máximo de
+                  - strong [ref=e144]: 15 días hábiles
+                  - text: contados a partir de la fecha de recepción del reclamo (hasta el 28/05/2026). Durante este tiempo, el equipo de Registro Académico verificará la documentación que usted adjunte y le comunicará el resultado por el correo electrónico registrado en su expediente.\n\n
+                  - strong [ref=e145]: Próximos pasos
+                  - text: :\n1. Envíe a la dirección de correo
+                  - link "registroacademico@institucion.edu.co" [ref=e146] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "los documentos que respalden su reclamo (actas, evaluaciones, comunicaciones previas, etc.).\\n2. Mantenga su bandeja de entrada disponible para recibir la respuesta dentro del plazo indicado.\\n3. Si transcurrido el plazo no ha recibido respuesta, podrá solicitar una segunda revisión o escalar el caso a la Oficina de Atención al Usuario.\\n\\nQuedamos atentos a su información y a cualquier duda adicional.\\n\\nCordialmente,\\n\\nEquipo de PQRS – Área de Registro Académico\", \"citations\": [ { \"path\": \"10-Catalogo-PQRS/Reclamo-Nota.md\", \"excerpt\": \"tags: - catalogo - categoria\" }, { \"path\": \"30-Conocimiento/Registro Académico.md\", \"excerpt\": \"tags: - area - responsable\" } ], \"confidence\": 0.86, \"plazo_aplicable\": \"15 días hábiles (hasta el 28/05/2026)\", \"proximos_pasos\": \"Envíe la documentación de respaldo a"
+                  - link "registroacademico@institucion.edu.co" [ref=e147] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "y espere la respuesta dentro del plazo indicado.\" }Estimado/a solicitante,"
+                - paragraph [ref=e148]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e149]:
+                  - strong [ref=e150]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e151]:
+                  - strong [ref=e152]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e153]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e154] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e155]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e156]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e157]:
+                  - strong [ref=e158]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e159]:
+                  - strong [ref=e160]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e161]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e162] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e163]:
+                  - text: "Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Quiero presentar un reclamo```json , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , { \"draft\": \"Estimado/a estudiante:\\n\\nHemos recibido su solicitud de presentar un reclamo. De acuerdo con el Catálogo de PQRS de nuestra institución, los reclamos de tipo"
+                  - strong [ref=e164]: Nota
+                  - text: deben ser dirigidos al Área de Registro Académico, la cual es responsable de revisar y, en caso procedente, corregir la calificación solicitada.\n\nLe informamos que el proceso de revisión tiene un plazo máximo de
+                  - strong [ref=e165]: 15 días hábiles
+                  - text: contados a partir de la fecha de recepción del reclamo (hasta el 28/05/2026). Durante este tiempo, el equipo de Registro Académico verificará la documentación que usted adjunte y le comunicará el resultado por el correo electrónico registrado en su expediente.\n\n
+                  - strong [ref=e166]: Próximos pasos
+                  - text: :\n1. Envíe a la dirección de correo
+                  - link "registroacademico@institucion.edu.co" [ref=e167] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "los documentos que respalden su reclamo (actas, evaluaciones, comunicaciones previas, etc.).\\n2. Mantenga su bandeja de entrada disponible para recibir la respuesta dentro del plazo indicado.\\n3. Si transcurrido el plazo no ha recibido respuesta, podrá solicitar una segunda revisión o escalar el caso a la Oficina de Atención al Usuario.\\n\\nQuedamos atentos a su información y a cualquier duda adicional.\\n\\nCordialmente,\\n\\nEquipo de PQRS – Área de Registro Académico\", \"citations\": [ { \"path\": \"10-Catalogo-PQRS/Reclamo-Nota.md\", \"excerpt\": \"tags: - catalogo - categoria\" }, { \"path\": \"30-Conocimiento/Registro Académico.md\", \"excerpt\": \"tags: - area - responsable\" } ], \"confidence\": 0.86, \"plazo_aplicable\": \"15 días hábiles (hasta el 28/05/2026)\", \"proximos_pasos\": \"Envíe la documentación de respaldo a"
+                  - link "registroacademico@institucion.edu.co" [ref=e168] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "y espere la respuesta dentro del plazo indicado.\" }Estimado/a solicitante,"
+                - paragraph [ref=e169]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e170]:
+                  - strong [ref=e171]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e172]:
+                  - strong [ref=e173]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e174]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e175] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e176]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e177]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e178]:
+                  - strong [ref=e179]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e180]:
+                  - strong [ref=e181]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e182]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e183] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e184]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e185]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e186]:
+                  - strong [ref=e187]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e188]:
+                  - strong [ref=e189]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e190]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e191] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e192]:
+                  - text: "Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Quiero presentar un reclamo```json , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , { \"draft\": \"Estimado/a estudiante:\\n\\nHemos recibido su solicitud de presentar un reclamo. De acuerdo con el Catálogo de PQRS de nuestra institución, los reclamos de tipo"
+                  - strong [ref=e193]: Nota
+                  - text: deben ser dirigidos al Área de Registro Académico, la cual es responsable de revisar y, en caso procedente, corregir la calificación solicitada.\n\nLe informamos que el proceso de revisión tiene un plazo máximo de
+                  - strong [ref=e194]: 15 días hábiles
+                  - text: contados a partir de la fecha de recepción del reclamo (hasta el 28/05/2026). Durante este tiempo, el equipo de Registro Académico verificará la documentación que usted adjunte y le comunicará el resultado por el correo electrónico registrado en su expediente.\n\n
+                  - strong [ref=e195]: Próximos pasos
+                  - text: :\n1. Envíe a la dirección de correo
+                  - link "registroacademico@institucion.edu.co" [ref=e196] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "los documentos que respalden su reclamo (actas, evaluaciones, comunicaciones previas, etc.).\\n2. Mantenga su bandeja de entrada disponible para recibir la respuesta dentro del plazo indicado.\\n3. Si transcurrido el plazo no ha recibido respuesta, podrá solicitar una segunda revisión o escalar el caso a la Oficina de Atención al Usuario.\\n\\nQuedamos atentos a su información y a cualquier duda adicional.\\n\\nCordialmente,\\n\\nEquipo de PQRS – Área de Registro Académico\", \"citations\": [ { \"path\": \"10-Catalogo-PQRS/Reclamo-Nota.md\", \"excerpt\": \"tags: - catalogo - categoria\" }, { \"path\": \"30-Conocimiento/Registro Académico.md\", \"excerpt\": \"tags: - area - responsable\" } ], \"confidence\": 0.86, \"plazo_aplicable\": \"15 días hábiles (hasta el 28/05/2026)\", \"proximos_pasos\": \"Envíe la documentación de respaldo a"
+                  - link "registroacademico@institucion.edu.co" [ref=e197] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "y espere la respuesta dentro del plazo indicado.\" }Estimado/a solicitante,"
+                - paragraph [ref=e198]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e199]:
+                  - strong [ref=e200]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e201]:
+                  - strong [ref=e202]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e203]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e204] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e205]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e206]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e207]:
+                  - strong [ref=e208]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e209]:
+                  - strong [ref=e210]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e211]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e212] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e213]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e214]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e215]:
+                  - strong [ref=e216]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e217]:
+                  - strong [ref=e218]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e219]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e220] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e221]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e222]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e223]:
+                  - strong [ref=e224]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e225]:
+                  - strong [ref=e226]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e227]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e228] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e229]:
+                  - text: "Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Quiero presentar un reclamo```json , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , { \"draft\": \"Estimado/a estudiante:\\n\\nHemos recibido su solicitud de presentar un reclamo. De acuerdo con el Catálogo de PQRS de nuestra institución, los reclamos de tipo"
+                  - strong [ref=e230]: Nota
+                  - text: deben ser dirigidos al Área de Registro Académico, la cual es responsable de revisar y, en caso procedente, corregir la calificación solicitada.\n\nLe informamos que el proceso de revisión tiene un plazo máximo de
+                  - strong [ref=e231]: 15 días hábiles
+                  - text: contados a partir de la fecha de recepción del reclamo (hasta el 28/05/2026). Durante este tiempo, el equipo de Registro Académico verificará la documentación que usted adjunte y le comunicará el resultado por el correo electrónico registrado en su expediente.\n\n
+                  - strong [ref=e232]: Próximos pasos
+                  - text: :\n1. Envíe a la dirección de correo
+                  - link "registroacademico@institucion.edu.co" [ref=e233] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "los documentos que respalden su reclamo (actas, evaluaciones, comunicaciones previas, etc.).\\n2. Mantenga su bandeja de entrada disponible para recibir la respuesta dentro del plazo indicado.\\n3. Si transcurrido el plazo no ha recibido respuesta, podrá solicitar una segunda revisión o escalar el caso a la Oficina de Atención al Usuario.\\n\\nQuedamos atentos a su información y a cualquier duda adicional.\\n\\nCordialmente,\\n\\nEquipo de PQRS – Área de Registro Académico\", \"citations\": [ { \"path\": \"10-Catalogo-PQRS/Reclamo-Nota.md\", \"excerpt\": \"tags: - catalogo - categoria\" }, { \"path\": \"30-Conocimiento/Registro Académico.md\", \"excerpt\": \"tags: - area - responsable\" } ], \"confidence\": 0.86, \"plazo_aplicable\": \"15 días hábiles (hasta el 28/05/2026)\", \"proximos_pasos\": \"Envíe la documentación de respaldo a"
+                  - link "registroacademico@institucion.edu.co" [ref=e234] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "y espere la respuesta dentro del plazo indicado.\" }Estimado/a solicitante,"
+                - paragraph [ref=e235]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e236]:
+                  - strong [ref=e237]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e238]:
+                  - strong [ref=e239]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e240]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e241] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e242]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e243]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e244]:
+                  - strong [ref=e245]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e246]:
+                  - strong [ref=e247]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e248]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e249] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e250]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e251]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e252]:
+                  - strong [ref=e253]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e254]:
+                  - strong [ref=e255]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e256]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e257] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e258]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e259]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e260]:
+                  - strong [ref=e261]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e262]:
+                  - strong [ref=e263]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e264]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e265] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e266]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e267]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e268]:
+                  - strong [ref=e269]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e270]:
+                  - strong [ref=e271]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e272]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e273] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e274]:
+                  - text: "Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Quiero presentar un reclamo```json , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , { \"draft\": \"Estimado/a estudiante:\\n\\nHemos recibido su solicitud de presentar un reclamo. De acuerdo con el Catálogo de PQRS de nuestra institución, los reclamos de tipo"
+                  - strong [ref=e275]: Nota
+                  - text: deben ser dirigidos al Área de Registro Académico, la cual es responsable de revisar y, en caso procedente, corregir la calificación solicitada.\n\nLe informamos que el proceso de revisión tiene un plazo máximo de
+                  - strong [ref=e276]: 15 días hábiles
+                  - text: contados a partir de la fecha de recepción del reclamo (hasta el 28/05/2026). Durante este tiempo, el equipo de Registro Académico verificará la documentación que usted adjunte y le comunicará el resultado por el correo electrónico registrado en su expediente.\n\n
+                  - strong [ref=e277]: Próximos pasos
+                  - text: :\n1. Envíe a la dirección de correo
+                  - link "registroacademico@institucion.edu.co" [ref=e278] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "los documentos que respalden su reclamo (actas, evaluaciones, comunicaciones previas, etc.).\\n2. Mantenga su bandeja de entrada disponible para recibir la respuesta dentro del plazo indicado.\\n3. Si transcurrido el plazo no ha recibido respuesta, podrá solicitar una segunda revisión o escalar el caso a la Oficina de Atención al Usuario.\\n\\nQuedamos atentos a su información y a cualquier duda adicional.\\n\\nCordialmente,\\n\\nEquipo de PQRS – Área de Registro Académico\", \"citations\": [ { \"path\": \"10-Catalogo-PQRS/Reclamo-Nota.md\", \"excerpt\": \"tags: - catalogo - categoria\" }, { \"path\": \"30-Conocimiento/Registro Académico.md\", \"excerpt\": \"tags: - area - responsable\" } ], \"confidence\": 0.86, \"plazo_aplicable\": \"15 días hábiles (hasta el 28/05/2026)\", \"proximos_pasos\": \"Envíe la documentación de respaldo a"
+                  - link "registroacademico@institucion.edu.co" [ref=e279] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "y espere la respuesta dentro del plazo indicado.\" }Estimado/a solicitante,"
+                - paragraph [ref=e280]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e281]:
+                  - strong [ref=e282]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e283]:
+                  - strong [ref=e284]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e285]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e286] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e287]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e288]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e289]:
+                  - strong [ref=e290]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e291]:
+                  - strong [ref=e292]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e293]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e294] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e295]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e296]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e297]:
+                  - strong [ref=e298]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e299]:
+                  - strong [ref=e300]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e301]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e302] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e303]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e304]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e305]:
+                  - strong [ref=e306]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e307]:
+                  - strong [ref=e308]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e309]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e310] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e311]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e312]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e313]:
+                  - strong [ref=e314]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e315]:
+                  - strong [ref=e316]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e317]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e318] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e319]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e320]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e321]:
+                  - strong [ref=e322]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e323]:
+                  - strong [ref=e324]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e325]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e326] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e327]:
+                  - text: "Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Quiero presentar un reclamo```json , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , { \"draft\": \"Estimado/a estudiante:\\n\\nHemos recibido su solicitud de presentar un reclamo. De acuerdo con el Catálogo de PQRS de nuestra institución, los reclamos de tipo"
+                  - strong [ref=e328]: Nota
+                  - text: deben ser dirigidos al Área de Registro Académico, la cual es responsable de revisar y, en caso procedente, corregir la calificación solicitada.\n\nLe informamos que el proceso de revisión tiene un plazo máximo de
+                  - strong [ref=e329]: 15 días hábiles
+                  - text: contados a partir de la fecha de recepción del reclamo (hasta el 28/05/2026). Durante este tiempo, el equipo de Registro Académico verificará la documentación que usted adjunte y le comunicará el resultado por el correo electrónico registrado en su expediente.\n\n
+                  - strong [ref=e330]: Próximos pasos
+                  - text: :\n1. Envíe a la dirección de correo
+                  - link "registroacademico@institucion.edu.co" [ref=e331] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "los documentos que respalden su reclamo (actas, evaluaciones, comunicaciones previas, etc.).\\n2. Mantenga su bandeja de entrada disponible para recibir la respuesta dentro del plazo indicado.\\n3. Si transcurrido el plazo no ha recibido respuesta, podrá solicitar una segunda revisión o escalar el caso a la Oficina de Atención al Usuario.\\n\\nQuedamos atentos a su información y a cualquier duda adicional.\\n\\nCordialmente,\\n\\nEquipo de PQRS – Área de Registro Académico\", \"citations\": [ { \"path\": \"10-Catalogo-PQRS/Reclamo-Nota.md\", \"excerpt\": \"tags: - catalogo - categoria\" }, { \"path\": \"30-Conocimiento/Registro Académico.md\", \"excerpt\": \"tags: - area - responsable\" } ], \"confidence\": 0.86, \"plazo_aplicable\": \"15 días hábiles (hasta el 28/05/2026)\", \"proximos_pasos\": \"Envíe la documentación de respaldo a"
+                  - link "registroacademico@institucion.edu.co" [ref=e332] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "y espere la respuesta dentro del plazo indicado.\" }Estimado/a solicitante,"
+                - paragraph [ref=e333]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e334]:
+                  - strong [ref=e335]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e336]:
+                  - strong [ref=e337]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e338]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e339] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e340]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e341]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e342]:
+                  - strong [ref=e343]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e344]:
+                  - strong [ref=e345]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e346]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e347] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e348]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e349]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e350]:
+                  - strong [ref=e351]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e352]:
+                  - strong [ref=e353]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e354]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e355] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e356]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e357]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e358]:
+                  - strong [ref=e359]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e360]:
+                  - strong [ref=e361]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e362]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e363] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e364]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e365]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e366]:
+                  - strong [ref=e367]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e368]:
+                  - strong [ref=e369]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e370]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e371] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e372]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e373]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e374]:
+                  - strong [ref=e375]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e376]:
+                  - strong [ref=e377]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e378]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e379] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e380]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e381]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e382]:
+                  - strong [ref=e383]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e384]:
+                  - strong [ref=e385]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e386]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e387] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e388]:
+                  - text: "Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Quiero presentar un reclamo```json , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , { \"draft\": \"Estimado/a estudiante:\\n\\nHemos recibido su solicitud de presentar un reclamo. De acuerdo con el Catálogo de PQRS de nuestra institución, los reclamos de tipo"
+                  - strong [ref=e389]: Nota
+                  - text: deben ser dirigidos al Área de Registro Académico, la cual es responsable de revisar y, en caso procedente, corregir la calificación solicitada.\n\nLe informamos que el proceso de revisión tiene un plazo máximo de
+                  - strong [ref=e390]: 15 días hábiles
+                  - text: contados a partir de la fecha de recepción del reclamo (hasta el 28/05/2026). Durante este tiempo, el equipo de Registro Académico verificará la documentación que usted adjunte y le comunicará el resultado por el correo electrónico registrado en su expediente.\n\n
+                  - strong [ref=e391]: Próximos pasos
+                  - text: :\n1. Envíe a la dirección de correo
+                  - link "registroacademico@institucion.edu.co" [ref=e392] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "los documentos que respalden su reclamo (actas, evaluaciones, comunicaciones previas, etc.).\\n2. Mantenga su bandeja de entrada disponible para recibir la respuesta dentro del plazo indicado.\\n3. Si transcurrido el plazo no ha recibido respuesta, podrá solicitar una segunda revisión o escalar el caso a la Oficina de Atención al Usuario.\\n\\nQuedamos atentos a su información y a cualquier duda adicional.\\n\\nCordialmente,\\n\\nEquipo de PQRS – Área de Registro Académico\", \"citations\": [ { \"path\": \"10-Catalogo-PQRS/Reclamo-Nota.md\", \"excerpt\": \"tags: - catalogo - categoria\" }, { \"path\": \"30-Conocimiento/Registro Académico.md\", \"excerpt\": \"tags: - area - responsable\" } ], \"confidence\": 0.86, \"plazo_aplicable\": \"15 días hábiles (hasta el 28/05/2026)\", \"proximos_pasos\": \"Envíe la documentación de respaldo a"
+                  - link "registroacademico@institucion.edu.co" [ref=e393] [cursor=pointer]:
+                    - /url: mailto:registroacademico@institucion.edu.co
+                  - text: "y espere la respuesta dentro del plazo indicado.\" }Estimado/a solicitante,"
+                - paragraph [ref=e394]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e395]:
+                  - strong [ref=e396]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e397]:
+                  - strong [ref=e398]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e399]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e400] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e401]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e402]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e403]:
+                  - strong [ref=e404]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e405]:
+                  - strong [ref=e406]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e407]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e408] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e409]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e410]: Hemos recibido su solicitud de presentar un reclamo. Para garantizar una atención adecuada, su caso será escalado a un funcionario del Área de Registro Académico, quien revisará la información y tomará las medidas pertinentes.
+                - paragraph [ref=e411]:
+                  - strong [ref=e412]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e413]:
+                  - strong [ref=e414]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e415]:
+                  - text: Si necesita asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e416] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e417]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e418]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e419]:
+                  - strong [ref=e420]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e421]:
+                  - strong [ref=e422]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e423]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e424] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e425]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e426]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e427]:
+                  - strong [ref=e428]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e429]:
+                  - strong [ref=e430]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e431]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e432] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e433]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e434]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e435]:
+                  - strong [ref=e436]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e437]:
+                  - strong [ref=e438]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e439]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e440] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e441]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Estimado/a solicitante,
+                - paragraph [ref=e442]: Hemos recibido su reclamo y, para asegurar una atención adecuada, lo escalaremos a un funcionario del Área de Registro Académico, quien revisará su caso y tomará las medidas pertinentes.
+                - paragraph [ref=e443]:
+                  - strong [ref=e444]: Radicado
+                  - text: ": 2026-00012345"
+                - paragraph [ref=e445]:
+                  - strong [ref=e446]: Plazo estimado de respuesta
+                  - text: ": 3 días hábiles."
+                - paragraph [ref=e447]:
+                  - text: Si requiere asistencia inmediata, puede contactar directamente al área a través del correo
+                  - link "bienestar@universidad.edu.co" [ref=e448] [cursor=pointer]:
+                    - /url: mailto:bienestar@universidad.edu.co
+                  - text: .
+                - paragraph [ref=e449]: Agradecemos su paciencia y quedamos a su disposición para cualquier consulta adicional.Tu caso ha sido derivado a un funcionario que te contactará pronto.
+          - generic [ref=e450]:
+            - generic [ref=e452]: Escalamiento
+            - generic [ref=e453]: ·
+            - generic [ref=e454]: Derivando a un funcionario…
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - button "Adjuntar documento" [ref=e80]:
+              - img [ref=e81]
+            - textbox "Escribe tu mensaje aquí…" [disabled] [ref=e83]
+            - button "Detener" [ref=e121]:
+              - img [ref=e122]
+          - paragraph [ref=e88]: Presiona Enter para enviar · Shift+Enter para nueva línea
+    - contentinfo [ref=e89]: NeuronaPQRS · Sistema PQRS Institucional · Ley 1755 de 2015
+  - button "Open Next.js Dev Tools" [ref=e95] [cursor=pointer]:
+    - img [ref=e96]
+  - alert [ref=e125]

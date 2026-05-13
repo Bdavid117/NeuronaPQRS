@@ -1,0 +1,111 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e6]: NeuronaPQRS
+      - button "Nueva consulta" [active] [ref=e8]:
+        - img [ref=e9]
+        - text: Nueva consulta
+      - generic [ref=e10]:
+        - paragraph [ref=e11]: Recientes
+        - button "Peticion · Certificado-Academico 07 de may de 2026 PQRS-20260507-80D4E8" [ref=e169]:
+          - img [ref=e170]
+          - generic [ref=e172]:
+            - paragraph [ref=e173]: Peticion · Certificado-Academico
+            - paragraph [ref=e174]: 07 de may de 2026
+            - paragraph [ref=e175]: PQRS-20260507-80D4E8
+      - generic [ref=e17]:
+        - generic [ref=e18]:
+          - img [ref=e20]
+          - generic [ref=e23]: Anónimo
+        - link "Salir" [ref=e24] [cursor=pointer]:
+          - /url: /login
+          - img [ref=e25]
+          - text: Salir
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - generic [ref=e30]: Nueva consulta
+        - generic [ref=e31]:
+          - generic [ref=e32]:
+            - button "Texto" [ref=e33]:
+              - img [ref=e34]
+              - generic [ref=e36]: Texto
+            - button "Voz" [ref=e37]:
+              - img [ref=e38]
+              - generic [ref=e41]: Voz
+          - generic [ref=e44]: En línea
+      - generic [ref=e379]:
+        - generic [ref=e380]:
+          - generic [ref=e381]:
+            - img [ref=e383]
+            - generic [ref=e388]:
+              - paragraph [ref=e389]: ¡Hola! Soy el asistente virtual de PQRS de la institución.
+              - paragraph [ref=e390]:
+                - text: ¿En qué puedo ayudarte hoy? Puedes presentar una
+                - strong [ref=e391]: Petición
+                - text: ","
+                - strong [ref=e392]: Queja
+                - text: ","
+                - strong [ref=e393]: Reclamo
+                - text: o
+                - strong [ref=e394]: Sugerencia
+                - text: .
+              - paragraph [ref=e395]: Selecciona una opción o escríbeme directamente.
+          - generic [ref=e396]:
+            - paragraph [ref=e397]: ¿Qué tipo de solicitud deseas presentar?
+            - generic [ref=e398]:
+              - button "Petición Solicita información, documentos o certificados" [ref=e399]:
+                - img [ref=e401]
+                - generic [ref=e404]:
+                  - generic [ref=e405]: Petición
+                  - generic [ref=e406]: Solicita información, documentos o certificados
+              - button "Queja Reporta inconformidad con un servicio o funcionario" [ref=e407]:
+                - img [ref=e409]
+                - generic [ref=e411]:
+                  - generic [ref=e412]: Queja
+                  - generic [ref=e413]: Reporta inconformidad con un servicio o funcionario
+              - button "Reclamo Exige corrección de una nota, proceso o trámite" [ref=e414]:
+                - img [ref=e416]
+                - generic [ref=e420]:
+                  - generic [ref=e421]: Reclamo
+                  - generic [ref=e422]: Exige corrección de una nota, proceso o trámite
+              - button "Sugerencia Propón mejoras a los servicios institucionales" [ref=e423]:
+                - img [ref=e425]
+                - generic [ref=e427]:
+                  - generic [ref=e428]: Sugerencia
+                  - generic [ref=e429]: Propón mejoras a los servicios institucionales
+        - generic [ref=e430]:
+          - generic [ref=e431]:
+            - button "Adjuntar documento" [ref=e432]:
+              - img [ref=e433]
+            - textbox "Escribe tu mensaje aquí…" [ref=e435]
+            - button "Enviar (Enter)" [disabled] [ref=e436]:
+              - img [ref=e437]
+          - paragraph [ref=e440]: Presiona Enter para enviar · Shift+Enter para nueva línea
+    - complementary [ref=e108]:
+      - generic [ref=e109]:
+        - paragraph [ref=e110]: Caso activo
+        - paragraph [ref=e111]: Sin caso activo
+      - generic [ref=e129]:
+        - paragraph [ref=e130]: Progreso del agente
+        - generic [ref=e131]:
+          - generic [ref=e132]:
+            - img [ref=e453]
+            - generic [ref=e135]: Clasificación
+          - generic [ref=e136]:
+            - img [ref=e455]
+            - generic [ref=e139]: Recolección de datos
+          - generic [ref=e140]:
+            - img [ref=e457]
+            - generic [ref=e143]: Resolución
+          - generic [ref=e144]:
+            - img [ref=e459]
+            - generic [ref=e147]: Verificación
+          - generic [ref=e148]:
+            - img [ref=e461]
+            - generic [ref=e151]: Cierre
+      - button "Ver resumen completo" [disabled] [ref=e463]:
+        - img [ref=e464]
+        - text: Ver resumen completo
+  - button "Open Next.js Dev Tools" [ref=e164] [cursor=pointer]:
+    - img [ref=e165]
+  - alert [ref=e168]
