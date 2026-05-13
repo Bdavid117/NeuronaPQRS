@@ -2,7 +2,7 @@ import { AgoraLogo } from "@/components/AgoraLogo";
 import Link from "next/link";
 import { LayoutDashboard, ListChecks, LogOut } from "lucide-react";
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function AdminPanelLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex bg-surface-alt">
       {/* Sidebar */}

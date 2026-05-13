@@ -13,9 +13,9 @@
   --color-primary-800: #312e81;
   --color-primary-900: #1e1b4b;
 
-  /* Superficies */
-  --color-surface: #f1f5f9;
-  --color-surface-alt: #f8fafc;
+  /* Superficies — tinte índigo suave para evitar el efecto "todo blanco" */
+  --color-surface:     #eef2ff;
+  --color-surface-alt: #f5f7ff;
 
   /* Urgencia */
   --color-urgencia-alta: #dc2626;
@@ -25,9 +25,9 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0f172a;
-  --border: #e2e8f0;
-  --muted: #64748b;
+  --foreground: #1e1b4b;   /* primary-900 — cálido en lugar de slate frío */
+  --border: #dde1f0;       /* borde con leve tinte índigo */
+  --muted: #475569;        /* slate-600 — más legible que slate-500 */
 }
 
 html, body, #__next {

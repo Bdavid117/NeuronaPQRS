@@ -28,6 +28,7 @@ interface CaseRow {
   requiere_revision_humana: boolean;
   plazo_respuesta: string | null;
   created_at: string;
+  turn_count: number;
 }
 
 interface CasesResponse {
@@ -123,7 +124,7 @@ export default function AdminDashboard() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-slate-100">
-                {["Radicado", "Tipo", "Categoría", "Área", "Urgencia", "Estado", "Fecha", ""].map((h) => (
+                {["Radicado", "Tipo", "Categoría", "Área", "Urgencia", "Estado", "Turnos", "Fecha", ""].map((h) => (
                   <th
                     key={h}
                     className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-widest"
@@ -136,19 +137,19 @@ export default function AdminDashboard() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={8} className="px-4 py-8 text-center text-slate-400 text-sm">
+                  <td colSpan={9} className="px-4 py-8 text-center text-slate-400 text-sm">
                     Cargando…
                   </td>
                 </tr>
               ) : error ? (
                 <tr>
-                  <td colSpan={8} className="px-4 py-8 text-center text-red-500 text-sm">
+                  <td colSpan={9} className="px-4 py-8 text-center text-red-500 text-sm">
                     {error}
                   </td>
                 </tr>
               ) : data?.cases.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-4 py-8 text-center text-slate-400 text-sm">
+                  <td colSpan={9} className="px-4 py-8 text-center text-slate-400 text-sm">
                     No hay casos con estos filtros.
                   </td>
                 </tr>
@@ -180,6 +181,9 @@ export default function AdminDashboard() {
                       >
                         {c.estado.replace(/_/g, " ")}
                       </span>
+                    </td>
+                    <td className="px-4 py-3 text-slate-500 text-xs text-center">
+                      {c.turn_count}
                     </td>
                     <td className="px-4 py-3 text-slate-500 text-xs whitespace-nowrap">
                       {new Date(c.created_at).toLocaleDateString("es-CO")}

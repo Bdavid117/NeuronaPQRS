@@ -67,7 +67,7 @@ export default function HomePage() {
           Radica tu solicitud<br className="hidden sm:block" /> en minutos
         </h1>
 
-        <p className="text-slate-500 text-base sm:text-lg mb-8 max-w-md">
+        <p className="text-slate-600 text-base sm:text-lg mb-8 max-w-md">
           Nuestro asistente inteligente te guía paso a paso para registrar peticiones, quejas, reclamos y sugerencias.
         </p>
 
@@ -89,7 +89,7 @@ export default function HomePage() {
 
       {/* PQRS type cards */}
       <section className="max-w-5xl mx-auto w-full px-4 sm:px-8 py-12">
-        <p className="text-center text-xs font-semibold uppercase tracking-widest text-slate-400 mb-6">
+        <p className="text-center text-xs font-semibold uppercase tracking-widest text-slate-500 mb-6">
           ¿Qué necesitas radicar?
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -104,7 +104,7 @@ export default function HomePage() {
                 <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${type.badge} mb-2 inline-block`}>
                   {type.label}
                 </span>
-                <p className="text-slate-500 text-sm leading-relaxed">{type.description}</p>
+                <p className="text-slate-600 text-sm leading-relaxed">{type.description}</p>
               </div>
             </Link>
           ))}
@@ -125,7 +125,7 @@ export default function HomePage() {
               </div>
               <div>
                 <h4 className="font-semibold text-slate-900 text-sm mb-1">{title}</h4>
-                <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
+                <p className="text-slate-600 text-sm leading-relaxed">{desc}</p>
               </div>
             </div>
           ))}
@@ -133,7 +133,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-4 text-center text-xs text-slate-400 border-t border-slate-100">
+      <footer className="py-4 text-center text-xs text-slate-500 border-t border-slate-200">
         ÁGORA · Sistema PQRS Institucional · Ley 1755 de 2015
       </footer>
     </div>
