@@ -60,7 +60,6 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
   const [showUpload, setShowUpload] = useState(false);
   const [pendingAttachments, setPendingAttachments] = useState<number[]>([]);
   const [caseInfo, setCaseInfo] = useState<CaseInfo | null>(null);
-  const [abortController, setAbortController] = useState<AbortController | null>(null);
   // Keep a ref to the current AbortController so we can abort on unmount without
   // stale-closure issues. This prevents a running SSE stream from emitting events
   // (and calling onCaseUpdate/onAgentChange) after "Nueva consulta" replaces us.
@@ -78,7 +77,7 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
 
   // Voice I/O
   const tts = useVoiceSynthesis();
-  const voice = useVoiceInput({
+  const { state: voiceState, start: voiceStart, stop: voiceStop, interimTranscript: voiceInterim } = useVoiceInput({
     onResult: (transcript) => {
       sendMessageRef.current(transcript);
     },
@@ -117,19 +116,19 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
     prevIsSpeakingRef.current = tts.isSpeaking;
     if (wasSpeaking && !tts.isSpeaking && voiceMode && !isLoading) {
       try {
-        voice.start();
+        voiceStart();
       } catch (err) {
         console.warn("NeuronaPQRS: Failed to restart mic after TTS:", err);
       }
     }
-  }, [tts.isSpeaking, voiceMode, isLoading, voice.start]);
+  }, [tts.isSpeaking, voiceMode, isLoading, voiceStart]);
 
   // Stop microphone when switching from voice to text mode
   useEffect(() => {
-    if (!voiceMode && voice.state !== "idle") {
-      voice.stop();
+    if (!voiceMode && voiceState !== "idle") {
+      voiceStop();
     }
-  }, [voiceMode, voice.state, voice.stop]);
+  }, [voiceMode, voiceState, voiceStop]);
 
   const showCards = messages.length === 1 && !isLoading;
 
@@ -157,7 +156,6 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
 
       const ac = new AbortController();
       abortControllerRef.current = ac;
-      setAbortController(ac);
 
       try {
         const stream = streamChat(sessionId, text.trim(), pendingAttachments, ac.signal);
@@ -215,7 +213,6 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
         setIsLoading(false);
         setCurrentAgent(null);
         abortControllerRef.current = null;
-        setAbortController(null);
         inputRef.current?.focus();
       }
     },
@@ -326,6 +323,7 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
               <button
                 onClick={() => setPendingAttachments((prev) => prev.filter((a) => a !== id))}
                 className="hover:text-white transition-colors"
+                aria-label="Eliminar archivo"
               >
                 <X size={10} />
               </button>
@@ -349,14 +347,14 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
               </button>
             )}
             <VoiceButton
-              state={voice.state}
-              onStart={voice.start}
-              onStop={voice.stop}
+              state={voiceState}
+              onStart={voiceStart}
+              onStop={voiceStop}
               disabled={isLoading || tts.isSpeaking}
             />
             {isLoading && (
               <button
-                onClick={() => abortController?.abort()}
+                onClick={() => abortControllerRef.current?.abort()}
                 className="p-2 rounded-full bg-red-50 text-red-500 hover:bg-red-100 transition-all"
                 title="Detener"
               >
@@ -365,11 +363,11 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
             )}
           </div>
           <p className="text-center text-xs text-slate-400 max-w-xs leading-relaxed">
-            {voice.state === "error"
+            {voiceState === "error"
               ? <span className="text-rose-400">Error de transcripción. Intenta de nuevo.</span>
-              : voice.state === "listening" && voice.interimTranscript
-              ? <span className="text-slate-600 italic">&ldquo;{voice.interimTranscript}&rdquo;</span>
-              : voice.state === "listening"
+              : voiceState === "listening" && voiceInterim
+              ? <span className="text-slate-600 italic">&ldquo;{voiceInterim}&rdquo;</span>
+              : voiceState === "listening"
               ? "Escuchando… toca para detener"
               : tts.isSpeaking
               ? "Reproduciendo respuesta…"
@@ -410,7 +408,7 @@ export function ChatStream({ sessionId, onCaseUpdate, onAgentChange, initialProm
 
             {isLoading ? (
               <button
-                onClick={() => abortController?.abort()}
+                onClick={() => abortControllerRef.current?.abort()}
                 className="flex-shrink-0 p-1.5 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 transition-all duration-200"
                 title="Detener"
               >

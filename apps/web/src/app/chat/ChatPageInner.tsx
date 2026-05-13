@@ -71,21 +71,26 @@ export function ChatPageInner() {
   const searchParams = useSearchParams();
   const initialPrompt = searchParams.get("prompt") ?? undefined;
 
-  const [sessionId, setSessionId] = useState<string>(uuidv4);
+  const [sessionId, setSessionId] = useState<string>(() =>
+    typeof window !== "undefined"
+      ? localStorage.getItem("pae_session_id") ?? uuidv4()
+      : uuidv4()
+  );
   const sessionIdRef = useRef(sessionId);
   const [caseInfo, setCaseInfo] = useState<CaseInfo | null>(null);
   const [chatKey, setChatKey] = useState(0);
   const [voiceMode, setVoiceMode] = useState(false);
 
   useEffect(() => {
-    const storedId = localStorage.getItem("pae_session_id");
-    const id = storedId ?? sessionId;
-    if (!storedId) localStorage.setItem("pae_session_id", id);
-    if (id !== sessionId) {
-      setSessionId(id);
-      sessionIdRef.current = id;
+    const stored = localStorage.getItem("pae_session_id");
+    if (!stored) {
+      localStorage.setItem("pae_session_id", sessionId);
+    } else if (stored !== sessionId) {
+      setSessionId(stored);
+      sessionIdRef.current = stored;
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    sessionIdRef.current = sessionId;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCaseUpdate = useCallback((info: CaseInfo) => {
@@ -101,8 +106,10 @@ export function ChatPageInner() {
         requiresHuman: info.requiresHuman,
       };
       try {
+        type HistoryItem = { sessionId: string; radicado: string; title: string; date: string; requiresHuman: boolean };
         const prev = JSON.parse(localStorage.getItem("pae_history") ?? "[]");
-        const updated = [item, ...prev.filter((h: typeof item) => h.sessionId !== sessionIdRef.current)].slice(0, 20);
+        const prevSafe: HistoryItem[] = Array.isArray(prev) ? prev : [];
+        const updated = [item, ...prevSafe.filter((h) => h.sessionId !== sessionIdRef.current)].slice(0, 20);
         localStorage.setItem("pae_history", JSON.stringify(updated));
       } catch { /* noop */ }
     }
@@ -122,7 +129,7 @@ export function ChatPageInner() {
       {/* Top bar */}
       <header className="flex items-center justify-between px-4 py-3 bg-white border-b border-slate-200 flex-shrink-0 shadow-sm">
         <div className="flex items-center gap-2">
-          <Link href="/" className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-colors">
+          <Link href="/" className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-colors" aria-label="Volver al inicio">
             <ChevronLeft size={18} />
           </Link>
           <div className="flex items-center gap-2">
