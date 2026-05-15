@@ -19,6 +19,7 @@ from ..services.obsidian import (
 )
 from ..services.tracking import calcular_plazo, plazo_label
 from .classifier import classifier_agent
+from .confirm import confirm_agent
 from .escalator import escalator_agent
 from .intake import intake_agent
 from .resolver import resolver_agent
@@ -102,23 +103,6 @@ def _supervisor_route(
 async def _wait_node(state: PQRSState) -> dict:
     """No-op node — terminates this graph turn so the user can respond."""
     return {}
-
-
-async def _confirm_node(state: PQRSState) -> dict:
-    """Present a summary of collected fields to the user and request confirmation."""
-    collected = state.get("collected_fields", {})
-    tipo = str(state.get("pqrs_tipo") or "").title()
-    lines = [f"**Resumen de su {tipo}:**", ""]
-    for key, val in collected.items():
-        label = key.replace("_", " ").title()
-        lines.append(f"- **{label}:** {val}")
-    lines += ["", "¿Confirma que los datos son correctos? Responda **sí** para radicar o **no** para corregir."]
-    summary = "\n".join(lines)
-    return {
-        "messages": [AIMessage(content=summary, name="confirm")],
-        "awaiting_confirmation": True,
-        "agent_runs": (state.get("agent_runs") or []) + [{"agent_name": "confirm"}],
-    }
 
 
 def _upsert_user_node(collected: dict, session_id: str, radicado: str) -> None:
@@ -317,7 +301,7 @@ def build_graph() -> StateGraph:
     builder.add_node("resolver", resolver_agent)
     builder.add_node("resolver_auto", resolver_auto_agent)
     builder.add_node("escalator", escalator_agent)
-    builder.add_node("confirm", _confirm_node)
+    builder.add_node("confirm", confirm_agent)
     builder.add_node("finish", finish_node)
     builder.add_node("wait", _wait_node)
 
