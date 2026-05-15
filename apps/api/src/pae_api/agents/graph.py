@@ -26,17 +26,26 @@ from .resolver_auto import AUTO_RESOLVE_CATEGORIES, resolver_auto_agent
 from .state import PQRSState
 from .vision import vision_agent
 
-# Minimum fields that must be collected before resolving any PQRS
-_CONTACT_FIELDS = frozenset({"correo_contacto", "telefono_contacto", "correo_electronico"})
-_DESC_FIELDS = frozenset({
-    "descripcion_reclamo", "descripcion_situacion",
-    "descripcion_peticion", "descripcion_sugerencia", "descripcion_detallada",
-})
+REQUIRED_FIELDS: dict[str, list[str]] = {
+    "peticion":   ["nombre_solicitante", "numero_identificacion", "correo_contacto", "descripcion_peticion"],
+    "queja":      ["nombre_solicitante", "numero_identificacion", "correo_contacto", "descripcion_situacion"],
+    "reclamo":    ["nombre_solicitante", "numero_identificacion", "correo_contacto",
+                   "programa_academico", "codigo_estudiante", "descripcion_reclamo"],
+    "sugerencia": ["descripcion_sugerencia"],
+}
+
+
+def _missing_fields(state: PQRSState) -> list[str]:
+    """Compute missing required fields deterministically from collected_fields."""
+    tipo = str(state.get("pqrs_tipo") or "")
+    required = REQUIRED_FIELDS.get(tipo, ["nombre_solicitante", "numero_identificacion", "correo_contacto"])
+    collected = state.get("collected_fields", {})
+    return [f for f in required if not collected.get(f)]
 
 
 def _supervisor_route(
     state: PQRSState,
-) -> Literal["intake", "classifier", "vision", "resolver", "resolver_auto", "escalator", "finish", "wait"]:
+) -> Literal["intake", "classifier", "vision", "resolver", "resolver_auto", "escalator", "finish", "confirm", "wait"]:
     """Pure routing logic — no LLM call needed."""
     if state.get("requires_human"):
         already_escalated = any(
@@ -56,29 +65,31 @@ def _supervisor_route(
     if not state.get("pqrs_tipo") or not state.get("categoria"):
         return "classifier"
 
-    # Enforce intake before resolving: require contact info + description.
-    # Sugerencias don't need contact since they're anonymous by design.
-    collected = state.get("collected_fields", {})
+    # Deterministic field check — never trusts pending_fields from LLM
+    missing = _missing_fields(state)
     tipo = str(state.get("pqrs_tipo") or "")
-    has_contact = any(collected.get(f) for f in _CONTACT_FIELDS)
-    has_description = any(collected.get(f) for f in _DESC_FIELDS)
-    contact_required = tipo != "sugerencia"
 
-    needs_more = (
-        (contact_required and not has_contact)
-        or not has_description
-        or bool(state.get("pending_fields"))
-        or bool(state.get("validation_errors"))
-    )
-
-    if needs_more:
+    if missing:
         intake_ran = any(r.get("agent_name") == "intake" for r in state.get("agent_runs", []))
         if intake_ran:
-            # Intake already ran this turn — pause and wait for the user's next message.
             return "wait"
         return "intake"
 
-    # Draft not yet generated
+    # All required fields collected
+    # Sugerencias are anonymous — skip confirmation, go directly to resolver
+    if tipo == "sugerencia":
+        if not state.get("draft_response"):
+            return "resolver_auto" if state.get("categoria") in AUTO_RESOLVE_CATEGORIES else "resolver"
+        return "finish"
+
+    # For all other types: require user confirmation of summary
+    if not state.get("confirmed"):
+        confirm_ran = any(r.get("agent_name") == "confirm" for r in state.get("agent_runs", []))
+        if confirm_ran:
+            return "wait"
+        return "confirm"
+
+    # User confirmed — generate response
     if not state.get("draft_response"):
         if state.get("categoria") in AUTO_RESOLVE_CATEGORIES:
             return "resolver_auto"
@@ -90,6 +101,23 @@ def _supervisor_route(
 async def _wait_node(state: PQRSState) -> dict:
     """No-op node — terminates this graph turn so the user can respond."""
     return {}
+
+
+async def _confirm_node(state: PQRSState) -> dict:
+    """Present a summary of collected fields to the user and request confirmation."""
+    collected = state.get("collected_fields", {})
+    tipo = str(state.get("pqrs_tipo") or "").title()
+    lines = [f"**Resumen de su {tipo}:**", ""]
+    for key, val in collected.items():
+        label = key.replace("_", " ").title()
+        lines.append(f"- **{label}:** {val}")
+    lines += ["", "¿Confirma que los datos son correctos? Responda **sí** para radicar o **no** para corregir."]
+    summary = "\n".join(lines)
+    return {
+        "messages": [AIMessage(content=summary, name="confirm")],
+        "awaiting_confirmation": True,
+        "agent_runs": (state.get("agent_runs") or []) + [{"agent_name": "confirm"}],
+    }
 
 
 def _upsert_user_node(collected: dict, session_id: str, radicado: str) -> None:
@@ -149,11 +177,16 @@ async def finish_node(state: PQRSState) -> dict:
     plazo = calcular_plazo(state.get("pqrs_tipo", "peticion"), state.get("categoria"))
     label = plazo_label(state.get("pqrs_tipo", "peticion"), state.get("categoria"))
 
+    def _str(v, default=None):
+        if v is None:
+            return default
+        return v.value if hasattr(v, "value") else str(v)
+
     metadata = {
-        "tipo": state.get("pqrs_tipo"),
+        "tipo": _str(state.get("pqrs_tipo")),
         "categoria": state.get("categoria"),
-        "area": state.get("area"),
-        "urgencia": state.get("urgencia", "baja"),
+        "area": _str(state.get("area")),
+        "urgencia": _str(state.get("urgencia"), "baja"),
         "plazo_respuesta": str(plazo),
         "estado": "abierto",
         "requiere_revision_humana": state.get("requires_human", False),
@@ -283,6 +316,7 @@ def build_graph() -> StateGraph:
     builder.add_node("resolver", resolver_agent)
     builder.add_node("resolver_auto", resolver_auto_agent)
     builder.add_node("escalator", escalator_agent)
+    builder.add_node("confirm", _confirm_node)
     builder.add_node("finish", finish_node)
     builder.add_node("wait", _wait_node)
 
@@ -294,6 +328,7 @@ def build_graph() -> StateGraph:
         "resolver_auto": "resolver_auto",
         "escalator": "escalator",
         "finish": "finish",
+        "confirm": "confirm",
         "wait": "wait",
     }
 
@@ -301,7 +336,7 @@ def build_graph() -> StateGraph:
     builder.set_conditional_entry_point(_supervisor_route, _all_routes)
 
     # After each agent, route again
-    for node in ("intake", "classifier", "vision", "resolver", "resolver_auto", "escalator"):
+    for node in ("intake", "classifier", "vision", "resolver", "resolver_auto", "escalator", "confirm"):
         builder.add_conditional_edges(node, _supervisor_route, _all_routes)
 
     builder.add_edge("finish", END)
