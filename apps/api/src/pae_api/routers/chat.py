@@ -53,6 +53,8 @@ async def _sse_stream(request: ChatRequest, db: AsyncSession) -> AsyncGenerator[
         "agent_runs": [],
         "qr_code_b64": None,
         "case_url": None,
+        "confirmed": existing_case.confirmed if existing_case else False,
+        "awaiting_confirmation": existing_case.awaiting_confirmation if existing_case else False,
     }
 
     def _event(name: str, data: object) -> str:
@@ -185,6 +187,9 @@ async def _persist_state(db: AsyncSession, session_id: str, state: dict) -> None
             pass
     if state.get("requires_human"):
         case.requiere_revision_humana = True
+
+    case.confirmed = bool(state.get("confirmed", False))
+    case.awaiting_confirmation = bool(state.get("awaiting_confirmation", False))
 
     case.turn_count = (case.turn_count or 0) + 1
 
