@@ -46,3 +46,7 @@ class PQRSState(TypedDict):
     # QR / case URL (set by finish_node)
     qr_code_b64: str | None
     case_url: str | None
+
+    # Confirmation flow
+    confirmed: bool          # True when user approved the final summary
+    awaiting_confirmation: bool  # True after summary shown, waiting for user reply
