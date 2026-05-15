@@ -83,3 +83,17 @@ def test_pending_fields_not_used_in_routing():
         pending_fields=["nombre_solicitante"],  # LLM wrongly says this is pending
     )
     assert _missing_fields(state) == []
+
+
+def test_missing_fields_peticion():
+    state = _state(pqrs_tipo="peticion")
+    missing = _missing_fields(state)
+    assert "descripcion_peticion" in missing
+    assert len(missing) == len(REQUIRED_FIELDS["peticion"])
+
+
+def test_missing_fields_queja():
+    state = _state(pqrs_tipo="queja")
+    missing = _missing_fields(state)
+    assert "descripcion_situacion" in missing
+    assert len(missing) == len(REQUIRED_FIELDS["queja"])

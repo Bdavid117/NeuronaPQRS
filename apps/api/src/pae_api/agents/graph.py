@@ -40,7 +40,7 @@ def _missing_fields(state: PQRSState) -> list[str]:
     tipo = str(state.get("pqrs_tipo") or "")
     required = REQUIRED_FIELDS.get(tipo, ["nombre_solicitante", "numero_identificacion", "correo_contacto"])
     collected = state.get("collected_fields", {})
-    return [f for f in required if not collected.get(f)]
+    return [f for f in required if collected.get(f) is None or collected.get(f) == ""]
 
 
 def _supervisor_route(
@@ -54,6 +54,7 @@ def _supervisor_route(
         )
         if not already_escalated:
             return "escalator"
+        # Escalator already ran — fall through to complete the normal flow
 
     # Unprocessed attachments
     attachment_ids = state.get("attachment_ids", [])
