@@ -10,6 +10,7 @@ from ..config import get_settings
 from ..logging_config import get_logger
 from ..services.obsidian import search as kb_search
 from ..services.nvidia_nim import get_nvidia_nim
+from .normalize import normalize_fields
 from .state import PQRSState
 from .utils import extract_json
 
@@ -69,7 +70,9 @@ async def intake_agent(state: PQRSState) -> dict:
         parsed = {"reply": raw or "¿Podría proporcionarme más información?", "extracted_fields": {}, "remaining_fields": pending, "validation_errors": [], "escalate": False, "sentiment": "neutral"}
 
     reply = parsed.get("reply", "¿Podría proporcionarme más información?")
-    new_fields = {**collected, **parsed.get("extracted_fields", {})}
+    raw_extracted = parsed.get("extracted_fields", {})
+    normalized_extracted = normalize_fields(raw_extracted)
+    new_fields = {**collected, **normalized_extracted}
     new_pending = parsed.get("remaining_fields", pending)
     new_errors = parsed.get("validation_errors", [])
     escalate = parsed.get("escalate", False) or parsed.get("sentiment") == "urgente"
