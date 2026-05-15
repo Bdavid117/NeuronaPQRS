@@ -28,14 +28,17 @@ _FIELD_LABELS: dict[str, str] = {
     "descripcion_detallada": "Descripción",
 }
 
+_VALID_CORRECTION_FIELDS: frozenset[str] = frozenset(_FIELD_LABELS.keys())
+
 
 def _build_summary(collected: dict, tipo: str, categoria: str | None) -> str:
     lines = ["📋 Antes de radicar tu caso, verifica que los datos sean correctos:\n"]
-    for key, label in _FIELD_LABELS.items():
-        val = collected.get(key)
-        if val:
-            short_val = str(val)[:200]
-            lines.append(f"• **{label}:** {short_val}")
+    field_values = [(label, str(collected.get(key, ""))[:200]) for key, label in _FIELD_LABELS.items() if collected.get(key)]
+    if not field_values and not tipo:
+        return "No hay datos suficientes para mostrar el resumen. Por favor, proporciona tu información."
+
+    for label, val in field_values:
+        lines.append(f"• **{label}:** {val}")
     if tipo:
         tipo_display = tipo.capitalize()
         cat_display = f" — {categoria}" if categoria else ""
@@ -116,8 +119,11 @@ async def confirm_agent(state: PQRSState) -> dict:
     try:
         parsed = extract_json(raw)
     except (json.JSONDecodeError, ValueError):
-        log.warning(f"  confirm: JSON parse failed, assuming confirmation. raw={raw[:60]!r}")
-        parsed = {"action": "confirm", "reply": "Perfecto, procedo a radicar tu caso.", "correction": {}}
+        log.warning(f"  confirm: JSON parse failed, asking user to retry. raw={raw[:60]!r}")
+        return {
+            "messages": [AIMessage(content="No pude entender tu respuesta. ¿Confirmas los datos o quieres corregir algo?", name="confirm")],
+            "awaiting_confirmation": True,
+        }
 
     action = parsed.get("action", "confirm")
     reply = parsed.get("reply", "Perfecto.")
@@ -134,7 +140,8 @@ async def confirm_agent(state: PQRSState) -> dict:
         }
 
     # Apply correction and return to intake on next turn
-    new_collected = {**collected, **correction}
+    safe_correction = {k: v for k, v in correction.items() if k in _VALID_CORRECTION_FIELDS}
+    new_collected = {**collected, **safe_correction}
     return {
         "messages": [AIMessage(content=reply, name="confirm")],
         "confirmed": False,
