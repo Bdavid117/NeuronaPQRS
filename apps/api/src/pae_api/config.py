@@ -54,7 +54,7 @@ class Settings(BaseSettings):
     def check_production_secrets(self) -> "Settings":
         if self.app_env != "development":
             insecure_markers = ("change", "change-me", "secret-change", "placeholder")
-            for field_name in ("admin_password", "admin_token_secret"):
+            for field_name in ("secret_key",):
                 val = getattr(self, field_name, "")
                 if any(marker in val for marker in insecure_markers):
                     raise ValueError(
