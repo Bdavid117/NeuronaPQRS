@@ -158,6 +158,8 @@ async def _sse_stream(request: ChatRequest, db: AsyncSession) -> AsyncGenerator[
 
 
 async def _persist_state(db: AsyncSession, session_id: str, state: dict) -> None:
+    from ..models.pqrs import AgentRun, Message
+
     result = await db.exec(select(PQRSCase).where(PQRSCase.session_id == session_id))
     case = result.first()
 
@@ -166,13 +168,13 @@ async def _persist_state(db: AsyncSession, session_id: str, state: dict) -> None
         db.add(case)
 
     if state.get("pqrs_tipo"):
-        case.tipo = state["pqrs_tipo"]
+        case.tipo = str(state["pqrs_tipo"]).lower()          # B2: normalize
     if state.get("categoria"):
         case.categoria = state["categoria"]
     if state.get("area"):
         case.area = state["area"]
     if state.get("urgencia"):
-        case.urgencia = state["urgencia"]
+        case.urgencia = str(state["urgencia"]).lower()        # B2: normalize
     if state.get("collected_fields"):
         case.collected_fields = state["collected_fields"]
     if state.get("validation_errors") is not None:
@@ -187,11 +189,43 @@ async def _persist_state(db: AsyncSession, session_id: str, state: dict) -> None
             pass
     if state.get("requires_human"):
         case.requiere_revision_humana = True
+    if state.get("vault_note_path"):                          # B1: save vault path
+        case.vault_note_path = state["vault_note_path"]
 
     case.confirmed = bool(state.get("confirmed", False))
     case.awaiting_confirmation = bool(state.get("awaiting_confirmation", False))
-
     case.turn_count = (case.turn_count or 0) + 1
+
+    await db.commit()
+    await db.refresh(case)                                    # get case.id for FK inserts
+
+    # B3: persist conversation messages
+    for msg in state.get("messages", []):
+        role = getattr(msg, "type", "unknown")
+        if role == "human":
+            role = "user"
+        elif role == "ai":
+            role = "assistant"
+        content = str(msg.content) if msg.content else ""
+        agent_name = getattr(msg, "name", None)
+        db.add(Message(
+            case_id=case.id,
+            role=role,
+            content=content,
+            agent_name=agent_name,
+        ))
+
+    # B4: persist agent telemetry runs
+    for run in state.get("agent_runs", []):
+        db.add(AgentRun(
+            case_id=case.id,
+            agent_name=run.get("agent_name", "unknown"),
+            model=run.get("model", "unknown"),
+            tokens_in=run.get("tokens_in", 0),
+            tokens_out=run.get("tokens_out", 0),
+            cost_usd=run.get("cost_usd", 0.0),
+            duration_ms=run.get("duration_ms", 0),
+        ))
 
     await db.commit()
 
