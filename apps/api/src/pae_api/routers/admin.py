@@ -38,7 +38,7 @@ async def _get_admin_user(token: str, db: AsyncSession) -> User:
 
     result = await db.exec(select(User).where(User.id == user_id))
     user = result.first()
-    if not user or not user.is_admin:
+    if not user or not user.is_active or not user.is_admin:
         raise HTTPException(status_code=403, detail="Acceso denegado — se requiere rol admin")
     return user
 
@@ -55,19 +55,27 @@ def _extract_token(request: Request) -> str:
     return token
 
 
+async def require_admin(
+    request: Request,
+    db: AsyncSession = Depends(get_session),
+) -> User:
+    """FastAPI dependency: validates JWT and verifies is_admin."""
+    return await _get_admin_user(_extract_token(request), db)
+
+
 @router.post("/login")
 async def admin_login(body: LoginBody, db: AsyncSession = Depends(get_session)):
     """Authenticate admin user by email+password, return JWT."""
     result = await db.exec(select(User).where(User.email == body.username))
     user = result.first()
-    if not user or not user.is_admin or not _verify_password(body.password, user.password_hash):
+    if not user or not user.is_active or not user.is_admin or not _verify_password(body.password, user.password_hash):
         raise HTTPException(status_code=401, detail="Credenciales incorrectas")
     return {"token": _create_token(user.id, user.email)}
 
 
 @router.get("/cases")
 async def list_cases(
-    request: Request,
+    _admin: User = Depends(require_admin),
     page: int = Query(1, ge=1),
     per_page: int = Query(20, ge=1, le=100),
     tipo: Optional[str] = None,
@@ -76,9 +84,6 @@ async def list_cases(
     urgencia: Optional[str] = None,
     db: AsyncSession = Depends(get_session),
 ):
-    token = _extract_token(request)
-    await _get_admin_user(token, db)
-
     stmt = select(PQRSCase)
     if tipo:
         stmt = stmt.where(PQRSCase.tipo == tipo.lower())
@@ -122,12 +127,9 @@ async def list_cases(
 @router.get("/cases/{radicado}")
 async def get_case(
     radicado: str,
-    request: Request,
+    _admin: User = Depends(require_admin),
     db: AsyncSession = Depends(get_session),
 ):
-    token = _extract_token(request)
-    await _get_admin_user(token, db)
-
     result = await db.exec(select(PQRSCase).where(PQRSCase.radicado == radicado))
     case = result.first()
     if not case:
@@ -154,12 +156,9 @@ async def get_case(
 async def update_case_status(
     radicado: str,
     body: UpdateStatusBody,
-    request: Request,
+    _admin: User = Depends(require_admin),
     db: AsyncSession = Depends(get_session),
 ):
-    token = _extract_token(request)
-    await _get_admin_user(token, db)
-
     result = await db.exec(select(PQRSCase).where(PQRSCase.radicado == radicado))
     case = result.first()
     if not case:
@@ -173,12 +172,9 @@ async def update_case_status(
 
 @router.get("/stats")
 async def get_stats(
-    request: Request,
+    _admin: User = Depends(require_admin),
     db: AsyncSession = Depends(get_session),
 ):
-    token = _extract_token(request)
-    await _get_admin_user(token, db)
-
     now = datetime.now(timezone.utc)
     one_week_ago = now - timedelta(days=7)
     two_weeks_ago = now - timedelta(days=14)
@@ -231,6 +227,13 @@ async def get_stats(
             PQRSCase.estado != PQRSEstado.CERRADO,
         )
     ) or 0
+    a_tiempo = await db.scalar(
+        select(func.count()).select_from(PQRSCase).where(
+            PQRSCase.plazo_respuesta >= today,
+            PQRSCase.plazo_respuesta > en_riesgo_limit,
+            PQRSCase.estado != PQRSEstado.CERRADO,
+        )
+    ) or 0
 
     pending_human = await db.scalar(
         select(func.count()).select_from(PQRSCase).where(
@@ -265,7 +268,7 @@ async def get_stats(
         "sla_status": {
             "vencidos": vencidos,
             "en_riesgo": en_riesgo,
-            "a_tiempo": max(0, total - vencidos - en_riesgo),
+            "a_tiempo": a_tiempo,
         },
         "pendientes_revision_humana": pending_human,
         "costo_llm_semana_usd": costo_semana,
