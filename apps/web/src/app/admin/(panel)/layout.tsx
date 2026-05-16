@@ -1,6 +1,6 @@
 import { AgoraLogo } from "@/components/AgoraLogo";
 import Link from "next/link";
-import { LayoutDashboard, ListChecks, LogOut } from "lucide-react";
+import { BarChart2, LayoutDashboard, ListChecks, LogOut } from "lucide-react";
 
 export default function AdminPanelLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -28,6 +28,13 @@ export default function AdminPanelLayout({ children }: { children: React.ReactNo
           >
             <ListChecks size={15} className="text-slate-500" />
             Casos abiertos
+          </Link>
+          <Link
+            href="/admin/stats"
+            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50 transition-colors"
+          >
+            <BarChart2 size={15} className="text-slate-500" />
+            Estadísticas
           </Link>
         </nav>
 
