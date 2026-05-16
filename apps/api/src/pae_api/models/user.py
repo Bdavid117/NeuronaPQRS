@@ -13,4 +13,5 @@ class User(SQLModel, table=True):
     password_hash: str
     name: str = ""
     is_active: bool = True
+    is_admin: bool = False
     created_at: datetime = Field(default_factory=datetime.utcnow)
