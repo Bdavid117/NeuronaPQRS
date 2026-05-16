@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-import shutil
 from pathlib import Path
 
 _NEVER_WRITE = {".obsidian"}
@@ -58,8 +57,8 @@ def write_note(rel_path: str, content: str, mode: str = "create") -> None:
         raise FileExistsError(f"Note already exists: {rel_path}. Use mode='overwrite' or 'append'.")
 
     if mode == "overwrite" and path.exists():
-        backup = path.with_suffix(".md.bak")
-        shutil.copy2(path, backup)
+        # mode="overwrite" writes without backup — git is the version history
+        pass
 
     if mode == "append" and path.exists():
         existing = path.read_text(encoding="utf-8")
