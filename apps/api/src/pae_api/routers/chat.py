@@ -158,6 +158,8 @@ async def _sse_stream(request: ChatRequest, db: AsyncSession) -> AsyncGenerator[
 
 
 async def _persist_state(db: AsyncSession, session_id: str, state: dict) -> None:
+    from datetime import datetime, timezone
+    from sqlalchemy import func as sql_func
     from ..models.pqrs import AgentRun, Message
 
     result = await db.exec(select(PQRSCase).where(PQRSCase.session_id == session_id))
@@ -195,12 +197,17 @@ async def _persist_state(db: AsyncSession, session_id: str, state: dict) -> None
     case.confirmed = bool(state.get("confirmed", False))
     case.awaiting_confirmation = bool(state.get("awaiting_confirmation", False))
     case.turn_count = (case.turn_count or 0) + 1
+    case.updated_at = datetime.now(timezone.utc)              # I1: keep updated_at current
 
     await db.commit()
     await db.refresh(case)                                    # get case.id for FK inserts
 
-    # B3: persist conversation messages
-    for msg in state.get("messages", []):
+    # B3: persist conversation messages — slice to only new messages (C1: avoid duplicates)
+    existing_msg_count = await db.scalar(
+        select(sql_func.count()).where(Message.case_id == case.id)
+    ) or 0
+    messages_to_save = state.get("messages", [])[existing_msg_count:]
+    for msg in messages_to_save:
         role = getattr(msg, "type", "unknown")
         if role == "human":
             role = "user"
