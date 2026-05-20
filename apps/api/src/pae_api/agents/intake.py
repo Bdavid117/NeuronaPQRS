@@ -11,19 +11,24 @@ from ..logging_config import get_logger
 from ..services.obsidian import search as kb_search
 from ..services.nvidia_nim import get_nvidia_nim
 from .normalize import normalize_fields
-from .state import PQRSState
+from .state import PQRSState, REQUIRED_FIELDS as _BASE_REQUIRED
 from .utils import extract_json
 
 _PROMPT = (Path(__file__).parent / "prompts" / "intake.md").read_text()
 log = get_logger("intake")
 
-# Required fields by PQRS tipo (loaded from KB at runtime if available)
-_BASE_REQUIRED: dict[str, list[str]] = {
-    "peticion": ["nombre_solicitante", "numero_identificacion", "correo_contacto", "descripcion_peticion"],
-    "queja": ["nombre_solicitante", "numero_identificacion", "correo_contacto", "descripcion_situacion", "persona_o_dependencia_implicada"],
-    "reclamo": ["nombre_solicitante", "numero_identificacion", "correo_contacto", "programa_academico", "codigo_estudiante", "descripcion_reclamo"],
-    "sugerencia": ["descripcion_sugerencia", "area_relacionada"],
-}
+
+async def _call_and_parse(client, model: str, messages: list) -> tuple[dict, dict]:
+    """Single LLM call + JSON parse. Raises ValueError on parse failure."""
+    resp = await client.chat(
+        model=model,
+        messages=messages,
+        temperature=0.5,
+        response_format={"type": "json_object"},
+    )
+    raw = resp["choices"][0]["message"]["content"] or ""
+    parsed = extract_json(raw)  # raises json.JSONDecodeError or ValueError on failure
+    return parsed, resp
 
 
 async def intake_agent(state: PQRSState) -> dict:
@@ -51,23 +56,32 @@ async def intake_agent(state: PQRSState) -> dict:
         *[{"role": "assistant" if m.type == "ai" else "user" if m.type == "human" else m.type, "content": m.content} for m in state["messages"]],
     ]
 
-    resp = await client.chat(
-        model=settings.model_intake,
-        messages=messages,
-        temperature=0.5,
-        response_format={"type": "json_object"},
-    )
-
-    cost = client.estimate_cost(resp)
-    usage = resp.get("usage", {})
-    raw = resp["choices"][0]["message"]["content"] or ""
-
+    parsed: dict = {}
+    resp: dict = {}
     try:
-        parsed = extract_json(raw)
-        log.info(f"  extracted={list(parsed.get('extracted_fields', {}).keys())}  pending={parsed.get('remaining_fields', [])}")
-    except (json.JSONDecodeError, ValueError) as e:
-        log.warning(f"  ⚠ JSON parse failed: {e}  raw={raw[:80]!r}")
-        parsed = {"reply": raw or "¿Podría proporcionarme más información?", "extracted_fields": {}, "remaining_fields": pending, "validation_errors": [], "escalate": False, "sentiment": "neutral"}
+        for attempt in range(2):
+            try:
+                parsed, resp = await _call_and_parse(client, settings.model_intake, messages)
+                break  # success — exit loop
+            except (json.JSONDecodeError, ValueError) as e:
+                log.warning(f"  ⚠ JSON parse failed (attempt {attempt + 1}/2): {e}")
+                if attempt == 1:
+                    raise  # exhausted retries — fall through to outer except
+    except (json.JSONDecodeError, ValueError):
+        log.error("  ✗ JSON parse failed after 2 attempts — using fallback response")
+        parsed = {
+            "reply": "Disculpe, tuve un problema procesando su respuesta. ¿Podría repetir la información?",
+            "extracted_fields": {},
+            "remaining_fields": pending,
+            "validation_errors": state.get("validation_errors", []),  # PRESERVE, do not clear
+            "escalate": False,
+            "sentiment": "neutral",
+        }
+        resp = {}
+
+    cost = client.estimate_cost(resp) if resp else 0.0
+    usage = resp.get("usage", {}) if resp else {}
+    log.info(f"  extracted={list(parsed.get('extracted_fields', {}).keys())}  pending={parsed.get('remaining_fields', [])}")
 
     reply = parsed.get("reply", "¿Podría proporcionarme más información?")
     raw_extracted = parsed.get("extracted_fields", {})
@@ -76,7 +90,6 @@ async def intake_agent(state: PQRSState) -> dict:
     new_pending = parsed.get("remaining_fields", pending)
     new_errors = parsed.get("validation_errors", [])
     escalate = parsed.get("escalate", False) or parsed.get("sentiment") == "urgente"
-    log.info(f"  reply={reply[:80]!r}  escalate={escalate}")
 
     run_record = {
         "agent_name": "intake",
