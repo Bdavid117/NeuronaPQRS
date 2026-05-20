@@ -24,16 +24,8 @@ from .escalator import escalator_agent
 from .intake import intake_agent
 from .resolver import resolver_agent
 from .resolver_auto import AUTO_RESOLVE_CATEGORIES, resolver_auto_agent
-from .state import PQRSState
+from .state import PQRSState, REQUIRED_FIELDS
 from .vision import vision_agent
-
-REQUIRED_FIELDS: dict[str, list[str]] = {
-    "peticion":   ["nombre_solicitante", "numero_identificacion", "correo_contacto", "descripcion_peticion"],
-    "queja":      ["nombre_solicitante", "numero_identificacion", "correo_contacto", "descripcion_situacion"],
-    "reclamo":    ["nombre_solicitante", "numero_identificacion", "correo_contacto",
-                   "programa_academico", "codigo_estudiante", "descripcion_reclamo"],
-    "sugerencia": ["descripcion_sugerencia"],
-}
 
 
 def _missing_fields(state: PQRSState) -> list[str]:
@@ -48,14 +40,8 @@ def _supervisor_route(
     state: PQRSState,
 ) -> Literal["intake", "classifier", "vision", "resolver", "resolver_auto", "escalator", "finish", "confirm", "wait"]:
     """Pure routing logic — no LLM call needed."""
-    if state.get("requires_human"):
-        already_escalated = any(
-            r.get("agent_name") == "escalator"
-            for r in state.get("agent_runs", [])
-        )
-        if not already_escalated:
-            return "escalator"
-        # Escalator already ran — fall through to complete the normal flow
+    if state.get("requires_human") and not state.get("escalated"):
+        return "escalator"
 
     # Unprocessed attachments
     attachment_ids = state.get("attachment_ids", [])
@@ -245,7 +231,9 @@ async def finish_node(state: PQRSState) -> dict:
             pass  # non-critical
 
     except FileExistsError:
-        vault_path = None
+        # Idempotency: note already written (e.g. finish_node retry after disconnect).
+        # Recover correct path instead of storing NULL.
+        vault_path = f"20-Casos/{radicado}.md"
     except Exception as exc:
         logging.getLogger("pae_api.agents.graph").error(
             "finish_node: failed to write case %s to vault: %s", radicado, exc
