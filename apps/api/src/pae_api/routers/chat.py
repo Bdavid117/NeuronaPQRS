@@ -282,11 +282,11 @@ async def _bg_persist_if_needed(state_holder: dict) -> None:
         log.warning("_bg_persist: no state to save (disconnect before graph finished)")
         return
     log.info(f"_bg_persist: saving after disconnect  session={session_id[:8]}")
-    async with get_session_factory()() as session:
-        try:
+    try:
+        async with get_session_factory()() as session:
             await _persist_state(session, session_id, final_state)
-        except Exception:
-            log.error("_bg_persist: failed", exc_info=True)
+    except Exception:
+        log.error("_bg_persist: failed", exc_info=True)
 
 
 @router.post("")

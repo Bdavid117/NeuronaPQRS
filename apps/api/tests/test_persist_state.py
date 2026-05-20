@@ -195,3 +195,22 @@ async def test_bg_persist_runs_when_inline_skipped():
     with patch("pae_api.routers.chat.get_session_factory", return_value=mock_factory):
         await _bg_persist_if_needed(state_holder)
         mock_session.commit.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_bg_persist_logs_error_when_session_factory_raises():
+    """If get_session_factory raises, the error must be caught and logged (not re-raised)."""
+    from pae_api.routers.chat import _bg_persist_if_needed
+    from unittest.mock import patch, MagicMock
+
+    state_holder = {
+        "persisted": False,
+        "session_id": "test-session-001",
+        "final_state": _make_state(),
+    }
+
+    failing_factory = MagicMock(side_effect=Exception("connection pool exhausted"))
+
+    with patch("pae_api.routers.chat.get_session_factory", return_value=failing_factory):
+        # Must not raise — background tasks must be fire-and-forget
+        await _bg_persist_if_needed(state_holder)
