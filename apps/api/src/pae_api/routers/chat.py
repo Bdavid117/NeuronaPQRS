@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from collections.abc import AsyncGenerator
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, BackgroundTasks, Depends
 from fastapi.responses import StreamingResponse
 from langchain_core.messages import HumanMessage
 from sqlmodel.ext.asyncio.session import AsyncSession
@@ -11,6 +11,7 @@ from sqlmodel import select
 
 from ..agents.graph import get_graph
 from ..agents.state import PQRSState
+from ..db import get_session_factory
 from ..deps import get_db
 from ..logging_config import get_logger
 from ..models.pqrs import PQRSCase
@@ -21,7 +22,11 @@ router = APIRouter(prefix="/chat", tags=["chat"])
 log = get_logger("chat")
 
 
-async def _sse_stream(request: ChatRequest, db: AsyncSession) -> AsyncGenerator[str, None]:
+async def _sse_stream(
+    request: ChatRequest,
+    db: AsyncSession,
+    state_holder: dict,
+) -> AsyncGenerator[str, None]:
     """Run the LangGraph and emit SSE events."""
     graph = get_graph()
     log.info(f"▶ session={request.session_id[:8]}  msg={request.message[:80]!r}")
@@ -154,7 +159,13 @@ async def _sse_stream(request: ChatRequest, db: AsyncSession) -> AsyncGenerator[
         except Exception:
             pass  # non-critical — cache write failure must not break the response
 
+    # Mark state_holder before persisting so background task knows what to do
+    state_holder["session_id"] = request.session_id
+    state_holder["final_state"] = final_state
+    state_holder["persisted"] = False
+
     await _persist_state(db, request.session_id, final_state)
+    state_holder["persisted"] = True  # signal: inline persist succeeded
 
     yield _event("done", {"session_id": request.session_id})
 
@@ -246,10 +257,33 @@ async def _persist_state(db: AsyncSession, session_id: str, state: dict) -> None
         raise
 
 
+async def _bg_persist_if_needed(state_holder: dict) -> None:
+    """BackgroundTask: persists only if inline persist was skipped (client disconnect)."""
+    if state_holder.get("persisted"):
+        return
+    session_id = state_holder.get("session_id")
+    final_state = state_holder.get("final_state")
+    if not session_id or not final_state:
+        log.warning("_bg_persist: no state to save (disconnect before graph finished)")
+        return
+    log.info(f"_bg_persist: saving after disconnect  session={session_id[:8]}")
+    async with get_session_factory()() as session:
+        try:
+            await _persist_state(session, session_id, final_state)
+        except Exception:
+            log.error("_bg_persist: failed", exc_info=True)
+
+
 @router.post("")
-async def chat_endpoint(body: ChatRequest, db: AsyncSession = Depends(get_db)) -> StreamingResponse:
+async def chat_endpoint(
+    body: ChatRequest,
+    background_tasks: BackgroundTasks,
+    db: AsyncSession = Depends(get_db),
+) -> StreamingResponse:
+    state_holder: dict = {}
+    background_tasks.add_task(_bg_persist_if_needed, state_holder)
     return StreamingResponse(
-        _sse_stream(body, db),
+        _sse_stream(body, db, state_holder),
         media_type="text/event-stream",
         headers={
             "Cache-Control": "no-cache",

@@ -137,3 +137,43 @@ def test_collected_fields_state_wins_on_conflict():
     new = {"nombre_solicitante": "Ana Torres Corrected"}
     merged = {**existing, **new}
     assert merged["nombre_solicitante"] == "Ana Torres Corrected"
+
+
+@pytest.mark.asyncio
+async def test_bg_persist_skips_when_already_persisted():
+    """Background task must no-op when inline persist succeeded."""
+    from pae_api.routers.chat import _bg_persist_if_needed
+    from unittest.mock import patch
+
+    state_holder = {"persisted": True, "session_id": "abc", "final_state": {}}
+    with patch("pae_api.routers.chat.get_session_factory") as mock_factory:
+        await _bg_persist_if_needed(state_holder)
+        mock_factory.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_bg_persist_runs_when_inline_skipped():
+    """Background task must call _persist_state when inline persist was skipped."""
+    from pae_api.routers.chat import _bg_persist_if_needed
+    from unittest.mock import patch, AsyncMock, MagicMock
+
+    state_holder = {
+        "persisted": False,
+        "session_id": "test-session-001",
+        "final_state": _make_state(),
+    }
+
+    mock_session = AsyncMock()
+    mock_session.__aenter__ = AsyncMock(return_value=mock_session)
+    mock_session.__aexit__ = AsyncMock(return_value=False)
+    mock_session.exec = AsyncMock(return_value=AsyncMock(first=MagicMock(return_value=None)))
+    mock_session.flush = AsyncMock()
+    mock_session.commit = AsyncMock()
+    mock_session.rollback = AsyncMock()
+    mock_session.add = MagicMock()
+
+    mock_factory = MagicMock(return_value=mock_session)
+
+    with patch("pae_api.routers.chat.get_session_factory", return_value=mock_factory):
+        await _bg_persist_if_needed(state_holder)
+        mock_session.commit.assert_awaited_once()
