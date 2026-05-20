@@ -55,6 +55,8 @@ async def _sse_stream(request: ChatRequest, db: AsyncSession) -> AsyncGenerator[
         "case_url": None,
         "confirmed": existing_case.confirmed if existing_case else False,
         "awaiting_confirmation": existing_case.awaiting_confirmation if existing_case else False,
+        "escalated": existing_case.estado == "escalado" if existing_case else False,
+        "vault_note_path": existing_case.vault_note_path if existing_case else None,
     }
 
     def _event(name: str, data: object) -> str:
@@ -158,78 +160,90 @@ async def _sse_stream(request: ChatRequest, db: AsyncSession) -> AsyncGenerator[
 
 
 async def _persist_state(db: AsyncSession, session_id: str, state: dict) -> None:
-    from datetime import datetime, timezone
+    from datetime import datetime
     from ..models.pqrs import AgentRun, Message
 
-    result = await db.exec(select(PQRSCase).where(PQRSCase.session_id == session_id))
-    case = result.first()
+    try:
+        result = await db.exec(select(PQRSCase).where(PQRSCase.session_id == session_id))
+        case = result.first()
 
-    if case is None:
-        case = PQRSCase(session_id=session_id)
-        db.add(case)
+        if case is None:
+            case = PQRSCase(session_id=session_id)
+            db.add(case)
 
-    if state.get("pqrs_tipo"):
-        case.tipo = str(state["pqrs_tipo"]).lower()          # B2: normalize
-    if state.get("categoria"):
-        case.categoria = state["categoria"]
-    if state.get("area"):
-        case.area = state["area"]
-    if state.get("urgencia"):
-        case.urgencia = str(state["urgencia"]).lower()        # B2: normalize
-    if state.get("collected_fields"):
-        case.collected_fields = state["collected_fields"]
-    if state.get("validation_errors") is not None:
-        case.validation_errors = state["validation_errors"]
-    if state.get("radicado"):
-        case.radicado = state["radicado"]
-    if state.get("plazo_respuesta"):
-        from datetime import date as _date
-        try:
-            case.plazo_respuesta = _date.fromisoformat(state["plazo_respuesta"])
-        except (ValueError, TypeError):
-            pass
-    if state.get("requires_human"):
-        case.requiere_revision_humana = True
-    if state.get("vault_note_path"):                          # B1: save vault path
-        case.vault_note_path = state["vault_note_path"]
+        if state.get("pqrs_tipo"):
+            case.tipo = str(state["pqrs_tipo"]).lower()
+        if state.get("categoria"):
+            case.categoria = state["categoria"]
+        if state.get("area"):
+            case.area = state["area"]
+        if state.get("urgencia"):
+            case.urgencia = str(state["urgencia"]).lower()
+        if state.get("collected_fields"):
+            existing_fields = case.collected_fields or {}
+            case.collected_fields = {**existing_fields, **state["collected_fields"]}
+        if state.get("validation_errors") is not None:
+            case.validation_errors = state["validation_errors"]
+        if state.get("radicado"):
+            case.radicado = state["radicado"]
+        if state.get("plazo_respuesta"):
+            from datetime import date as _date
+            try:
+                case.plazo_respuesta = _date.fromisoformat(state["plazo_respuesta"])
+            except (ValueError, TypeError):
+                pass
+        if state.get("requires_human"):
+            case.requiere_revision_humana = True
+        if state.get("escalated"):
+            from ..models.pqrs import PQRSEstado
+            case.estado = PQRSEstado.ESCALADO.value
+        if state.get("vault_note_path"):
+            case.vault_note_path = state["vault_note_path"]
 
-    case.confirmed = bool(state.get("confirmed", False))
-    case.awaiting_confirmation = bool(state.get("awaiting_confirmation", False))
-    case.turn_count = (case.turn_count or 0) + 1
-    case.updated_at = datetime.now(timezone.utc)              # I1: keep updated_at current
+        case.confirmed = bool(state.get("confirmed", False))
+        case.awaiting_confirmation = bool(state.get("awaiting_confirmation", False))
+        case.turn_count = (case.turn_count or 0) + 1
+        case.updated_at = datetime.utcnow()
 
-    await db.commit()
-    await db.refresh(case)                                    # get case.id for FK inserts
+        # flush assigns case.id from DB sequence without committing
+        # — required for FK inserts on Message and AgentRun below
+        await db.flush()
 
-    # B3: persist current turn's messages (state["messages"] is always only this turn)
-    for msg in state.get("messages", []):
-        role = getattr(msg, "type", "unknown")
-        if role == "human":
-            role = "user"
-        elif role == "ai":
-            role = "assistant"
-        content = str(msg.content) if msg.content else ""
-        agent_name = getattr(msg, "name", None)
-        db.add(Message(
-            case_id=case.id,
-            role=role,
-            content=content,
-            agent_name=agent_name,
-        ))
+        # B3: persist current turn's messages (state["messages"] is always only this turn)
+        for msg in state.get("messages", []):
+            role = getattr(msg, "type", "unknown")
+            if role == "human":
+                role = "user"
+            elif role == "ai":
+                role = "assistant"
+            content = str(msg.content) if msg.content else ""
+            agent_name = getattr(msg, "name", None)
+            db.add(Message(
+                case_id=case.id,
+                role=role,
+                content=content,
+                agent_name=agent_name,
+            ))
 
-    # B4: persist agent telemetry runs
-    for run in state.get("agent_runs", []):
-        db.add(AgentRun(
-            case_id=case.id,
-            agent_name=run.get("agent_name", "unknown"),
-            model=run.get("model", "unknown"),
-            tokens_in=run.get("tokens_in", 0),
-            tokens_out=run.get("tokens_out", 0),
-            cost_usd=run.get("cost_usd", 0.0),
-            duration_ms=run.get("duration_ms", 0),
-        ))
+        # B4: persist agent telemetry runs
+        for run in state.get("agent_runs", []):
+            db.add(AgentRun(
+                case_id=case.id,
+                agent_name=run.get("agent_name", "unknown"),
+                model=run.get("model", "unknown"),
+                tokens_in=run.get("tokens_in", 0),
+                tokens_out=run.get("tokens_out", 0),
+                cost_usd=run.get("cost_usd", 0.0),
+                duration_ms=run.get("duration_ms", 0),
+            ))
 
-    await db.commit()
+        # single atomic commit covers case, messages, and agent_runs
+        await db.commit()
+
+    except Exception:
+        await db.rollback()
+        log.error("_persist_state: transaction rolled back", exc_info=True)
+        raise
 
 
 @router.post("")
