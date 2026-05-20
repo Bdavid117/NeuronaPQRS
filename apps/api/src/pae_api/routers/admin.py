@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone, date, timedelta
+from datetime import datetime, date, timedelta
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from jose import JWTError, jwt
 from pydantic import BaseModel
+from sqlalchemy import text
 from sqlmodel import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -165,7 +166,7 @@ async def update_case_status(
         raise HTTPException(status_code=404, detail="Case not found")
 
     case.estado = body.estado
-    case.updated_at = datetime.now(timezone.utc)
+    case.updated_at = datetime.utcnow()
     await db.commit()
     return {"status": "updated", "radicado": radicado, "estado": body.estado}
 
@@ -175,7 +176,7 @@ async def get_stats(
     _admin: User = Depends(require_admin),
     db: AsyncSession = Depends(get_session),
 ):
-    now = datetime.now(timezone.utc)
+    now = datetime.utcnow()
     one_week_ago = now - timedelta(days=7)
     two_weeks_ago = now - timedelta(days=14)
     thirty_days_ago = now - timedelta(days=30)
@@ -247,14 +248,12 @@ async def get_stats(
     )
     costo_semana = round(float(cost_result or 0), 4)
 
+    _day = func.date_trunc(text("'day'"), PQRSCase.created_at)
     days_rows = await db.exec(
-        select(
-            func.date_trunc("day", PQRSCase.created_at).label("day"),
-            func.count().label("cnt"),
-        )
+        select(_day.label("day"), func.count().label("cnt"))
         .where(PQRSCase.created_at >= thirty_days_ago)
-        .group_by(func.date_trunc("day", PQRSCase.created_at))
-        .order_by(func.date_trunc("day", PQRSCase.created_at))
+        .group_by(_day)
+        .order_by(_day)
     )
     casos_por_dia = [{"date": str(row.day)[:10], "count": row.cnt} for row in days_rows.all()]
 
