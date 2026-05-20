@@ -14,7 +14,7 @@ from ..agents.state import PQRSState
 from ..db import get_session_factory
 from ..deps import get_db
 from ..logging_config import get_logger
-from ..models.pqrs import PQRSCase
+from ..models.pqrs import Attachment, PQRSCase
 from ..models.schemas import ChatRequest
 from ..services.semantic_cache import get_cached_response, store_response
 
@@ -35,6 +35,21 @@ async def _sse_stream(
     result = await db.exec(select(PQRSCase).where(PQRSCase.session_id == request.session_id))
     existing_case = result.first()
 
+    # Validate attachment_ids: only accept IDs belonging to this session
+    validated_attachment_ids: list[int] = []
+    if request.attachment_ids:
+        att_result = await db.exec(
+            select(Attachment).where(
+                Attachment.id.in_(request.attachment_ids),
+                Attachment.session_id == request.session_id,
+            )
+        )
+        valid_ids = {a.id for a in att_result.all()}
+        invalid_ids = set(request.attachment_ids) - valid_ids
+        if invalid_ids:
+            log.warning(f"  ⚠ attachment_ids rejected (wrong session): {invalid_ids}  session={request.session_id[:8]}")
+        validated_attachment_ids = [i for i in request.attachment_ids if i in valid_ids]
+
     init_state: PQRSState = {
         "messages": [HumanMessage(content=request.message)],
         "session_id": request.session_id,
@@ -45,7 +60,7 @@ async def _sse_stream(
         "collected_fields": existing_case.collected_fields if existing_case else {},
         "pending_fields": [],
         "validation_errors": existing_case.validation_errors if existing_case else [],
-        "attachment_ids": request.attachment_ids,
+        "attachment_ids": validated_attachment_ids,
         "vision_results": [],
         "kb_citations": [],
         "draft_response": None,

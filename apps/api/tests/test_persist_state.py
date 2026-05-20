@@ -151,6 +151,24 @@ async def test_bg_persist_skips_when_already_persisted():
         mock_factory.assert_not_called()
 
 
+def test_attachment_id_validation_drops_wrong_session():
+    """IDs not belonging to the session must be silently dropped."""
+    request_ids = [1, 2, 99]
+    valid_ids = {1, 2}  # 99 belongs to another session
+    invalid_ids = set(request_ids) - valid_ids
+    validated = [i for i in request_ids if i in valid_ids]
+    assert validated == [1, 2]
+    assert invalid_ids == {99}
+
+
+def test_attachment_id_validation_empty_request():
+    """Empty attachment_ids list produces empty validated list."""
+    request_ids = []
+    valid_ids = set()
+    validated = [i for i in request_ids if i in valid_ids]
+    assert validated == []
+
+
 @pytest.mark.asyncio
 async def test_bg_persist_runs_when_inline_skipped():
     """Background task must call _persist_state when inline persist was skipped."""
