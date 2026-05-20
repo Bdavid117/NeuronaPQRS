@@ -45,6 +45,7 @@ async def test_intake_retries_on_malformed_json_and_preserves_errors():
         assert result["collected_fields"]["nombre_solicitante"] == "Ana"
         # reply is non-empty Spanish message
         assert len(result["messages"][0].content) > 10
+        assert "Disculpe" in result["messages"][0].content
 
 
 @pytest.mark.asyncio
@@ -69,3 +70,4 @@ async def test_intake_succeeds_on_second_attempt():
         result = await intake_agent(_make_intake_state())
 
         assert result["collected_fields"].get("numero_identificacion") == "1234567"
+        assert client.chat.await_count == 2

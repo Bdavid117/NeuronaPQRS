@@ -67,8 +67,8 @@ async def intake_agent(state: PQRSState) -> dict:
                 log.warning(f"  ⚠ JSON parse failed (attempt {attempt + 1}/2): {e}")
                 if attempt == 1:
                     raise  # exhausted retries — fall through to outer except
-    except (json.JSONDecodeError, ValueError):
-        log.error("  ✗ JSON parse failed after 2 attempts — using fallback response")
+    except Exception:
+        log.error("  ✗ intake LLM call or parse failed — using fallback response", exc_info=True)
         parsed = {
             "reply": "Disculpe, tuve un problema procesando su respuesta. ¿Podría repetir la información?",
             "extracted_fields": {},
