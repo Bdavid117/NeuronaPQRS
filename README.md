@@ -55,7 +55,49 @@ Arranca Docker/PostgreSQL → aplica migraciones → Backend FastAPI → Fronten
 |---|---|
 | Frontend | http://localhost:3000 |
 | API / Swagger | http://localhost:8000/docs |
-| PostgreSQL | localhost:5432 (`pae`/`pae123`) |
+| PostgreSQL | localhost:5435 (`pae`/`pae123`, DB `pae_pqrs`) |
+
+### 5. (Opcional) Registrar el MCP de Obsidian en Claude Code
+
+Si vas a usar Claude Code para escribir en el vault Neurona:
+
+```bash
+claude mcp add mcp-obsidian -- \
+  /Library/Frameworks/Python.framework/Versions/3.14/bin/uv \
+  run --project packages/mcp-obsidian mcp-obsidian
+```
+
+---
+
+## Verificación rápida
+
+```bash
+# Backend vivo
+curl http://localhost:8000/health
+
+# Tests
+make test                # MCP + API
+cd apps/api && uv run pytest -v
+
+# Estado del vault
+ls Neurona/10-Catalogo-PQRS/
+```
+
+---
+
+## Troubleshooting
+
+| Problema | Solución |
+|---|---|
+| `docker: command not found` | Instala Docker Desktop y déjalo corriendo antes de `dev.sh`. |
+| Migraciones fallan con `connection refused` | Espera a que el contenedor esté `healthy`; ejecuta `docker compose ps`. |
+| `OPENROUTER_API_KEY` inválida | Verifica la key en https://openrouter.ai/keys y reinicia el backend. |
+| Puerto 3000/8000/5435 ocupado | Detén el proceso (`lsof -i :8000`) o cambia el puerto en `.env` / `docker-compose.yml`. |
+| Voz no funciona en Safari | Web Speech API es limitada en Safari; usa Chrome/Edge para STT nativo. |
+| `VAULT_ROOT` inválido | Debe ser ruta **absoluta** a `Neurona/`; revisa `.env`. |
+| Frontend no encuentra la API | Confirma `NEXT_PUBLIC_API_URL=http://localhost:8000` en `.env`. |
+
+Logs de desarrollo: `.dev-logs/api.log` y `.dev-logs/web.log`.
 
 ---
 
